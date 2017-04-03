@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csg.view;
+package csg.style;
 
 /**
  *
  * @author Itai
  */
-public class View {
+public class ScheduleStyle {
     
 }

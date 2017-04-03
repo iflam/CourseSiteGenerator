@@ -1,0 +1,28 @@
+
+{
+    "startHour":"0",
+    "endHour":"3",
+    "undergrad_tas":[
+        {
+            "name":"itai",
+            "email":"i.f@s.u"
+        }
+    ],
+    "officeHours":[
+        {
+            "day":"MONDAY",
+            "time":"1_00am",
+            "name":"itai"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"1_00am",
+            "name":"itai"
+        },
+        {
+            "day":"FRIDAY",
+            "time":"1_00am",
+            "name":"itai"
+        }
+    ]
+}

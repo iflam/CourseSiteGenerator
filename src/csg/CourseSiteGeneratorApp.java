@@ -2,6 +2,8 @@
 package csg;
 
 import csg.data.CourseSiteGeneratorData;
+import csg.file.CourseSiteGeneratorFiles;
+import csg.style.CourseSiteGeneratorStyle;
 import csg.view.CourseSiteGeneratorWorkspace;
 import djf.AppTemplate;
 import java.util.Locale;
@@ -27,8 +29,8 @@ public class CourseSiteGeneratorApp extends AppTemplate{
         // WHEN IT IS CONSTRUCTED, SO BE CAREFUL OF THE ORDER
         dataComponent = new CourseSiteGeneratorData(this);
         workspaceComponent = new CourseSiteGeneratorWorkspace(this);
-        //fileComponent = new TAFiles(this);
-        //styleComponent = new TAStyle(this);
+        fileComponent = new CourseSiteGeneratorFiles(this);
+        styleComponent = new CourseSiteGeneratorStyle(this);
     }
     public jTPS getStack(){
         return stack;

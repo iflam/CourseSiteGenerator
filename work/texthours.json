@@ -1,0 +1,10 @@
+{
+    "startHour":"10",
+    "endHour":"13",
+    "undergrad_tas":[
+        {
+            "name":"Billy Mays"
+        }
+	],
+	"officeHours":[]
+}

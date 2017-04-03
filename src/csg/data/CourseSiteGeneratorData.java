@@ -36,12 +36,11 @@ public class CourseSiteGeneratorData implements AppDataComponent{
         project = new ProjectData();
         recitation = new RecitationData();
         schedule = new ScheduleData();
-        ta = new TAData();
+        ta = new TAData(app);
         currentData = ta;
     }
     @Override
     public void resetData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public Data getCurrentData(){
         return currentData;

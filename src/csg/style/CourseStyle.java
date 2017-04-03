@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package csg.view;
-
-import csg.CourseSiteGeneratorApp;
-import djf.components.AppDataComponent;
+package csg.style;
 
 /**
  *
  * @author Itai
  */
-public class RecitationView {
-
+public class CourseStyle {
+    
 }

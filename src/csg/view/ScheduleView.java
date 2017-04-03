@@ -5,10 +5,14 @@
  */
 package csg.view;
 
+import csg.CourseSiteGeneratorApp;
+import djf.components.AppDataComponent;
+
 /**
  *
  * @author Itai
  */
-public class ScheduleView extends View{
-    
+public class ScheduleView {
+
+  
 }

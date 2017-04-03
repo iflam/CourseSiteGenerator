@@ -1,0 +1,42 @@
+
+{
+    "startHour":"5",
+    "endHour":"10",
+    "undergrad_tas":[
+        {
+            "name":"itai",
+            "email":"flam"
+        }
+    ],
+    "officeHours":[
+        {
+            "day":"MONDAY",
+            "time":"9_30am",
+        },
+        {
+            "day":"TUESDAY",
+            "time":"10_30am",
+            "name":"itai"
+        },
+        {
+            "day":"MONDAY",
+            "time":"12_00pm",
+            "name":"itai"
+        },
+        {
+            "day":"TUESDAY",
+            "time":"12_00pm",
+            "name":"itai"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"3_00pm",
+            "name":"itai"
+        },
+        {
+            "day":"MONDAY",
+            "time":"3_30pm",
+            "name":"itai"
+        }
+    ]
+}

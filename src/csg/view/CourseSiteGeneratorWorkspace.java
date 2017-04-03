@@ -1,8 +1,13 @@
 package csg.view;
 
 import csg.CourseSiteGeneratorApp;
+import csg.data.CourseSiteGeneratorData;
 import djf.components.AppDataComponent;
 import djf.components.AppWorkspaceComponent;
+import djf.ui.AppGUI;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * This class serves as the workspace class for our Course Site Generator program. 
@@ -14,6 +19,7 @@ import djf.components.AppWorkspaceComponent;
  */
 public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
     //Provides access to the App Components
+    AppGUI gui;
     CourseSiteGeneratorApp app;
     //For interactions
     CourseSiteGeneratorController controller;
@@ -23,21 +29,48 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
     RecitationView recitation;
     ScheduleView schedule;
     TAView ta;
-    View currentView;
+    TabPane tp;
+    Tab currentTab;
     
     public CourseSiteGeneratorWorkspace(CourseSiteGeneratorApp initApp){
         app = initApp;
-        currentView = ta;
+        TabPane tp = new TabPane();
+        Tab courseTab = new Tab("Course Details");
+        Tab projectTab = new Tab("Project Data");
+        Tab recitationTab = new Tab("Recitation Data");
+        Tab taTab = new Tab("TA Data");
+        Tab scheduleTab = new Tab("Schedule Data");
+        tp.getTabs().addAll(courseTab,taTab,recitationTab,scheduleTab,projectTab);
+        workspace = new BorderPane();
+        ((BorderPane) workspace).setCenter(tp);
+        controller = new CourseSiteGeneratorController(app);
+        course = new CourseView(app);
+        courseTab.setContent(course.getvBox());
     }
     
     @Override
     public void resetWorkspace() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void reloadWorkspace(AppDataComponent dataComponent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        app.getGUI().getAppPane().setCenter(workspace);
     }
     
+    public TAView getTAView(){
+        return ta;
+    }
+    public CourseView getCourseView(){
+        return course;
+    }
+    public ProjectView getProjectView(){
+        return project;
+    }
+    public ScheduleView getScheduleView(){
+        return schedule;
+    }
+    public RecitationView getRecitationView(){
+        return recitation;
+    }
 }
