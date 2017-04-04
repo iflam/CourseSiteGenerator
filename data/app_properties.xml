@@ -93,6 +93,7 @@
 		<property name="WINTER_TEXT"	    value="Winter"></property>
 		<property name="SPRING_TEXT"	    value="Spring"></property>
 		<property name="COURSE_DETAILS_TEXT"	    value="Course Details"></property>
+		<property name="COURSE_INFO_TEXT"	    value="Course Info"></property>
 		<property name="TITLE_DEFAULT_TEXT"	    value="Computer Science III"></property>
 		<property name="INSTRUCTOR_NAME_DEFAULT_TEXT"	    value="Richard McKenna"></property>
 		<property name="INSTRUCTOR_HOME_DEFAULT_TEXT"	    value="htttp://www.cs.stonybrook.edu/~richard"></property>

@@ -28,7 +28,11 @@ import csg.transactions.HourChange_Transaction;
 import csg.transactions.RemoveTA_Transaction;
 import csg.transactions.ToggleTA_Transaction;
 import csg.transactions.UpdateTA_Transaction;
+import static djf.settings.AppPropertyType.LOAD_WORK_TITLE;
+import static djf.settings.AppStartupConstants.PATH_WORK;
+import java.io.File;
 import javafx.scene.control.Tab;
+import javafx.stage.FileChooser;
 
 /**
  *
@@ -288,6 +292,13 @@ public class CourseSiteGeneratorController {
         jTPS_Transaction transaction = new HourChange_Transaction(data,startTime,endTime,(TAView)((CourseSiteGeneratorWorkspace)app.getWorkspaceComponent()).getTAView());
         app.getStack().addTransaction(transaction);
         app.getGUI().updateToolbarControls(false);
+    }
+    
+    //COURSE VIEW CONTROLLERS:
+    //CHANGE EXPORT DIR
+    public void handleChangeExportDir(){
+      
+        
     }
     
 }
