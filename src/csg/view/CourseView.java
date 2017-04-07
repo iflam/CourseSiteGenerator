@@ -222,7 +222,7 @@ public class CourseView{
         
                 
     }
-    public VBox getvBox(){
+    public VBox getGUI(){
         return vBox;
     }
 }

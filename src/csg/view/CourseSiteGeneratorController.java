@@ -126,7 +126,7 @@ public class CourseSiteGeneratorController {
             else{
             // ADD THE NEW TA TO THE DATA
            // data.addTA(name,email);
-           TeachingAssistant t = new TeachingAssistant(name,email);
+           TeachingAssistant t = new TeachingAssistant(name,email,true);
            jTPS_Transaction transaction = new AddTA_Transaction(data,t);
            app.getStack().addTransaction(transaction);
             // CLEAR THE TEXT FIELDS

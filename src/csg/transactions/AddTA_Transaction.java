@@ -26,7 +26,7 @@ public class AddTA_Transaction implements jTPS_Transaction{
     }
     @Override
     public void doTransaction() {
-        data.addTA(t.getName(), t.getEmail());
+        data.addTA(t.getName(), t.getEmail(),t.isIsUndergrad());
     }
 
     @Override

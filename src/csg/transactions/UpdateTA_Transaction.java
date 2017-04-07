@@ -22,6 +22,7 @@ public class UpdateTA_Transaction implements jTPS_Transaction{
     String email;
     String OgName;
     String OgEmail;
+    boolean isUndergrad;
     public UpdateTA_Transaction(TAData data, TeachingAssistant t, String name, String email){
         teachingAssistants = data.getTeachingAssistants();
         this.t = t;
@@ -30,6 +31,7 @@ public class UpdateTA_Transaction implements jTPS_Transaction{
         this.email = email;
         OgName = t.getName();
         OgEmail = t.getEmail();
+        isUndergrad = t.isIsUndergrad();
     }
     @Override
     public void doTransaction() {
@@ -38,7 +40,7 @@ public class UpdateTA_Transaction implements jTPS_Transaction{
 
     @Override
     public void undoTransaction() {
-        TeachingAssistant b = new TeachingAssistant(name, email);
+        TeachingAssistant b = new TeachingAssistant(name, email,isUndergrad);
         data.updateTA(b, OgName, OgEmail);
     }
     

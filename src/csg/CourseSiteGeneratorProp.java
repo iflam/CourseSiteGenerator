@@ -64,6 +64,50 @@ public enum CourseSiteGeneratorProp {
     RIGHT_IMG_TEXT,
     STYLESHEET_TEXT,
     STYLESHEET_MESSAGE,
+    // Recitation View
+    RECITATION_TITLE_TEXT,
+    SECTION_TEXT,
+    INSTRUCTOR_TEXT,
+    DAY_TIME_TEXT,
+    LOCATION_TEXT,
+    SUPERVISING_TA_TEXT,
+    ADD_UPDATE_TEXT,
+    DELETE_BUTTON_TEXT,
+    ADD_EDIT_TEXT,
+    SECTION_SUG,
+    INSTRUCTOR_SUG,
+    DAY_TIME_SUG,
+    LOCATION_SUG,
+    //tabs text
+    TA_DATA_TEXT,
+    RECITATION_DATA_TEXT,
+    SCHEDULE_DATA_TEXT,
+    PROJECT_DATA_TEXT,
+    TA_TEXT,
+    //Schedule View
+    SCHEDULE_TEXT,
+    CB_TEXT,
+    STARTING_TEXT,
+    ENDING_TEXT,
+    TYPE_TEXT,
+    DATE_TEXT,
+    TIME_TEXT,
+    TOPIC_TEXT,
+    LINK_TEXT,
+    CRITERIA_TEXT,
+    SI_TEXT,
+    //Project view
+    PROJECTS_TEXT,
+    TEAMS_TEXT,
+    COLOR_TEXT,
+    TEXT_COLOR_TEXT,
+    STUDENTS_TEXT,
+    FIRST_NAME_TEXT,
+    LAST_NAME_TEXT,
+    TEAM_TEXT,
+    ROLE_TEXT,
+    
+    
     
     
     

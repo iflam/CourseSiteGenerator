@@ -34,7 +34,7 @@ public class RemoveTA_Transaction implements jTPS_Transaction{
 
     @Override
     public void undoTransaction() {
-        data.addTA(t.getName(), t.getEmail());
+        data.addTA(t.getName(), t.getEmail(),t.isIsUndergrad());
         for(TimeSlot ts : OGofficeHourTimes){
             try{
                 if(ts.getName().equals(t.getName()))

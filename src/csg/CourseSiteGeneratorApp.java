@@ -23,6 +23,7 @@ import jtps.jTPS;
  */
 public class CourseSiteGeneratorApp extends AppTemplate{
     private jTPS stack = new jTPS();
+    @Override
     public void buildAppComponentsHook() {
         // CONSTRUCT ALL FOUR COMPONENTS. NOTE THAT FOR THIS APP
         // THE WORKSPACE NEEDS THE DATA COMPONENT TO EXIST ALREADY
@@ -43,6 +44,7 @@ public class CourseSiteGeneratorApp extends AppTemplate{
      * will simply call launch, which gets JavaFX rolling, resulting in sending
      * the properly initialized Stage (i.e. window) to the start method inherited
      * from AppTemplate, defined in the Desktop Java Framework.
+     * @param args
      */
     public static void main(String[] args) {
 	Locale.setDefault(Locale.US);

@@ -283,9 +283,9 @@ public class TAData extends Data{
         return false;
     }
 
-    public void addTA(String initName, String initEmail) {
+    public void addTA(String initName, String initEmail, boolean initIsUndergrad) {
         // MAKE THE TA
-        TeachingAssistant ta = new TeachingAssistant(initName, initEmail);
+        TeachingAssistant ta = new TeachingAssistant(initName, initEmail, initIsUndergrad);
 
         // ADD THE TA
         if (!containsTA(initName) || !containsTA(initEmail)) {
@@ -313,7 +313,7 @@ public class TAData extends Data{
                 }
             }
         }
-        addTA(name,email);
+        addTA(name,email,ta.isIsUndergrad());
         Collections.sort(teachingAssistants);
         int i = 0;
     }

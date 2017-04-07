@@ -46,6 +46,7 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
     static final String JSON_NAME = "name";
     static final String JSON_EMAIL = "email";
     static final String JSON_UNDERGRAD_TAS = "undergrad_tas";
+    static final String JSON_GRAD_TAS = "grad_tas";
     
     public CourseSiteGeneratorFiles(CourseSiteGeneratorApp initApp) {
         app = initApp;
@@ -68,9 +69,9 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
         app.getWorkspaceComponent().reloadWorkspace(app.getDataComponent());
 
         // NOW LOAD ALL THE UNDERGRAD TAs
-        JsonArray jsonTAArray = json.getJsonArray(JSON_UNDERGRAD_TAS);
-        for (int i = 0; i < jsonTAArray.size(); i++) {
-            JsonObject jsonTA = jsonTAArray.getJsonObject(i);
+        JsonArray jsonUndergradTAArray = json.getJsonArray(JSON_UNDERGRAD_TAS);
+        for (int i = 0; i < jsonUndergradTAArray.size(); i++) {
+            JsonObject jsonTA = jsonUndergradTAArray.getJsonObject(i);
             String name = jsonTA.getString(JSON_NAME);
             String email = null;
             try{
@@ -79,7 +80,21 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
             catch(NullPointerException e){
                 email = null;
             }
-            dataManager.addTA(name,email);
+            dataManager.addTA(name,email,true);
+        }
+        // NOW LOAD ALL THE GRAD TAs
+        JsonArray jsonGradTAArray = json.getJsonArray(JSON_GRAD_TAS);
+        for (int i = 0; i < jsonGradTAArray.size(); i++) {
+            JsonObject jsonTA = jsonGradTAArray.getJsonObject(i);
+            String name = jsonTA.getString(JSON_NAME);
+            String email = null;
+            try{
+                email = jsonTA.getString(JSON_EMAIL);
+            }
+            catch(NullPointerException e){
+                email = null;
+            }
+            dataManager.addTA(name,email,false);
         }
 
         // AND THEN ALL THE OFFICE HOURS
