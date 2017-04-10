@@ -7,24 +7,28 @@ package csg.view;
 
 import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
-import static csg.CourseSiteGeneratorProp.DEFAULT_PICTURES_ICON;
-import djf.components.AppDataComponent;
-import static djf.settings.AppPropertyType.LOAD_WORK_TITLE;
+import csg.data.SitePage;
 import static djf.settings.AppStartupConstants.FILE_PROTOCOL;
 import static djf.settings.AppStartupConstants.PATH_IMAGES;
-import static djf.settings.AppStartupConstants.PATH_WORK;
-import java.io.File;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import properties_manager.PropertiesManager;
 
 /**
@@ -34,6 +38,7 @@ import properties_manager.PropertiesManager;
 public class CourseView{
     CourseSiteGeneratorApp app;
     private VBox vBox;
+    private ScrollPane thisGUI;
     //TOP PANE STUFFS
     private GridPane topGridPane;
     private Label topGPLabel;
@@ -62,10 +67,11 @@ public class CourseView{
     private Label midvBoxDir;
     private Button midTempDirButton;
     private Label sitePageLabel;
-    private TableView templateTable;
+    private TableView<SitePage> templateTable;
     
     //BOTTOM PANE STUFF
     private GridPane lowGridPane;
+    private VBox lowvBox;
     private Label pageStyleLabel;
     private Label bannerImgLabel;
     private Label leftFtLabel;
@@ -165,56 +171,76 @@ public class CourseView{
         midvBoxDir = new Label(props.getProperty(CourseSiteGeneratorProp.TEMPLATE_DEFAULT_TEXT.toString()));
         midTempDirButton = new Button(props.getProperty(CourseSiteGeneratorProp.SELECT_TEMPLATE_TEXT.toString()));
         sitePageLabel = new Label(props.getProperty(CourseSiteGeneratorProp.SITE_PAGES_TEXT.toString()));
-        templateTable = new TableView();
+        templateTable = new TableView<SitePage>();
+        ObservableList<SitePage> sitePages = FXCollections.observableArrayList();
+        sitePages.add(new SitePage("course","butt.html","ass.json",true));
+        TableColumn<SitePage, Boolean> useCol = new TableColumn(props.getProperty(CourseSiteGeneratorProp.USE_TEXT.toString()));
+        useCol.setCellValueFactory(new PropertyValueFactory<SitePage,Boolean>("use"));
+        useCol.setCellFactory(CheckBoxTableCell.forTableColumn(useCol));
+        TableColumn<SitePage, String> titleCol = new TableColumn(props.getProperty(CourseSiteGeneratorProp.NAVBAR_TITLE_TEXT.toString()));
+        titleCol.setCellValueFactory(new PropertyValueFactory<SitePage,String>("title"));
+        TableColumn<SitePage, String> fileCol = new TableColumn(props.getProperty(CourseSiteGeneratorProp.FILE_NAME_TEXT.toString()));
+        fileCol.setCellValueFactory(new PropertyValueFactory<SitePage,String>("file"));
+        TableColumn<SitePage, String> scriptCol = new TableColumn(props.getProperty(CourseSiteGeneratorProp.SCRIPT_TEXT.toString()));
+        scriptCol.setCellValueFactory(new PropertyValueFactory<SitePage,String>("script"));
+        useCol.prefWidthProperty().bind(templateTable.widthProperty().divide(4)); // w * 1/4
+        titleCol.prefWidthProperty().bind(templateTable.widthProperty().divide(4)); // w * 1/4
+        fileCol.prefWidthProperty().bind(templateTable.widthProperty().divide(4)); // w * 1/4
+        scriptCol.prefWidthProperty().bind(templateTable.widthProperty().divide(4)); // w * 1/4
+        templateTable.setEditable(true);
+        templateTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        templateTable.getColumns().addAll(useCol, titleCol, fileCol, scriptCol);
+        templateTable.setItems(sitePages);
         midvBox = new VBox();
         midvBox.getChildren().addAll(midvBoxLabel,midvBoxDesc,midvBoxDir,midTempDirButton,sitePageLabel,templateTable);
         //////////////////////////////////////////////////////////////
         //LOWER BOX
         String imagePath = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(CourseSiteGeneratorProp.DEFAULT_PICTURES_ICON.toString());
         lowGridPane = new GridPane();
+        lowvBox = new VBox();
         pageStyleLabel = new Label(props.getProperty(CourseSiteGeneratorProp.PAGE_STYLE_TEXT.toString()));
-        GridPane.setConstraints(pageStyleLabel, 0, 0);
         bannerImgLabel = new Label(props.getProperty(CourseSiteGeneratorProp.BANNER_IMG_TEXT.toString()));
-        GridPane.setConstraints(bannerImgLabel,0,1);
+        GridPane.setConstraints(bannerImgLabel,0,0);
         leftFtLabel = new Label(props.getProperty(CourseSiteGeneratorProp.LEFT_IMG_TEXT.toString()));
-        GridPane.setConstraints(leftFtLabel,0,2);
+        GridPane.setConstraints(leftFtLabel,0,1);
         rightFtLabel = new Label(props.getProperty(CourseSiteGeneratorProp.RIGHT_IMG_TEXT.toString()));
-        GridPane.setConstraints(rightFtLabel,0,3);
+        GridPane.setConstraints(rightFtLabel,0,2);
         lowGridPane.getChildren().addAll(pageStyleLabel,bannerImgLabel,leftFtLabel,rightFtLabel);
         //
-        styleSheetLabel = new Label(props.getProperty(CourseSiteGeneratorProp.STYLESHEET_TEXT.toString()));
-        GridPane.setConstraints(styleSheetLabel,0,4);
-        styleSheetMessageLabel = new Label(props.getProperty(CourseSiteGeneratorProp.STYLESHEET_MESSAGE.toString()));
-        GridPane.setConstraints(styleSheetMessageLabel,0,5);
-        lowGridPane.getChildren().addAll(styleSheetLabel,styleSheetMessageLabel);
         bannerImage = new ImageView(imagePath);
-        GridPane.setConstraints(bannerImage,1,1);
+        GridPane.setConstraints(bannerImage,1,0);
         bannerImage.setFitHeight(554/6);
         bannerImage.setFitWidth((1816/4)+100);
         leftFtImage = new ImageView(imagePath);
-        GridPane.setConstraints(leftFtImage,1,2);
+        GridPane.setConstraints(leftFtImage,1,1);
         leftFtImage.setFitHeight(554/6);
         leftFtImage.setFitWidth((1816/4)+100);
         rightFtImage = new ImageView(imagePath);
-        GridPane.setConstraints(rightFtImage,1,3);
+        GridPane.setConstraints(rightFtImage,1,2);
         rightFtImage.setFitHeight(554/6);
         rightFtImage.setFitWidth((1816/4)+100);
         lowGridPane.getChildren().addAll(bannerImage,leftFtImage,rightFtImage);
         changeBanner = new Button(props.getProperty(CourseSiteGeneratorProp.CHANGE_TEXT.toString()));
-        GridPane.setConstraints(changeBanner,3,1);
+        GridPane.setConstraints(changeBanner,3,0);
         changeLeft = new Button(props.getProperty(CourseSiteGeneratorProp.CHANGE_TEXT.toString()));
-        GridPane.setConstraints(changeLeft,3,2);
+        GridPane.setConstraints(changeLeft,3,1);
         changeRight = new Button(props.getProperty(CourseSiteGeneratorProp.CHANGE_TEXT.toString()));
-        GridPane.setConstraints(changeRight,3,3);
+        GridPane.setConstraints(changeRight,3,2);
+        styleSheetLabel = new Label(props.getProperty(CourseSiteGeneratorProp.STYLESHEET_TEXT.toString()));
         stylesheetCB = new ComboBox();
-        GridPane.setConstraints(stylesheetCB, 2, 4);
-        lowGridPane.getChildren().addAll(changeBanner,changeLeft,changeRight,stylesheetCB);
+        lowGridPane.getChildren().addAll(changeBanner,changeLeft,changeRight);
         lowGridPane.setHgap(10);
         lowGridPane.setVgap(5);
         lowGridPane.setPadding(new Insets(10,10,10,10));
-        vBox.getChildren().addAll(topGridPane,midvBox,lowGridPane);
+        styleSheetMessageLabel = new Label(props.getProperty(CourseSiteGeneratorProp.STYLESHEET_MESSAGE.toString()));
+        ssHbox = new HBox(styleSheetLabel,stylesheetCB);
+        lowvBox.getChildren().addAll(pageStyleLabel,lowGridPane,ssHbox, styleSheetMessageLabel);
+        vBox.getChildren().addAll(topGridPane,midvBox,lowvBox);
         vBox.setPadding(new Insets(10,10,10,10));
-        
+        thisGUI = new ScrollPane(vBox);
+        thisGUI.setFitToWidth(true);
+        thisGUI.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        thisGUI.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         //ACTION IN HERE
         changeButton.setOnAction(e->{
 	
@@ -222,7 +248,191 @@ public class CourseView{
         
                 
     }
-    public VBox getGUI(){
+    public VBox getLowvBox(){
+        return lowvBox;
+    }
+
+    public VBox getvBox() {
         return vBox;
+    }
+
+    public GridPane getTopGridPane() {
+        return topGridPane;
+    }
+
+    public ComboBox getSemesterCB() {
+        return semesterCB;
+    }
+
+    public ComboBox getYearCB() {
+        return yearCB;
+    }
+
+    public Button getChangeButton() {
+        return changeButton;
+    }
+
+    public VBox getMidvBox() {
+        return midvBox;
+    }
+
+    public Button getMidTempDirButton() {
+        return midTempDirButton;
+    }
+
+    public TableView getTemplateTable() {
+        return templateTable;
+    }
+
+    public GridPane getLowGridPane() {
+        return lowGridPane;
+    }
+
+    public Button getChangeBanner() {
+        return changeBanner;
+    }
+
+    public Button getChangeLeft() {
+        return changeLeft;
+    }
+
+    public Button getChangeRight() {
+        return changeRight;
+    }
+
+    public HBox getBannerHbox() {
+        return bannerHbox;
+    }
+
+    public HBox getLeftHbox() {
+        return leftHbox;
+    }
+
+    public HBox getRightHbox() {
+        return rightHbox;
+    }
+
+    public HBox getSsHbox() {
+        return ssHbox;
+    }
+
+    public ComboBox getStylesheetCB() {
+        return stylesheetCB;
+    }
+
+    public Label getTopGPLabel() {
+        return topGPLabel;
+    }
+
+    public Label getSubjectLabel() {
+        return subjectLabel;
+    }
+
+    public Label getNumberLabel() {
+        return numberLabel;
+    }
+
+    public Label getSemesterLabel() {
+        return semesterLabel;
+    }
+
+    public Label getYearLabel() {
+        return yearLabel;
+    }
+
+    public Label getTitleLabel() {
+        return titleLabel;
+    }
+
+    public Label getInstructorNameLabel() {
+        return instructorNameLabel;
+    }
+
+    public Label getInstructorHomeLabel() {
+        return instructorHomeLabel;
+    }
+
+    public Label getExportLabel() {
+        return exportLabel;
+    }
+
+    public Label getExportDirLabel() {
+        return exportDirLabel;
+    }
+
+    public TextField getSubjectTF() {
+        return subjectTF;
+    }
+
+    public TextField getNumberTF() {
+        return numberTF;
+    }
+
+    public TextField getTitleTF() {
+        return titleTF;
+    }
+
+    public TextField getInstructorNameTF() {
+        return instructorNameTF;
+    }
+
+    public TextField getInstructorHomeTF() {
+        return instructorHomeTF;
+    }
+
+    public Label getMidvBoxLabel() {
+        return midvBoxLabel;
+    }
+
+    public Label getMidvBoxDesc() {
+        return midvBoxDesc;
+    }
+
+    public Label getMidvBoxDir() {
+        return midvBoxDir;
+    }
+
+    public Label getSitePageLabel() {
+        return sitePageLabel;
+    }
+
+    public Label getPageStyleLabel() {
+        return pageStyleLabel;
+    }
+
+    public Label getBannerImgLabel() {
+        return bannerImgLabel;
+    }
+
+    public Label getLeftFtLabel() {
+        return leftFtLabel;
+    }
+
+    public Label getRightFtLabel() {
+        return rightFtLabel;
+    }
+
+    public Label getStyleSheetLabel() {
+        return styleSheetLabel;
+    }
+
+    public Label getStyleSheetMessageLabel() {
+        return styleSheetMessageLabel;
+    }
+
+    public ImageView getBannerImage() {
+        return bannerImage;
+    }
+
+    public ImageView getLeftFtImage() {
+        return leftFtImage;
+    }
+
+    public ImageView getRightFtImage() {
+        return rightFtImage;
+    }
+    
+    public ScrollPane getGUI(){
+        return thisGUI;
     }
 }

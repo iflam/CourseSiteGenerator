@@ -114,6 +114,10 @@ public class ScheduleView {
         TableColumn<ScheduleItem, Date> dateColumn = new TableColumn(dateLabel.getText());
         TableColumn<ScheduleItem, String> titleColumn = new TableColumn(titleLabel.getText());
         TableColumn<ScheduleItem, String> topicColumn = new TableColumn(topicLabel.getText());
+        typeColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
+        dateColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
+        titleColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
+        topicColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
         scheduleTable.getColumns().addAll(typeColumn, dateColumn, titleColumn, topicColumn);
         GridPane.setConstraints(addEditLabel, 0, 0);
         GridPane.setConstraints(typeLabel, 0, 1);
@@ -139,6 +143,135 @@ public class ScheduleView {
         lowvBox.getChildren().addAll(sihBox,scheduleTable,lowGrid);
         schedulevBox.getChildren().addAll(sLabel,topGrid,lowvBox);
     }
+
+    public CourseSiteGeneratorApp getApp() {
+        return app;
+    }
+
+    public VBox getSchedulevBox() {
+        return schedulevBox;
+    }
+
+    public GridPane getTopGrid() {
+        return topGrid;
+    }
+
+    public VBox getLowvBox() {
+        return lowvBox;
+    }
+
+    public GridPane getLowGrid() {
+        return lowGrid;
+    }
+
+    public Label getsLabel() {
+        return sLabel;
+    }
+
+    public Label getCbLabel() {
+        return cbLabel;
+    }
+
+    public Label getStartingLabel() {
+        return startingLabel;
+    }
+
+    public Label getEndingLabel() {
+        return endingLabel;
+    }
+
+    public DatePicker getStartDate() {
+        return startDate;
+    }
+
+    public DatePicker getEndDate() {
+        return endDate;
+    }
+
+    public Label getSiLabel() {
+        return siLabel;
+    }
+
+    public HBox getSihBox() {
+        return sihBox;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public TableView getScheduleTable() {
+        return scheduleTable;
+    }
+
+    public Label getAddEditLabel() {
+        return addEditLabel;
+    }
+
+    public Label getTypeLabel() {
+        return typeLabel;
+    }
+
+    public ComboBox getTypeCB() {
+        return typeCB;
+    }
+
+    public Label getDateLabel() {
+        return dateLabel;
+    }
+
+    public DatePicker getDateDP() {
+        return dateDP;
+    }
+
+    public Label getTimeLabel() {
+        return timeLabel;
+    }
+
+    public TextField getTimeTF() {
+        return timeTF;
+    }
+
+    public Label getTitleLabel() {
+        return titleLabel;
+    }
+
+    public TextField getTitleTF() {
+        return titleTF;
+    }
+
+    public Label getTopicLabel() {
+        return topicLabel;
+    }
+
+    public TextField getTopicTF() {
+        return topicTF;
+    }
+
+    public Label getLinkLabel() {
+        return linkLabel;
+    }
+
+    public TextField getLinkTF() {
+        return linkTF;
+    }
+
+    public Label getCriteriaLabel() {
+        return criteriaLabel;
+    }
+
+    public TextField getCriteriaTF() {
+        return criteriaTF;
+    }
+
+    public Button getAddUpdateButton() {
+        return addUpdateButton;
+    }
+
+    public Button getClearButton() {
+        return clearButton;
+    }
+    
     public VBox getGUI(){
         return schedulevBox;
     }

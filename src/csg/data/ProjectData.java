@@ -9,6 +9,6 @@ package csg.data;
  *
  * @author Itai
  */
-public class ProjectData extends Data{
+public class ProjectData{
     
 }

@@ -9,6 +9,8 @@ import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
 import csg.data.Recitation;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -78,14 +80,23 @@ public class RecitationView {
         dayTimeCol = new TableColumn(dayTimeLabel.getText());
         taCol1 = new TableColumn(taLabel.getText());
         taCol2 = new TableColumn(taLabel.getText());
+        sectionCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
+        instructorCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
+        dayTimeCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
+        taCol1.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
+        taCol2.prefWidthProperty().bind(recitationTable.widthProperty().divide(5));
         recitationTable.getColumns().addAll(sectionCol,instructorCol,dayTimeCol,taCol1,taCol2);
         recvBox = new VBox();
         //BOTTOM
         addEditLabel = new Label(props.getProperty(CourseSiteGeneratorProp.ADD_EDIT_TEXT.toString()));
-        sectionTF = new TextField(props.getProperty(CourseSiteGeneratorProp.SECTION_SUG.toString()));
-        instructorTF = new TextField(props.getProperty(CourseSiteGeneratorProp.INSTRUCTOR_SUG.toString()));
-        dayTimeTF = new TextField(props.getProperty(CourseSiteGeneratorProp.DAY_TIME_SUG.toString()));
-        locationTF = new TextField(props.getProperty(CourseSiteGeneratorProp.LOCATION_SUG.toString()));
+        sectionTF = new TextField();
+        sectionTF.setPromptText(props.getProperty(CourseSiteGeneratorProp.SECTION_SUG.toString()));
+        instructorTF = new TextField();
+        instructorTF.setPromptText(props.getProperty(CourseSiteGeneratorProp.INSTRUCTOR_SUG.toString()));
+        dayTimeTF = new TextField();
+        dayTimeTF.setPromptText(props.getProperty(CourseSiteGeneratorProp.DAY_TIME_SUG.toString()));
+        locationTF = new TextField();
+        locationTF.setPromptText(props.getProperty(CourseSiteGeneratorProp.LOCATION_SUG.toString()));
         supervisingTALabel = new Label(props.getProperty(CourseSiteGeneratorProp.SUPERVISING_TA_TEXT.toString()));
         supervisingTALabel2 = new Label(props.getProperty(CourseSiteGeneratorProp.SUPERVISING_TA_TEXT.toString()));
         supervisingTACB1 = new ComboBox();
@@ -96,11 +107,11 @@ public class RecitationView {
         GridPane.setConstraints(sectionLabel, 0, 1);
         GridPane.setConstraints(sectionTF, 1, 1);
         GridPane.setConstraints(instructorLabel, 0, 2);
-        GridPane.setConstraints(instructorTF, 1, 2);
+        GridPane.setConstraints(instructorTF, 1, 2, 2, 1);
         GridPane.setConstraints(dayTimeLabel, 0, 3);
-        GridPane.setConstraints(dayTimeTF, 1, 3);
+        GridPane.setConstraints(dayTimeTF, 1, 3, 3, 1);
         GridPane.setConstraints(locationLabel, 0, 4);
-        GridPane.setConstraints(locationTF, 1, 4);
+        GridPane.setConstraints(locationTF, 1, 4, 3, 1);
         GridPane.setConstraints(supervisingTALabel, 0, 5);
         GridPane.setConstraints(supervisingTALabel2, 0, 6);
         GridPane.setConstraints(supervisingTACB1, 1, 5);
@@ -113,6 +124,126 @@ public class RecitationView {
                 addUpdateButton, clearButton);
         recvBox.getChildren().addAll(titlehBox,recitationTable,lowGridPane);
         
+    }
+
+    public Label getRecTitleLabel() {
+        return recTitleLabel;
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public Button getAddUpdateButton() {
+        return addUpdateButton;
+    }
+
+    public Button getClearButton() {
+        return clearButton;
+    }
+
+    public TableView getRecitationTable() {
+        return recitationTable;
+    }
+
+    public GridPane getLowGridPane() {
+        return lowGridPane;
+    }
+
+    public Label getAddEditLabel() {
+        return addEditLabel;
+    }
+
+    public Label getSectionLabel() {
+        return sectionLabel;
+    }
+
+    public Label getInstructorLabel() {
+        return instructorLabel;
+    }
+
+    public Label getDayTimeLabel() {
+        return dayTimeLabel;
+    }
+
+    public Label getLocationLabel() {
+        return locationLabel;
+    }
+
+    public Label getTaLabel() {
+        return taLabel;
+    }
+
+    public Label getSupervisingTALabel() {
+        return supervisingTALabel;
+    }
+
+    public Label getSupervisingTALabel2() {
+        return supervisingTALabel2;
+    }
+
+    public TextField getSectionTF() {
+        return sectionTF;
+    }
+
+    public TextField getInstructorTF() {
+        return instructorTF;
+    }
+
+    public TextField getDayTimeTF() {
+        return dayTimeTF;
+    }
+
+    public TextField getLocationTF() {
+        return locationTF;
+    }
+
+    public ComboBox getSupervisingTACB1() {
+        return supervisingTACB1;
+    }
+
+    public ComboBox getSupervisingTACB2() {
+        return supervisingTACB2;
+    }
+
+    public VBox getRecvBox() {
+        return recvBox;
+    }
+
+    public HBox getTitlehBox() {
+        return titlehBox;
+    }
+
+    public CourseSiteGeneratorApp getApp() {
+        return app;
+    }
+
+    public TableColumn<Recitation, String> getSectionCol() {
+        return sectionCol;
+    }
+
+    public TableColumn<Recitation, String> getInstructorCol() {
+        return instructorCol;
+    }
+
+    public TableColumn<Recitation, String> getDayTimeCol() {
+        return dayTimeCol;
+    }
+
+    public TableColumn<Recitation, String> getLocationCol() {
+        return locationCol;
+    }
+
+    public TableColumn<Recitation, String> getTaCol1() {
+        return taCol1;
+    }
+
+    public TableColumn<Recitation, String> getTaCol2() {
+        return taCol2;
+    }
+
+    public ObservableList<Recitation> getRecitations() {
+        return recitations;
     }
     
     public VBox getGUI(){

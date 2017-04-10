@@ -2,6 +2,7 @@ package csg.view;
 
 import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
+import csg.style.CourseSiteGeneratorStyle;
 import djf.components.AppDataComponent;
 import djf.components.AppWorkspaceComponent;
 import djf.ui.AppGUI;
@@ -32,10 +33,20 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
     ScheduleView schedule;
     TAView ta;
     TabPane tp;
-    Tab currentTab;
     
     public CourseSiteGeneratorWorkspace(CourseSiteGeneratorApp initApp){
         app = initApp;
+        course = new CourseView(app);
+        project = new ProjectView(app);
+        recitation = new RecitationView(app);
+        schedule = new ScheduleView(app);
+        ta = new TAView(app);
+        
+        
+    }
+    
+    @Override
+    public void resetWorkspace() {
         PropertiesManager props = PropertiesManager.getPropertiesManager(); 
         tp = new TabPane();
         Tab courseTab = new Tab(props.getProperty(CourseSiteGeneratorProp.COURSE_DETAILS_TEXT.toString()));
@@ -48,10 +59,10 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
         taTab.setClosable(false);
         Tab scheduleTab = new Tab(props.getProperty(CourseSiteGeneratorProp.SCHEDULE_DATA_TEXT.toString()));
         scheduleTab.setClosable(false);
-        tp.setPadding(new Insets(10,10,10,10));
         tp.getTabs().addAll(courseTab,taTab,recitationTab,scheduleTab,projectTab);
         workspace = new BorderPane();
         ((BorderPane) workspace).setCenter(tp);
+        ((BorderPane)workspace).getStyleClass().addAll("-fx-background-color:#000000","-fx-border-color:#000000");
         controller = new CourseSiteGeneratorController(app);
         //INITIALIZE ALL THE TABS
         course = new CourseView(app);
@@ -62,11 +73,9 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
         scheduleTab.setContent(schedule.getGUI());
         project = new ProjectView(app);
         projectTab.setContent(project.getGUI());
-    }
-    
-    @Override
-    public void resetWorkspace() {
-        
+        ta = new TAView(app);
+        taTab.setContent(ta.getGUI());
+        ((CourseSiteGeneratorStyle)(app.getStyleComponent())).initStyleSheet();
     }
 
     @Override
@@ -88,5 +97,8 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
     }
     public RecitationView getRecitationView(){
         return recitation;
+    }
+    public TabPane getTabPane(){
+        return tp;
     }
 }

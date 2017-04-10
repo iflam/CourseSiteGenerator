@@ -31,7 +31,7 @@ public class UpdateTA_Transaction implements jTPS_Transaction{
         this.email = email;
         OgName = t.getName();
         OgEmail = t.getEmail();
-        isUndergrad = t.isIsUndergrad();
+        isUndergrad = t.getUndergrad();
     }
     @Override
     public void doTransaction() {

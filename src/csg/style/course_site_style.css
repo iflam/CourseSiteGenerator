@@ -1,6 +1,6 @@
 /* 
     This style sheet stylizes the controls inside our
-    TA Manager JavaFX application. Note that controls
+    Course Site Generator JavaFX application. Note that controls
     in the UI must have the same class as those below in 
     order to be rendered using those properties.
 
@@ -15,8 +15,8 @@
 */
 .root{
     -fx-font-family: "Courier New";
+    -fx-font-size:15pt;
 }
-
 .dialog_pane {
     -fx-padding:15;
 }
@@ -38,7 +38,7 @@
 }
 
 .bordered_pane {
-    -fx-background-color: #aaaaff;
+    -fx-background-color: #bc5a58;
     -fx-background-radius: 5.0;
     -fx-padding: 15;
     -fx-spacing: 10;
@@ -47,7 +47,7 @@
 }
 
 .header_pane{
-    -fx-background-color:#ccccff;
+    -fx-background-color:#c49b75;
 }
 
 .header_label {
@@ -55,17 +55,26 @@
     -fx-font-weight: bold;
     -fx-padding: 5 10 5 10;
 }
-
+/*TA VIEW */
 .ta_table{
     -fx-font-size:16pt;  
 }
 
 .table-view .column-header.ta_table_column_header .label {
-    -fx-text-fill:white;
-    -fx-background-color:#000066;
-    
+    -fx-text-fill:black;
+    -fx-background-color:#f9dd90;
 }
-
+.table-row-cell, .table-row-cell:selected .check-box .box{
+    -fx-background-color:#ffec82;
+    -fx-border-color:brown;
+    -fx-table-cell-border-color:brown;
+}
+.table-row-cell:odd{
+    -fx-background-color:#f9e572;
+}
+.table-row-cell:selected, .table-row-cell .check-box .box{
+    -fx-background-color: #c18f62;
+}
 .add_ta_pane{
     -fx-padding: 5 10 5 10;
 }
@@ -99,32 +108,32 @@
 }
 
 .office_hours_grid_time_column_header_pane{
-    -fx-background-color:#000066;
+    -fx-background-color:#ffec82;
     -fx-border: 1px;    
 }
 
 .office_hours_grid_time_column_header_label{
-    -fx-text-fill:white;
+    -fx-text-fill:black;
     -fx-font-size:12pt;   
     -fx-font-weight:bold;
     -fx-padding: 10 20 10 20;
 }
 
 .office_hours_grid_day_column_header_pane{
-    -fx-background-color:#000066;
+    -fx-background-color:#ffec82;
     -fx-border: 1px;
-    -fx-border-color: #000066;
+    -fx-border-color: #c49b75;
 }
 
 .office_hours_grid_day_column_header_label{
-    -fx-text-fill:white;
+    -fx-text-fill:black;
     -fx-font-size:12pt;   
     -fx-font-weight:bold;
     -fx-padding: 10 20 10 20;
 }
 
 .office_hours_grid_time_cell_pane{
-    -fx-background-color:#000099; 
+    -fx-background-color:#ffec82; 
     -fx-border: 1px;   
     -fx-border-color:darkgray;
     -fx-border-style:dashed;
@@ -132,11 +141,11 @@
 
 .office_hours_grid_time_cell_label{
     -fx-font-size:12pt;
-    -fx-text-fill:white;
+    -fx-text-fill:black;
 }
 
 .office_hours_grid_ta_cell_pane{
-    -fx-background-color:#abab78;
+    -fx-background-color:#c49b75;
     -fx-border: 1px;
     -fx-border-color: black;
 }
@@ -147,11 +156,235 @@
     -fx-padding: 5 10 5 10;
 }
 .highlighted_grid_cell {
-    -fx-border-color: #fff428;
+    -fx-background-color: #fce667;
     -fx-border: 5px;
 }
 .highlighted_grid_row_or_column {
-    -fx-border-color: #fff98c;
+    -fx-background-color: #ffec82;
     -fx-border: 5px;
     -fx-border-style:solid;
 }
+/*TABS*/
+.tab-pane .tab-header-area .tab-header-background{
+	-fx-background-color:-fx-outer-border, -fx-text-box-border,#f2c829;
+        -fx-background-style:solid;
+        
+}
+.tab-pane {
+    -fx-padding:20px;
+    -fx-vgap:20px;
+}
+.tab:hover{
+    -fx-background-color:#ffe08c;
+    -fx-focus-color: transparent;
+}
+.tab{
+    -fx-background-color:#f9dd90;
+    -fx-font-family: Arial;
+    -fx-font-size: 18;
+    -fx-padding:5px;
+    -fx-border-style:solid;
+    -fx-border: 5px;
+    -fx-border-color: #493f1a;
+    border-radius:15px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+}
+.tab:selected{
+    -fx-background-color:#ffd76b;
+    -fx-focus-color:transparent;
+    -fx-faint-focus-color:transparent;
+}
+.split-pane .split-pane-divider{
+    -fx-background-color:#fce667;
+}
+/*COURSE VIEW */
+.outer_pane{
+    -fx-background-color:#c18f62;
+    -fx-padding:10px;
+    -fx-spacing:5px;
+    -fx-hgap:100px;
+}
+.inner_pane{
+    -fx-background-color:#c49b75;
+    -fx-padding:10px;
+    -fx-border-color:#8e6036;
+    -fx-border-style:solid;
+    -fx-font-size:16pt;
+    -fx-font-weight:bold;
+    -fx-spacing:5px;
+    -fx-alignment:CENTER;
+}
+.not_bold{
+    -fx-font-weight:normal;
+}
+.vbox{
+    -fx-padding:10px;
+    -fx-spacing:5px;
+    -fx-hgap:100px;
+    -fx-alignment:CENTER;
+}
+.hbox{
+    -fx-hgap:100px;
+    -fx-padding:5px;
+    -fx-spacing:5px;
+    -fx-alignment:CENTER;
+}
+.grid{
+    -fx-hgap:100px;
+    -fx-vgap:5px;
+    -fx-alignment:CENTER;
+}
+.button{
+    border-radius:15px;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10; 
+    -fx-background-color:#ffed6d;
+}
+.button:hover{
+    -fx-background-color:#eddb5a;
+}
+.italic_text{
+    -fx-font-style:italic;
+    -fx-font-weight:normal
+}
+.combo-box-base{
+    border-radius:15px;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10; 
+    -fx-background-color:#ffed6d;
+}
+.combo-box-base:hover{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10; 
+    -fx-background-color:#eddb5a;
+}
+.combo-box-base .text-field{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10; 
+}
+.combo-box-base .list-cell{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10; 
+    -fx-background-color:#fff7bf;
+}
+.combo-box-popup .list-view .list-cell{
+    -fx-border-radius: 0;
+    -fx-background-radius: 0; 
+}
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: #ffe47a;
+    -fx-font-weight:bold;
+    -fx-text-fill: -fx-text-inner-color;
+}
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover {   
+    -fx-font-weight: bold;
+    -fx-background: -fx-accent;
+    -fx-background-color: #ffd279;
+    -fx-text-fill: #000000;
+}
+.combo-box-base:showing 
+{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10; 
+    -fx-background-color: #ead959;
+}
+.date-picker .arrow-button{
+    -fx-background-color:#ffed6d;
+}
+.date-picker-popup .month-year-pane{
+    -fx-background-color:#ffe47a;
+}
+.date-picker-popup .spinner .button{
+    -fx-background-color:#d39f37;
+}
+.date-picker-popup .spinner .button:hover{
+    -fx-background-color:#af832a;
+}
+.date-picker-popup .date-cell{
+    -fx-background-color:#fff7bf;
+}
+.date-picker-popup .date-cell:hover{
+    -fx-background-color: #ffe47a;
+    -fx-font-weight:bold;
+    -fx-text-fill: -fx-text-inner-color;
+}
+.date-picker-popup .date-cell.selected{
+    -fx-font-weight: bold;
+    -fx-background: -fx-accent;
+    -fx-background-color: #ffd279;
+    -fx-text-fill: #000000;
+}
+.color-palette{
+    -fx-background-color:#fff7bf;
+}
+.custom-color-dialog{
+    -fx-background-color:#fff7bf;
+}
+.custom-color-dialog .controls-pane #settings-pane .settings-unit{
+    -fx-background-color:#000000;
+}
+.custom-color-dialog .controls-pane .customcolor-controls-background{
+    -fx-background-color:#ffe47a;
+}
+.custom-color-dialog .controls-pane .controls-input-field{
+    -fx-background-color:#fff9d1;
+} 
+.text-field{
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10; 
+    -fx-background-color: #fff9d1;
+}
+/*projectView*/
+.table-view{
+    -fx-background-color:#c18f62;
+    -fx-padding:10px;
+    -fx-border-color:#8e6036;
+    -fx-border-style:solid;
+    -fx-font-size:12pt;
+    -fx-font-weight:bolder;
+}
+.table-view .column-header{
+    -fx-background-color:#f9dd90;
+}
+.scroll-bar:vertical{
+    -fx-background-color:#ffed6d;
+}
+.scroll-bar .thumb{
+    -fx-background-color:#ddcb99;
+}
+.scroll-bar .thumb:hover, .scroll-bar .increment-button:hover, .scroll-bar .decrement-button:hover{
+    -fx-background-color:#b7a36a;
+}
+
+.text_prompt{
+    -fx-font-size:16pt;
+    -fx-font-weight:bold;
+}
+.text_header{
+    -fx-font-size:24pt;
+    -fx-font-weight:bold;
+    -fx-alignment:CENTER;
+}
+.button_header{
+    -fx-font-size:24pt;
+    -fx-font-weight:bold;
+    -fx-border-radius:30pt;
+}
+.back_pane{
+    -fx-background-color:#e29031;
+}
+.pane{
+    -fx-background-color:#e29031;
+    -fx-border-color:#e29031;
+}
+
+
+
+
+
+
+
+
+
+

@@ -14,6 +14,7 @@ import static csg.CourseSiteGeneratorProp.MISSING_TA_NAME_MESSAGE;
 import static csg.CourseSiteGeneratorProp.MISSING_TA_NAME_TITLE;
 import static csg.CourseSiteGeneratorProp.TA_NAME_AND_EMAIL_NOT_UNIQUE_MESSAGE;
 import static csg.CourseSiteGeneratorProp.TA_NAME_AND_EMAIL_NOT_UNIQUE_TITLE;
+import csg.data.CourseSiteGeneratorData;
 import csg.data.TAData;
 import csg.data.TeachingAssistant;
 import djf.ui.AppMessageDialogSingleton;
@@ -93,7 +94,7 @@ public class CourseSiteGeneratorController {
         String email = emailTextField.getText();
         
         // WE'LL NEED TO ASK THE DATA SOME QUESTIONS TOO
-        TAData data = (TAData)app.getDataComponent();
+        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
         
         // WE'LL NEED THIS IN CASE WE NEED TO DISPLAY ANY ERROR MESSAGES
         PropertiesManager props = PropertiesManager.getPropertiesManager();
@@ -142,14 +143,14 @@ public class CourseSiteGeneratorController {
     }
 
     public void handleCtrlz(){
-        TAData data = (TAData)app.getDataComponent();
+        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
         data.setUndoRedo(true);
         app.getStack().undoTransaction();
         app.getGUI().updateToolbarControls(false);
     }
     
     public void handleCtrly(){
-        TAData data = (TAData)app.getDataComponent();
+        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
         data.setUndoRedo(true);
         app.getStack().doTransaction();
         app.getGUI().updateToolbarControls(false);
@@ -172,7 +173,7 @@ public class CourseSiteGeneratorController {
         // GET THE TA
         TeachingAssistant ta = (TeachingAssistant)selectedItem;
         String taName = ta.getName();
-        TAData data = (TAData)app.getDataComponent();
+        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
         String cellKey = pane.getId();
         
         // AND TOGGLE THE OFFICE HOURS IN THE CLICKED CELL
@@ -183,7 +184,7 @@ public class CourseSiteGeneratorController {
     
     public void handleDeleteTA(TeachingAssistant ta){
         //GET THE TA LIST
-        TAData data = (TAData)app.getDataComponent();
+        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
         jTPS_Transaction transaction = new RemoveTA_Transaction(data,ta);
            app.getStack().addTransaction(transaction);
            app.getGUI().updateToolbarControls(false);
@@ -191,7 +192,7 @@ public class CourseSiteGeneratorController {
     
     public void handleUpdateTA(TeachingAssistant ta, String name, String email){
         PropertiesManager props = PropertiesManager.getPropertiesManager();
-        TAData data = (TAData)app.getDataComponent();
+        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
         CourseSiteGeneratorWorkspace workspaceComponent = (CourseSiteGeneratorWorkspace)app.getWorkspaceComponent();
         TAView workspace = workspaceComponent.getTAView();
         TextField nameTextField = workspace.getNameTextField();
@@ -262,7 +263,7 @@ public class CourseSiteGeneratorController {
     public void handleHoursChange(String start, String end){
         int startTime;
         int endTime;
-        TAData data = (TAData)app.getDataComponent();
+        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
         boolean startMorn = true;
         if(start.contains("pm"))
             startMorn = false;

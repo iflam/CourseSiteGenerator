@@ -21,6 +21,7 @@ public enum CourseSiteGeneratorProp {
     TAS_HEADER_TEXT,
     NAME_COLUMN_TEXT,
     EMAIL_COLUMN_TEXT,
+    GRAD_COLUMN_TEXT,
     NAME_PROMPT_TEXT,
     EMAIL_PROMPT_TEXT,
     ADD_BUTTON_TEXT,

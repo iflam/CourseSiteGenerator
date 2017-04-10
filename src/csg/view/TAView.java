@@ -10,6 +10,8 @@ import csg.CourseSiteGeneratorProp;
 import csg.data.CourseSiteGeneratorData;
 import csg.data.TAData;
 import csg.data.TeachingAssistant;
+import csg.style.CourseSiteGeneratorStyle;
+import csg.style.TAStyle;
 import djf.components.AppDataComponent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +26,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -49,6 +52,7 @@ public class TAView {
     TableView<TeachingAssistant> taTable;
     TableColumn<TeachingAssistant, String> nameColumn;
     TableColumn<TeachingAssistant, String> emailColumn;
+    TableColumn<TeachingAssistant, Boolean> gradColumn;
 
     // THE TA INPUT
     HBox addBox;
@@ -77,6 +81,7 @@ public class TAView {
     ComboBox endHourButton;
     Button submitHoursButton;
     HBox hoursBox;
+    SplitPane sPane;
     
     public TAView(CourseSiteGeneratorApp initApp){
         app = initApp;
@@ -92,11 +97,12 @@ public class TAView {
         // MAKE THE TABLE AND SETUP THE DATA MODEL
         taTable = new TableView();
         taTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        TAData data = (TAData)csgData.getCurrentData();
+        TAData data = csgData.getTAData();
         ObservableList<TeachingAssistant> tableData = data.getTeachingAssistants();
         taTable.setItems(tableData);
         String nameColumnText = props.getProperty(CourseSiteGeneratorProp.NAME_COLUMN_TEXT.toString());
         String emailColumnText = props.getProperty(CourseSiteGeneratorProp.EMAIL_COLUMN_TEXT.toString());
+        String gradColumnText = props.getProperty(CourseSiteGeneratorProp.GRAD_COLUMN_TEXT.toString());
         nameColumn = new TableColumn(nameColumnText);
         nameColumn.setCellValueFactory(
                 new PropertyValueFactory<>("name")
@@ -107,6 +113,16 @@ public class TAView {
                 new PropertyValueFactory<>("email")
         );
         emailColumn.setPrefWidth(325);
+        gradColumn = new TableColumn(gradColumnText);
+        gradColumn.setCellValueFactory(
+                new PropertyValueFactory<>("undergrad")
+        );
+        gradColumn.setCellFactory(CheckBoxTableCell.forTableColumn(gradColumn));
+        taTable.setEditable(true);
+        emailColumn.prefWidthProperty().bind(taTable.widthProperty().divide(2)); //1/2
+        nameColumn.prefWidthProperty().bind(taTable.widthProperty().divide(3));
+        gradColumn.prefWidthProperty().bind(taTable.widthProperty().divide(6)); //1/6 
+        taTable.getColumns().add(gradColumn);
         taTable.getColumns().add(nameColumn);
         taTable.getColumns().add(emailColumn);
         // ADD BOX FOR ADDING A TA
@@ -141,11 +157,8 @@ public class TAView {
         //INIT BUTTONS FOR COMBOBOX
         startHourButton = new ComboBox();
         endHourButton = new ComboBox();
-        //startHourButton.getStyleClass().add(TAStyle.HOURS_BOX);
-        //endHourButton.getStyleClass().add(TAStyle.HOURS_BOX);
         String submitButtonText = props.getProperty(CourseSiteGeneratorProp.SUBMIT_HOURS_TEXT.toString());
         submitHoursButton = new Button(submitButtonText);
-        //submitHoursButton.getStyleClass().add(TAStyle.HOURS_SUBMIT_BUTTON);
         officeHoursHeaderBox.getChildren().addAll(startHourButton, endHourButton, submitHoursButton);
         for(int i = 0; i < 24; i++){
             if(i <12){
@@ -190,15 +203,10 @@ public class TAView {
         rightPane.getChildren().add(officeHoursGridPane);
         
         // BOTH PANES WILL NOW GO IN A SPLIT PANE
-        SplitPane sPane = new SplitPane(leftPane, new ScrollPane(rightPane));
-//        workspace = new BorderPane();
-//        
-//        // AND PUT EVERYTHING IN THE WORKSPACE
-//        ((BorderPane) workspace).setCenter(sPane);
-//
+        sPane = new SplitPane(leftPane, new ScrollPane(rightPane));
 //        // MAKE SURE THE TABLE EXTENDS DOWN FAR ENOUGH
-//        taTable.prefHeightProperty().bind(workspace.heightProperty().multiply(1.9));
-//        officeHoursGridPane.prefWidthProperty().bind(workspace.widthProperty().divide(2).subtract(5));
+        taTable.prefHeightProperty().bind(app.getGUI().getAppPane().heightProperty().multiply(1.9));
+        officeHoursGridPane.prefWidthProperty().bind(app.getGUI().getAppPane().widthProperty().divide(2).subtract(5));
         
         // NOW LET'S SETUP THE EVENT HANDLING
         controller = new CourseSiteGeneratorController(app);
@@ -396,6 +404,10 @@ public class TAView {
     public Label getTACellLabel(String cellKey) {
         return officeHoursGridTACellLabels.get(cellKey);
     }
+    
+    public SplitPane getGUI(){
+        return sPane;
+    }
 
     public Pane getTACellPane(String cellPane) {
         return officeHoursGridTACellPanes.get(cellPane);
@@ -422,7 +434,6 @@ public class TAView {
 
     public void resetWorkspace() {
         // CLEAR OUT THE GRID PANE
-        app.getStack().clearStack();
         officeHoursGridPane.getChildren().clear();
         // AND THEN ALL THE GRID PANES AND LABELS
         officeHoursGridTimeHeaderPanes.clear();
@@ -453,8 +464,8 @@ public class TAView {
         app.getStack().clearStack();
     }
     
-    public void reloadWorkspace(AppDataComponent dataComponent) {
-        TAData taData = (TAData)dataComponent;
+    public void reloadWorkspace(CourseSiteGeneratorData dataComponent) {
+        TAData taData = dataComponent.getTAData();
         reloadOfficeHoursGrid(taData);
         startHourButton.getSelectionModel().select(taData.getStartHour());
         endHourButton.getSelectionModel().select(taData.getEndHour());
@@ -503,9 +514,8 @@ public class TAView {
         }
         
         // AND MAKE SURE ALL THE COMPONENTS HAVE THE PROPER STYLE
-        //CourseSiteGeneratorStyle taStyle = (CourseSiteGeneratorStyle)app.getStyleComponent();
-        //taStyle.initOfficeHoursGridStyle(); 
-        //DSFGSDPHGSKGHPDFHGKPDFKGPHKDFPGHKDPFGHPDKFGPHKDPFGKHPDFGHPDKFGPHKDFPGKHDPFGKHPDFGHPDKFGPHKDFPGHKDFPGKHDPFGKHPDFKGHPDKFGPHKDFPGHKDPFGKH
+        TAStyle taStyle = ((CourseSiteGeneratorStyle)app.getStyleComponent()).getTAStyle();
+        taStyle.initOfficeHoursGridStyle(); 
         
     }
 
@@ -553,47 +563,45 @@ public class TAView {
         }
 
         // CONTROLS FOR TOGGLING TA OFFICE HOURS
-//        for (Pane p : officeHoursGridTACellPanes.values()) {
-//            String pKey = getCellKey(p);
-//            String[] pItems = pKey.split("_");
-//            p.setOnMouseClicked(e -> {
-//                app.getGUI().updateToolbarControls(false);
-//                controller.handleCellToggle((Pane) e.getSource());
-//            });
-//            p.setOnMouseEntered(e -> {
-//               //set all of row
-//               p.getStyleClass().add(TAStyle.HIGHLIGHTED_GRID_CELL);
-//               for(Pane p2 : officeHoursGridTACellPanes.values()){
-//                   if(p2 == p){
-//                       continue;
-//                   }
-//                   String cellKey = getCellKey(p2);
-//                   String[] cellItems = cellKey.split("_");
-//                   //rows
-//                   if(pItems[0].equals(cellItems[0])){
-//                       if(Integer.parseInt(cellItems[1])<=Integer.parseInt(pItems[1]))
-//                            p2.getStyleClass().add(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN);
-//                   }
-//                   if(pItems[1].equals(cellItems[1])){
-//                       if(Integer.parseInt(cellItems[0])<=Integer.parseInt(pItems[0]))
-//                            p2.getStyleClass().add(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN);
-//                   }
-//               }
-//            });
-//            p.setOnMouseExited(e->{
-//               for(Pane p2: officeHoursGridTACellPanes.values()){
-//                   if(p2.getStyleClass().contains(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN)){
-//                        p2.getStyleClass().remove(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN);
-//                   }
-//               }
-//               p.getStyleClass().remove(TAStyle.HIGHLIGHTED_GRID_CELL);
-//            });
-//        }
-//        
-//        
-//        // AND MAKE SURE ALL THE COMPONENTS HAVE THE PROPER STYLE
-//        TAStyle taStyle = (TAStyle)app.getStyleComponent();
-//        taStyle.initOfficeHoursGridStyle();           
+        for (Pane p : officeHoursGridTACellPanes.values()) {
+            String pKey = getCellKey(p);
+            String[] pItems = pKey.split("_");
+            p.setOnMouseClicked(e -> {
+                app.getGUI().updateToolbarControls(false);
+                controller.handleCellToggle((Pane) e.getSource());
+            });
+            p.setOnMouseEntered(e -> {
+               //set all of row
+               p.getStyleClass().add(TAStyle.HIGHLIGHTED_GRID_CELL);
+               for(Pane p2 : officeHoursGridTACellPanes.values()){
+                   if(p2 == p){
+                       continue;
+                   }
+                   String cellKey = getCellKey(p2);
+                   String[] cellItems = cellKey.split("_");
+                   //rows
+                   if(pItems[0].equals(cellItems[0])){
+                       if(Integer.parseInt(cellItems[1])<=Integer.parseInt(pItems[1]))
+                            p2.getStyleClass().add(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN);
+                   }
+                   if(pItems[1].equals(cellItems[1])){
+                       if(Integer.parseInt(cellItems[0])<=Integer.parseInt(pItems[0]))
+                            p2.getStyleClass().add(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN);
+                   }
+               }
+            });
+            p.setOnMouseExited(e->{
+               for(Pane p2: officeHoursGridTACellPanes.values()){
+                   if(p2.getStyleClass().contains(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN)){
+                        p2.getStyleClass().remove(TAStyle.HIGHLIGHTED_GRID_ROW_OR_COLUMN);
+                   }
+               }
+               p.getStyleClass().remove(TAStyle.HIGHLIGHTED_GRID_CELL);
+            });
+        }    
+        // AND MAKE SURE ALL THE COMPONENTS HAVE THE PROPER STYLE
+        TAStyle taStyle = ((CourseSiteGeneratorStyle)app.getStyleComponent()).getTAStyle();
+        taStyle.initOfficeHoursGridStyle(); 
     }
     
     public void addCellToGrid(TAData dataComponent, HashMap<String, Pane> panes, HashMap<String, Label> labels, int col, int row) {       

@@ -1,5 +1,7 @@
 package csg.data;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -12,15 +14,7 @@ public class TeachingAssistant<E extends Comparable<E>> implements Comparable<E>
     // THE TABLE WILL STORE TA NAMES AND EMAILS
     private final StringProperty name;
     private final StringProperty email;
-    private boolean isUndergrad;
-
-    public boolean isIsUndergrad() {
-        return isUndergrad;
-    }
-
-    public void setIsUndergrad(boolean isUndergrad) {
-        this.isUndergrad = isUndergrad;
-    }
+    private BooleanProperty undergrad;
 
     /**
      * Constructor initializes the TA name
@@ -28,7 +22,7 @@ public class TeachingAssistant<E extends Comparable<E>> implements Comparable<E>
     public TeachingAssistant(String initName, String initEmail, boolean initIsUndergrad) {
         name = new SimpleStringProperty(initName);
         email = new SimpleStringProperty(initEmail);
-        isUndergrad = initIsUndergrad;
+        undergrad = new SimpleBooleanProperty(initIsUndergrad);
     }
 
     // ACCESSORS AND MUTATORS FOR THE PROPERTIES
@@ -46,6 +40,14 @@ public class TeachingAssistant<E extends Comparable<E>> implements Comparable<E>
 
     public void setEmail(String initEmail){
         email.set(initEmail);
+    }
+    
+    public Boolean getUndergrad(){
+        return undergrad.get();
+    }
+    
+    public void setUndergrad(boolean s){
+        undergrad.set(s);
     }
     @Override
     public int compareTo(E otherTA) {

@@ -6,6 +6,7 @@
 package csg.style;
 
 import csg.CourseSiteGeneratorApp;
+import csg.data.CourseSiteGeneratorData;
 import csg.data.TeachingAssistant;
 import csg.view.CourseSiteGeneratorWorkspace;
 import csg.view.TAView;
@@ -18,7 +19,7 @@ import javafx.scene.control.TableView;
  *
  * @author Itai
  */
-public class TAStyle implements Style{
+public class TAStyle{
     // FIRST WE SHOULD DECLARE ALL OF THE STYLE TYPES WE PLAN TO USE
     
     // WE'LL USE THIS FOR ORGANIZING LEFT AND RIGHT CONTROLS
@@ -50,6 +51,7 @@ public class TAStyle implements Style{
     public static String HIGHLIGHTED_GRID_ROW_OR_COLUMN = "highlighted_grid_row_or_column";
     public static String HOURS_BOX = "hours_box";
     public static String HOURS_SUBMIT_BUTTON = "hours_submit_button";
+    public static String MAIN_PAGE = "outer_pane";
     /**
      * This function specifies all the style classes for
      * all user interface controls in the workspace.
@@ -61,9 +63,9 @@ public class TAStyle implements Style{
         app = initApp;
         workspaceComponent = (TAView)((CourseSiteGeneratorWorkspace)app.getWorkspaceComponent()).getTAView();
     }
-    @Override
-    public void initWorkspaceStyle() {
+    public void initTAStyle() {
         // LEFT SIDE - THE HEADER
+        workspaceComponent.getGUI().getStyleClass().add(MAIN_PAGE);
         workspaceComponent.getTAsHeaderBox().getStyleClass().add(CLASS_HEADER_PANE);
         workspaceComponent.getTAsHeaderLabel().getStyleClass().add(CLASS_HEADER_LABEL);
 
@@ -86,7 +88,7 @@ public class TAStyle implements Style{
         workspaceComponent.getOfficeHoursSubheaderLabel().getStyleClass().add(CLASS_HEADER_LABEL);
         
         //HIGHIGHTS
-        
+        ((CourseSiteGeneratorWorkspace)app.getWorkspaceComponent()).getTAView().reloadWorkspace((CourseSiteGeneratorData)app.getDataComponent());
     }
     
     /**

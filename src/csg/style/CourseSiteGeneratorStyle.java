@@ -10,6 +10,9 @@ import javafx.scene.control.TableView;
 import csg.data.TeachingAssistant;
 import csg.view.CourseSiteGeneratorWorkspace;
 import csg.view.TAView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * This class manages all CSS style for this application.
@@ -25,7 +28,8 @@ public class CourseSiteGeneratorStyle extends AppStyleComponent {
     private RecitationStyle recitation;
     private ProjectStyle project;
     private CourseStyle course;
-    private Style currentStyle;
+    public static String APP_TAB = "tab";
+    public static String BACKGROUND = "back_pane";
     
     /**
      * This constructor initializes all style for the application.
@@ -38,17 +42,46 @@ public class CourseSiteGeneratorStyle extends AppStyleComponent {
 
         // LET'S USE THE DEFAULT STYLESHEET SETUP
         super.initStylesheet(app);
-        ta = new TAStyle(app);
-        currentStyle = ta;
         // INIT THE STYLE FOR THE FILE TOOLBAR
         app.getGUI().initFileToolbarStyle();
 
         // AND NOW OUR WORKSPACE STYLE
-        currentStyle.initWorkspaceStyle();
+        BorderPane workspace = (BorderPane)app.getWorkspaceComponent().getWorkspace();
     }
     
-    public Style getCurrentStyle(){
-        return currentStyle;
+    public void initStyleSheet(){
+        course = new CourseStyle(app);
+        course.initCourseStyle();
+        project = new ProjectStyle(app);
+        project.initProjectStyle();
+        recitation = new RecitationStyle(app);
+        recitation.initRecitationStyle();
+        schedule = new ScheduleStyle(app);
+        schedule.initScheduleStyle();
+        ta = new TAStyle(app);
+        ta.initTAStyle();
+        
     }
+
+    public TAStyle getTAStyle() {
+        return ta;
+    }
+
+    public ScheduleStyle getScheduleStyle() {
+        return schedule;
+    }
+
+    public RecitationStyle getRecitationStyle() {
+        return recitation;
+    }
+
+    public ProjectStyle getProjectStyle() {
+        return project;
+    }
+
+    public CourseStyle getCourseStyle() {
+        return course;
+    }
+    
     
 }

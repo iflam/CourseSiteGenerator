@@ -24,7 +24,7 @@ import csg.file.TimeSlot;
  *
  * @author Itai
  */
-public class TAData extends Data{
+public class TAData{
 
     // WE'LL NEED ACCESS TO THE APP TO NOTIFY THE GUI WHEN DATA CHANGES
     CourseSiteGeneratorApp app;
@@ -313,7 +313,7 @@ public class TAData extends Data{
                 }
             }
         }
-        addTA(name,email,ta.isIsUndergrad());
+        addTA(name,email,ta.getUndergrad());
         Collections.sort(teachingAssistants);
         int i = 0;
     }
