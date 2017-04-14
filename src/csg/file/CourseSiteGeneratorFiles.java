@@ -24,6 +24,7 @@ import javax.json.stream.JsonGenerator;
 import csg.CourseSiteGeneratorApp;
 import csg.data.TAData;
 import csg.data.TeachingAssistant;
+import csg.view.CourseSiteGeneratorWorkspace;
 
 /**
  * This class serves as the file component for the TA
@@ -47,6 +48,12 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
     static final String JSON_EMAIL = "email";
     static final String JSON_UNDERGRAD_TAS = "undergrad_tas";
     static final String JSON_GRAD_TAS = "grad_tas";
+    /**
+     * sdifhsaidfhaisdhfiashdfi
+     * ashidfiahsdifhasidhfaisdh
+     */
+    static final String JSON_TOP_BOX = "topbox"; 
+    static final String JSON_COURSE_SUBJECT = "subject";
     
     public CourseSiteGeneratorFiles(CourseSiteGeneratorApp initApp) {
         app = initApp;
@@ -67,6 +74,14 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
 
         // NOW RELOAD THE WORKSPACE WITH THE LOADED DATA
         app.getWorkspaceComponent().reloadWorkspace(app.getDataComponent());
+        
+        /*DFASDFASDF
+        ASDFASDFASDFA
+        ASDFASDFASD
+        */
+        JsonObject jsonCourseObject = json.getJsonObject(JSON_TOP_BOX);
+        CourseSiteGeneratorWorkspace appWorkspace = (CourseSiteGeneratorWorkspace)app.getWorkspaceComponent();
+        appWorkspace.getCourseView().getSubjectTF().setText(jsonCourseObject.getString(JSON_COURSE_SUBJECT));
 
         // NOW LOAD ALL THE UNDERGRAD TAs
         JsonArray jsonUndergradTAArray = json.getJsonArray(JSON_UNDERGRAD_TAS);

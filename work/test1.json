@@ -5,9 +5,26 @@
     "undergrad_tas":[
         {
             "name":"itai",
-            "email":"flam"
-        }
+            "email":"flam",
+        },
+		{
+			"name":"isaac",
+			"email":"ramos",
+		}
     ],
+
+	
+	"topbox":
+	{
+		"subject": "CSE",
+		"number": "219",
+		"semester": "Summer",
+		"year": "2017",
+		"title": "dfgij",
+		"instructor_name":"",
+		"instructor_home":"",
+		"export_dir": "None",
+	}
     "officeHours":[
         {
             "day":"MONDAY",

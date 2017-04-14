@@ -62,7 +62,6 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
         tp.getTabs().addAll(courseTab,taTab,recitationTab,scheduleTab,projectTab);
         workspace = new BorderPane();
         ((BorderPane) workspace).setCenter(tp);
-        ((BorderPane)workspace).getStyleClass().addAll("-fx-background-color:#000000","-fx-border-color:#000000");
         controller = new CourseSiteGeneratorController(app);
         //INITIALIZE ALL THE TABS
         course = new CourseView(app);

@@ -58,4 +58,12 @@ public class TeachingAssistant<E extends Comparable<E>> implements Comparable<E>
     public String toString() {
         return name.getValue();
     }
+    
+    public void undergradProperty(){
+        System.out.println(undergrad);
+        if(undergrad.getValue())
+            undergrad.setValue(Boolean.FALSE);
+        else
+            undergrad.setValue(Boolean.TRUE);
+    }
 }

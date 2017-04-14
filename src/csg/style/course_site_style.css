@@ -26,7 +26,9 @@
     -fx-background-color: bisque;
     -fx-color:red;
 }
-
+.top_buttons{
+    -fx-hgap:15px;
+}
 .dialog_prompt {
     -fx-font-size: 16pt;
     -fx-font-weight: bold;
@@ -43,7 +45,9 @@
     -fx-padding: 15;
     -fx-spacing: 10;
     -fx-border-width: 2px;
-    -fx-border-color: #7777dd;
+    -fx-border-color: brown;
+    -fx-hgap:100px;
+    -fx-alignment:CENTER;
 }
 
 .header_pane{
@@ -66,8 +70,8 @@
 }
 .table-row-cell, .table-row-cell:selected .check-box .box{
     -fx-background-color:#ffec82;
-    -fx-border-color:brown;
-    -fx-table-cell-border-color:brown;
+    -fx-border-color:#8e6036;
+    -fx-table-cell-border-color:#8e6036;
 }
 .table-row-cell:odd{
     -fx-background-color:#f9e572;
@@ -135,8 +139,8 @@
 .office_hours_grid_time_cell_pane{
     -fx-background-color:#ffec82; 
     -fx-border: 1px;   
-    -fx-border-color:darkgray;
-    -fx-border-style:dashed;
+    -fx-border-color:#8e6036;
+    -fx-border-style:solid;
 }
 
 .office_hours_grid_time_cell_label{
@@ -168,11 +172,15 @@
 .tab-pane .tab-header-area .tab-header-background{
 	-fx-background-color:-fx-outer-border, -fx-text-box-border,#f2c829;
         -fx-background-style:solid;
+        -fx-border-color:#c18f62;
         
 }
 .tab-pane {
-    -fx-padding:20px;
-    -fx-vgap:20px;
+    -fx-background-color:#c49b15;
+    -fx-border-style:solid;
+    -fx-padding:10px;
+    -fx-hgap:20px;
+    -fx-alignment:CENTER;
 }
 .tab:hover{
     -fx-background-color:#ffe08c;

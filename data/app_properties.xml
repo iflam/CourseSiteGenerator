@@ -20,7 +20,14 @@
         <property name="EXIT_ICON"          value="Exit.png"></property> 
 		<property name="SAVE_AS_ICON"		value="SaveAs.png"></property>
 		<property name="EXPORT_ICON"          value="Export.png"></property>
+		<property name="UNDO_ICON"		value="Undo.png"></property>
+		<property name="REDO_ICON"		value="Redo.png"></property>
+		<property name="ABOUT_ICON"		value="About.png"></property>
 		<property name="DEFAULT_PICTURES_ICON"          value="derpablerp.png"></property> 		
+		<property name="YES_TEXT"		value="Yes"></property>
+		<property name="NO_TEXT"		value="No"></property>
+		<property name="CANCEL_TEXT"		value="Cancel"></property>	
+		<property name="CLOSE_TEXT"		value="Close"></property>	
 		
         
         <!-- TOOLTIPS FOR BUTTONS -->
@@ -30,6 +37,9 @@
         <property name="EXIT_TOOLTIP"		value="Exit the Application"></property>
 		<property name="SAVE_AS_TOOLTIP"		value="Save the current TA Grid to a new file"></property>
 		<property name="EXPORT_TOOLTIP"		value="Export to HTML"></property>
+		<property name="UNDO_TOOLTIP"		value="Undo previous action"></property>
+		<property name="REDO_TOOLTIP"		value="Redo undone action"></property>
+		<property name="ABOUT_TOOLTIP"		value="About the program"></property>
         
         <!-- ERROR MESSAGES -->
         <property name="CLOSE_BUTTON_TEXT"              value="Close"></property>

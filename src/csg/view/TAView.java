@@ -467,8 +467,8 @@ public class TAView {
     public void reloadWorkspace(CourseSiteGeneratorData dataComponent) {
         TAData taData = dataComponent.getTAData();
         reloadOfficeHoursGrid(taData);
-        startHourButton.getSelectionModel().select(taData.getStartHour());
-        endHourButton.getSelectionModel().select(taData.getEndHour());
+        endHourButton.getSelectionModel().select((taData.getEndHour() == 24)?0:taData.getEndHour());
+        startHourButton.getSelectionModel().select((taData.getStartHour() == 24)?0:taData.getStartHour());
         nameTextField.setText("");
         emailTextField.setText("");
     }

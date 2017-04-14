@@ -39,6 +39,7 @@ public class CourseSiteGeneratorData implements AppDataComponent{
     }
     @Override
     public void resetData() {
+        ta.getTeachingAssistants().clear();
     }
     public CourseData getCourseData(){
         return course;

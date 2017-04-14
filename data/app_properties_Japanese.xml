@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This XML file allows us to easily customize the look and language used
+    in our program's user interface. Note that this properties file is only
+    for the standard controls for an app from the Desktop Java Framework, so
+    it would not include things initialized for the workspace, which is
+    customizable.
+-->
+<properties>
+    <property_list>
+        <property name="APP_TITLE"	    value="コースサイトジェネレーター"></property>
+	<property name="APP_LOGO"	    value="CourseSiteGeneratorLogo.png"></property>
+	<property name="APP_PATH_CSS"	    value="style/"></property>
+	<property name="APP_CSS"	    value="course_site_style.css"></property>
+        
+        <!-- PROGRAM ICON FILES -->
+        <property name="NEW_ICON"	    value="New.png"></property>
+        <property name="LOAD_ICON"	    value="Load.png"></property>
+        <property name="SAVE_ICON"	    value="Save.png"></property>
+        <property name="EXIT_ICON"          value="Exit.png"></property> 
+		<property name="SAVE_AS_ICON"		value="SaveAs.png"></property>
+		<property name="EXPORT_ICON"          value="Export.png"></property>
+		<property name="UNDO_ICON"		value="Undo.png"></property>
+		<property name="REDO_ICON"		value="Redo.png"></property>
+		<property name="ABOUT_ICON"		value="About.png"></property>
+		<property name="DEFAULT_PICTURES_ICON"          value="derpablerp.png"></property> 	
+		<property name="YES_TEXT"		value="はい"></property>
+		<property name="NO_TEXT"		value="いいえ"></property>
+		<property name="CANCEL_TEXT"		value="キャンセル"></property>
+		<property name="CLOSE_TEXT"		value="閉じる"></property>			
+		
+		
+        
+        <!-- TOOLTIPS FOR BUTTONS -->
+        <property name="NEW_TOOLTIP"		value="新しいコースサイトページを作る"></property>
+        <property name="LOAD_TOOLTIP"		value="コースサイトページをロードする"></property>
+        <property name="SAVE_TOOLTIP"		value="このページを同じファイルに保存する"></property>
+        <property name="EXIT_TOOLTIP"		value="アプリを出る"></property>
+		<property name="SAVE_AS_TOOLTIP"		value="新しいファイルにほぞの保存する"></property>
+		<property name="EXPORT_TOOLTIP"		value="HTMLに輸出"></property>
+		<property name="UNDO_TOOLTIP"		value="元に戻す"></property>
+		<property name="REDO_TOOLTIP"		value="やり直す"></property>
+		<property name="ABOUT_TOOLTIP"		value="プログラムについて"></property>
+        
+        <!-- ERROR MESSAGES -->
+        <property name="CLOSE_BUTTON_TEXT"              value="閉じる"></property>
+
+        <property name="NEW_ERROR_MESSAGE"              value="新しいファイルを作ることにエラーが起こりました。"></property>
+        <property name="NEW_ERROR_TITLE"		value="新しいワークエラー"></property>
+        <property name="LOAD_ERROR_MESSAGE"             value="ワークをロードすることにエラーが起こりました。"></property>
+        <property name="LOAD_ERROR_TITLE"		value="ロードエラー"></property>
+        <property name="SAVE_ERROR_MESSAGE"             value="ワークを保存することにエラーが起こりました。"></property>
+        <property name="SAVE_ERROR_TITLE"		value="保存エラー"></property>
+        <property name="PROPERTIES_LOAD_ERROR_MESSAGE"	value="An error occured loading a properties file."></property>	
+        <property name="PROPERTIES_LOAD_ERROR_TITLE"	value="Properties File Loading Error"></property>
+		<property name="EXPORT_ERROR_MESSAGE"             value="An error occured exporting work."></property>
+        <property name="EXPORT_ERROR_TITLE"		value="Export Work Error"></property>
+	
+        <!-- VERIFICATION MESSAGES -->
+	
+        <property name="NEW_COMPLETED_MESSAGE"		value="新しいワークが作成しました。"></property>
+        <property name="NEW_COMPLETED_TITLE"		value="新しいワーク作成"></property>
+        <property name="LOAD_COMPLETED_MESSAGE"		value="ファイルをロードすることが作成しました。"></property>
+        <property name="LOAD_COMPLETED_TITLE"		value="ロード作成"></property>
+        <property name="SAVE_COMPLETED_MESSAGE"		value="ファイルを保存することが作成しました。"></property>
+        <property name="SAVE_COMPLETED_TITLE"		value="保存完了"></property>
+        <property name="SAVE_UNSAVED_WORK_MESSAGE"	value="保存しなかったワークを保存したいですか。"></property>
+        <property name="SAVE_UNSAVED_WORK_TITLE"	value="保存してください。"></property>
+		<property name="EXPORT_COMPLETED_MESSAGE"		value="輸出が作成しました。"></property>
+        <property name="EXPORT_COMPLETED_TITLE"		value="輸出作成"></property>
+	
+        <property name="NEW_CREATED_MESSAGE"		value="新しいワークが作られましたが保存じゃありません。"></property>
+        <property name="WORK_LOADED_MESSAGE"		value="ワークがロードされました。"></property>
+        <property name="WORK_SAVED_MESSAGE"		value="ワークが保存されました。"></property>
+        <property name="SAVE_UNSAVED_WORK_MESSAGE"	value="ワークを保存したいですか。"></property>
+	<property name="SAVE_WORK_TITLE"		value="ワーク保存"></property>
+	<property name="LOAD_WORK_TITLE"		value="ロードしたいファイルを選んでください"></property>
+	<property name="EXPORT_WORK_TITLE"		value="輸出の名鑑を選んでください"></property>
+	<property name="WORK_FILE_EXT"			value="json"></property>
+	<property name="WORK_FILE_EXT_DESC"		value="コースサイトジェネレーター"></property>
+
+        <!-- WORKSPACE CONTROLS STUFF -->        
+        <property name="TAS_HEADER_TEXT"                value="手伝い"></property>
+        <property name="NAME_COLUMN_TEXT"               value="名前"></property>
+        <property name="EMAIL_COLUMN_TEXT"              value="メール"></property>
+		<property name="GRAD_COLUMN_TEXT"				value="大学生"></property>
+        <property name="NAME_PROMPT_TEXT"               value="名前"></property>
+        <property name="EMAIL_PROMPT_TEXT"              value="メール"></property>
+        <property name="ADD_BUTTON_TEXT"                value="手伝い追加"></property>
+		<property name="UPDATE_BUTTON_TEXT"                value="手伝い更新"></property>
+		<property name="CLEAR_BUTTON_TEXT"                value="クリア"></property>
+        <property name="OFFICE_HOURS_SUBHEADER"         value="オフィスアワーグリッド"></property>
+		<property name="SUBMIT_HOURS_TEXT"         value="提出"></property>
+		<property name="SEMESTER_TEXT"	    value="学期:"></property>
+		<property name="SUBJECT_TEXT"	    value="科目:"></property>
+		<property name="NUMBER_TEXT"	    value="番号:"></property>
+		<property name="YEAR_TEXT"	    value="年:"></property>
+		<property name="TITLE_TEXT"	    value="タイトル:"></property>
+		<property name="INSTRUCTOR_NAME_TEXT"	    value="教師の名前:"></property>
+		<property name="INSTRUCTOR_HOME_TEXT"	    value="教師のホームぺージ:"></property>
+		<property name="EXPORT_DIRECTORY_TEXT"	    value="輸出名鑑:"></property>
+		<property name="CHANGE_TEXT"	    value="変える"></property>
+		<property name="SUMMER_TEXT"	    value="夏"></property>
+		<property name="FALL_TEXT"	    value="秋"></property>
+		<property name="WINTER_TEXT"	    value="冬"></property>
+		<property name="SPRING_TEXT"	    value="春"></property>
+		<property name="COURSE_DETAILS_TEXT"	    value="コース詳細"></property>
+		<property name="COURSE_INFO_TEXT"	    value="コース情報"></property>
+		<property name="TITLE_DEFAULT_TEXT"	    value="コンピューターサイエンス ３"></property>
+		<property name="INSTRUCTOR_NAME_DEFAULT_TEXT"	    value="Richard McKenna"></property>
+		<property name="INSTRUCTOR_HOME_DEFAULT_TEXT"	    value="htttp://www.cs.stonybrook.edu/~richard"></property>
+		<property name="EXPORT_DIRECTORY_DEFAULT_TEXT"	    value="なし"></property>
+		<property name="SITE_TEMPLATE_TEXT"               value="サイトテンプレート"></property>
+		<property name="SELECTED_TEMPLATE_TEXT"               value="選んだテンプレートが完全なサイトテンプレートを含む。（HTMLファイルも含んでください）"></property>
+		<property name="TEMPLATE_DEFAULT_TEXT"               value=".\templates\CSE219"></property>
+		<property name="SELECT_TEMPLATE_TEXT"               value="テンプレート名鑑を選んでください"></property>
+		<property name="SITE_PAGES_TEXT"               value="サイトページ:"></property>
+		<property name="USE_TEXT"               value="使用"></property>
+		<property name="NAVBAR_TITLE_TEXT"               value="ナビゲーションバータイトル"></property>
+		<property name="FILE_NAME_TEXT"               value="ファイルの名前"></property>
+		<property name="SCRIPT_TEXT"               value="スクリプト"></property>
+		<property name="PAGE_STYLE_TEXT"               value="ページスタイル"></property>
+		<property name="BANNER_IMG_TEXT"               value="学校のバナー:"></property>
+		<property name="LEFT_IMG_TEXT"               value="左フッターバナー:"></property>
+		<property name="RIGHT_IMG_TEXT"               value="右フッターバナー:"></property>
+		<property name="STYLESHEET_TEXT"               value="スタイルシート:"></property>
+		<property name="STYLESHEET_MESSAGE"               value="選べるスタイルシートはwork/cssに入らないといけません。"></property>
+		<!-- Recitation view text -->
+		<property name="RECITATION_TITLE_TEXT"               value="復習クラス"></property>
+		<property name="SECTION_TEXT"               value="セクション"></property>
+		<property name="INSTRUCTOR_TEXT"               value="教師"></property>
+		<property name="DAY_TIME_TEXT"               value="日・時"></property>
+		<property name="LOCATION_TEXT"               value="場所"></property>
+		<property name="SUPERVISING_TA_TEXT"               value="手伝い人"></property>
+		<property name="ADD_EDIT_TEXT"				value="追加・編集"></property>
+		<property name="ADD_UPDATE_TEXT"               value="追加・更新"></property>
+		<property name="DELETE_BUTTON_TEXT"				value = "-"></property>
+		<property name="TA_TEXT"					value="手伝い人"></property>
+		<property name="SECTION_SUG"					value="R01"></property>
+		<property name="INSTRUCTOR_SUG"					value="McKenna"></property>
+		<property name="DAY_TIME_SUG"					value="月, 3:30pm-4:23pm"></property>
+		<property name="LOCATION_SUG"					value="古いコンピューターサイエンスビル 2114"></property>
+		<!-- Schedule view text-->
+		<property name="SCHEDULE_TEXT"				value="スケジュール"></property>
+		<property name="CB_TEXT"					value="カレンダー境界"></property>
+		<property name="STARTING_TEXT"					value="始まる月："></property>
+		<property name="ENDING_TEXT"					value="終わる金"></property>
+		<property name="TYPE_TEXT"					value="タイプ"></property>
+		<property name="DATE_TEXT"					value="デート"></property>
+		<property name="TIME_TEXT"					value="時"></property>
+		<property name="TITLE_TEXT"					value="タイトル"></property>
+		<property name="TOPIC_TEXT"					value="トピック"></property>
+		<property name="LINK_TEXT"					value="リンク"></property>
+		<property name="CRITERIA_TEXT"					value="クライテリア"></property>
+		<property name="SI_TEXT"					value="スケジュール内容"></property>
+		<!-- Project view text-->
+		<property name="PROJECTS_TEXT"					value="プロジェクト"></property>
+		<property name="TEAMS_TEXT"					value="チーム"></property>
+		<property name="COLOR_TEXT"					value="色"></property>
+		<property name="TEXT_COLOR_TEXT"					value="テキストの色"></property>
+		<property name="STUDENTS_TEXT"					value="学生"></property>
+		<property name="FIRST_NAME_TEXT"					value="名前"></property>
+		<property name="LAST_NAME_TEXT"					value="名字"></property>
+		<property name="TEAM_TEXT"					value="チーム"></property>
+		<property name="ROLE_TEXT"					value="ロール"></property>
+		
+		
+		<!-- Tab names-->
+		<property name="TA_DATA_TEXT"				value = "手伝い人のデータ"></property>
+		<property name="RECITATION_DATA_TEXT"				value = "復習クラスのデータ"></property>
+		<property name="SCHEDULE_DATA_TEXT"				value = "スケジュールのデータ"></property>
+		<property name="PROJECT_DATA_TEXT"				value = "プロジェクトのデータ"></property>
+		
+        
+        <!-- WORKSPACE ERROR MESSAGES -->
+        <property name="MISSING_TA_NAME_TITLE"          value="名前行方不明"></property>
+        <property name="MISSING_TA_NAME_MESSAGE"        value="名前は必要です。"></property>
+        <property name="MISSING_TA_EMAIL_TITLE"         value="メール行方不明"></property>
+		<property name="INCORRECT_FORMAT_TA_EMAIL_TITLE"         value="正しくないメールフォーマット"></property>
+		<property name="INCORRECT_FORMAT_TA_EMAIL_MESSAGE"         value="メールは正しくないフォーマットにあります。"></property>
+        <property name="MISSING_TA_EMAIL_MESSAGE"       value="メールは必要です。"></property>
+        <property name="TA_NAME_AND_EMAIL_NOT_UNIQUE_TITLE"     value="もうある名前かメール"></property>
+        <property name="TA_NAME_AND_EMAIL_NOT_UNIQUE_MESSAGE"   value="得意名前とメールを入力してください。"></property>
+		<property name="WRONG_HOURS_FORMAT_TITLE"     value="間違い時間"></property>
+        <property name="WRONG_HOURS_FORMAT_MESSAGE"   value="始まる時間は終わる時間の前にあることは必要です。"></property>
+		<property name="CHANGE_HOURS_PROMPT_TITLE"     value="余分なオフィスアワー？"></property>
+        <property name="CHANGE_HOURS_PROMPT_MESSAGE"   value="続いたら、選んだ時間の前後にあるオフィスアワーが消去されます。続きたいですか。"></property>
+		
+    </property_list>
+    <property_options_list>
+        <property_options name="OFFICE_HOURS_TABLE_HEADERS">
+            <option>始まる時間</option>
+            <option>終わる時間</option>
+        </property_options>
+        <property_options name="DAYS_OF_WEEK">
+            <option>月</option>
+            <option>火</option>
+            <option>水</option>
+            <option>木</option>
+            <option>金</option>
+        </property_options>
+    </property_options_list>
+</properties>
