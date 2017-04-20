@@ -2,6 +2,7 @@ package csg.view;
 
 import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
+import csg.data.CourseSiteGeneratorData;
 import csg.style.CourseSiteGeneratorStyle;
 import djf.components.AppDataComponent;
 import djf.components.AppWorkspaceComponent;
@@ -80,6 +81,9 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
     @Override
     public void reloadWorkspace(AppDataComponent dataComponent) {
         app.getGUI().getAppPane().setCenter(workspace);
+        CourseSiteGeneratorData data = (CourseSiteGeneratorData)dataComponent;
+        ta.reloadWorkspace(data);
+        
     }
     
     public TAView getTAView(){

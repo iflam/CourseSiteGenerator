@@ -15,6 +15,7 @@ import static csg.CourseSiteGeneratorProp.MISSING_TA_NAME_TITLE;
 import static csg.CourseSiteGeneratorProp.TA_NAME_AND_EMAIL_NOT_UNIQUE_MESSAGE;
 import static csg.CourseSiteGeneratorProp.TA_NAME_AND_EMAIL_NOT_UNIQUE_TITLE;
 import csg.data.CourseSiteGeneratorData;
+import csg.data.ScheduleData;
 import csg.data.TAData;
 import csg.data.TeachingAssistant;
 import djf.ui.AppMessageDialogSingleton;
@@ -32,6 +33,7 @@ import csg.transactions.UpdateTA_Transaction;
 import static djf.settings.AppPropertyType.LOAD_WORK_TITLE;
 import static djf.settings.AppStartupConstants.PATH_WORK;
 import java.io.File;
+import java.time.LocalDate;
 import javafx.scene.control.Tab;
 import javafx.stage.FileChooser;
 
@@ -57,33 +59,22 @@ public class CourseSiteGeneratorController {
      * @param selectedItem
      */
     
-//    public void handleSwitchTabs(Tab selectedItem){
-//        CourseSiteGeneratorWorkspace workspace = (CourseSiteGeneratorWorkspace)app.getWorkspaceComponent();
-//        switch(selectedItem.getText()){
-//            case "Course Details":
-//                CourseView c = new CourseView(app);
-//                app.getGUI().getAppPane().setCenter(c.getvBox());
-//                break;
-//            case "TA Data":
-//                break;
-//            case "Recitation Data":
-//                break;
-//            case "Schedule Data":
-//                break;
-//            case "Project Data":
-//                break;
-//            default:
-//                break;
-//        }
-//        
-//    }
-    
     /**
      * This method responds to when the user requests to add
      * a new TA via the UI. Note that it must first do some
      * validation to make sure a unique name and email address
      * has been provided.
      */
+    
+    public void handleChangeStartDate(LocalDate d){
+        ScheduleData data = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
+        data.setStartDate(d);
+    }
+    
+    public void handleChangeEndDate(LocalDate d){
+        ScheduleData data = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
+        data.setEndDate(d);
+    }
     public void handleAddTA() {
         // WE'LL NEED THE WORKSPACE TO RETRIEVE THE USER INPUT VALUES
         CourseSiteGeneratorWorkspace workspaceComponent = (CourseSiteGeneratorWorkspace)app.getWorkspaceComponent();

@@ -32,14 +32,19 @@ public class CourseSiteGeneratorData implements AppDataComponent{
     public CourseSiteGeneratorData(CourseSiteGeneratorApp initApp){
         app = initApp;
         course = new CourseData();
-        project = new ProjectData();
-        recitation = new RecitationData();
-        schedule = new ScheduleData();
+        project = new ProjectData(app);
+        recitation = new RecitationData(app);
+        schedule = new ScheduleData(app);
         ta = new TAData(app);
     }
     @Override
     public void resetData() {
         ta.getTeachingAssistants().clear();
+        recitation.getRecitations().clear();
+        schedule.getItems().clear();
+        schedule.resetDates();
+        project.getStudents().clear();
+        project.getTeams().clear();
     }
     public CourseData getCourseData(){
         return course;
@@ -49,6 +54,9 @@ public class CourseSiteGeneratorData implements AppDataComponent{
     }
     public RecitationData getRecitationData(){
         return recitation;
+    }
+    public ScheduleData getScheduleData(){
+        return schedule;
     }
     public TAData getTAData(){
         return ta;

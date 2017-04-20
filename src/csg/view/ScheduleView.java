@@ -7,9 +7,12 @@ package csg.view;
 
 import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
+import csg.data.CourseSiteGeneratorData;
+import csg.data.ScheduleData;
 import csg.data.ScheduleItem;
 import djf.components.AppDataComponent;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -18,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -29,6 +33,8 @@ import properties_manager.PropertiesManager;
  */
 public class ScheduleView {
     CourseSiteGeneratorApp app;
+    CourseSiteGeneratorController controller;
+    
     private VBox schedulevBox;
     GridPane topGrid;
     VBox lowvBox;
@@ -62,10 +68,13 @@ public class ScheduleView {
     TextField criteriaTF;
     Button addUpdateButton;
     Button clearButton;
+    public static final String DEFAULT_START = "01_01_2017";
+    public static final String DEFAULT_END = "12_12_2017";
     
     public ScheduleView(CourseSiteGeneratorApp initApp){
         app = initApp;
         PropertiesManager props = PropertiesManager.getPropertiesManager();
+        ScheduleData thisData = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
         //TOP
         sLabel = new Label(props.getProperty(CourseSiteGeneratorProp.SCHEDULE_TEXT.toString()));
         cbLabel = new Label(props.getProperty(CourseSiteGeneratorProp.CB_TEXT.toString()));
@@ -73,8 +82,8 @@ public class ScheduleView {
         endingLabel = new Label(props.getProperty(CourseSiteGeneratorProp.ENDING_TEXT.toString()));
         startDate = new DatePicker();
         endDate = new DatePicker();
-        startDate.setValue(LocalDate.now());
-        endDate.setValue(LocalDate.now());
+        setStartDate(thisData.getStartDate());
+        setEndDate(thisData.getEndDate());
         GridPane.setConstraints(cbLabel, 0, 0);
         GridPane.setConstraints(startingLabel, 0, 1);
         GridPane.setConstraints(endingLabel, 2, 1);
@@ -111,14 +120,19 @@ public class ScheduleView {
         schedulevBox = new VBox();
         scheduleTable = new TableView();
         TableColumn<ScheduleItem, String> typeColumn = new TableColumn(typeLabel.getText());
-        TableColumn<ScheduleItem, Date> dateColumn = new TableColumn(dateLabel.getText());
+        typeColumn.setCellValueFactory(new PropertyValueFactory<ScheduleItem,String>("type"));
+        TableColumn<ScheduleItem, String> dateColumn = new TableColumn(dateLabel.getText());
+        dateColumn.setCellValueFactory(new PropertyValueFactory<ScheduleItem,String>("date"));
         TableColumn<ScheduleItem, String> titleColumn = new TableColumn(titleLabel.getText());
+        titleColumn.setCellValueFactory(new PropertyValueFactory<ScheduleItem,String>("title"));
         TableColumn<ScheduleItem, String> topicColumn = new TableColumn(topicLabel.getText());
+        topicColumn.setCellValueFactory(new PropertyValueFactory<ScheduleItem,String>("topic"));
         typeColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
         dateColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
         titleColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
         topicColumn.prefWidthProperty().bind(scheduleTable.widthProperty().divide(4)); // w * 1/4
         scheduleTable.getColumns().addAll(typeColumn, dateColumn, titleColumn, topicColumn);
+        scheduleTable.setItems(thisData.getItems());
         GridPane.setConstraints(addEditLabel, 0, 0);
         GridPane.setConstraints(typeLabel, 0, 1);
         GridPane.setConstraints(typeCB, 1, 1);
@@ -138,12 +152,32 @@ public class ScheduleView {
         GridPane.setConstraints(clearButton, 1, 8);
         lowGrid.getChildren().addAll(
             addEditLabel, typeLabel, typeCB, dateLabel, dateDP, timeLabel, timeTF, titleLabel,
-            titleTF, linkLabel, linkTF, criteriaLabel, criteriaTF, addUpdateButton, clearButton);
+            titleTF,topicLabel,topicTF, linkLabel, linkTF, criteriaLabel, criteriaTF, addUpdateButton, clearButton);
         lowvBox = new VBox();
         lowvBox.getChildren().addAll(sihBox,scheduleTable,lowGrid);
         schedulevBox.getChildren().addAll(sLabel,topGrid,lowvBox);
+        // NOW LET'S SETUP THE EVENT HANDLING
+        controller = new CourseSiteGeneratorController(app);
+        startDate.setOnAction(e->{
+            controller.handleChangeStartDate(startDate.getValue());
+        });
+        endDate.setOnAction(e->{
+            controller.handleChangeEndDate(endDate.getValue());
+        });
     }
-
+    
+    public String getDefaultStart(){
+        return DEFAULT_START;
+    }
+    
+    public String getDefaultEnd(){
+        return DEFAULT_END;
+    }
+    public static LocalDate makeDate(String dateString){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM_dd_yyyy");
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+        return localDate;
+    }
     public CourseSiteGeneratorApp getApp() {
         return app;
     }
@@ -274,5 +308,24 @@ public class ScheduleView {
     
     public VBox getGUI(){
         return schedulevBox;
+    }
+    
+    public void resetDates(){
+        ScheduleData thisData = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
+        startDate.setValue(makeDate(DEFAULT_START));
+        endDate.setValue(makeDate(DEFAULT_END));
+    }
+    
+    public void setStartDate(String d){
+        startDate.setValue(makeDate(d));
+        ScheduleData thisData = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
+        thisData.setStartDate(d);
+        
+    }
+    
+    public void setEndDate(String d){
+        endDate.setValue(makeDate(d));
+        ScheduleData thisData = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
+        thisData.setEndDate(d);
     }
 }

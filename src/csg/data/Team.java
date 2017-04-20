@@ -5,55 +5,73 @@
  */
 package csg.data;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Itai
  */
 public class Team {
-    private String name;
-    private int color;
-    private String textColor;
-    private String link;
+    private StringProperty name;
+    private StringProperty color;
+    private StringProperty textColor;
+    private StringProperty link;
     
-    public Team(String n, int c, String tColor, String l){
-        name = n;
-        color = c;
-        textColor = tColor;
-        link = l;
+    public Team(String n, String c, String tColor, String l){
+        name = new SimpleStringProperty(n);
+        color = new SimpleStringProperty(c);
+        textColor = new SimpleStringProperty(tColor);
+        link = new SimpleStringProperty(l);
     }
 
     public String getName() {
-        return name;
+        return name.getValue();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.setValue(name);
     }
 
-    public int getColor() {
-        return color;
+    public String getColor() {
+        return color.getValue();
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setColor(String color) {
+        this.color.setValue(color);
     }
 
     public String getTextColor() {
-        return textColor;
+        return textColor.getValue();
     }
 
     public void setTextColor(String textColor) {
-        this.textColor = textColor;
+        this.textColor.setValue(textColor);
     }
 
     public String getLink() {
-        return link;
+        return link.getValue();
     }
 
     public void setLink(String link) {
-        this.link = link;
+        this.link.setValue(link);
     }
     
+    public StringProperty nameProperty(){
+        return name;
+    }
+    
+    public StringProperty colorProperty(){
+        return color;
+    }
+    
+    public StringProperty textcolorProperty(){
+        return textColor;
+    }
+    
+    public StringProperty linkProperty(){
+        return link;
+    }
     
     
 }

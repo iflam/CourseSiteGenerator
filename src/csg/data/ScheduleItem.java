@@ -6,58 +6,73 @@
 package csg.data;
 
 import java.util.Date;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author Itai
  */
 public class ScheduleItem {
-    private String holiday;
-    private Date date;
-    private String title;
-    private String topic;
+    private StringProperty type;
+    private StringProperty date;
+    private String time;
+    private StringProperty title;
+    private StringProperty topic;
     private String link;
     private String criteria;
     
-    public ScheduleItem(String h, Date d, String ti, String to, String l, String c){
-        holiday = h;
-        date = d;
-        title = ti;
-        topic = to;
+    public ScheduleItem(String h, String d, String ti, String time, String to, String l, String c){
+        type = new SimpleStringProperty(h);
+        date = new SimpleStringProperty(d);
+        this.time = time;
+        title = new SimpleStringProperty(ti);
+        topic = new SimpleStringProperty(to);
         link = l;
         criteria = c;
     }
 
-    public String getHoliday() {
-        return holiday;
+    public String getType() {
+        return type.getValue();
     }
 
-    public void setHoliday(String holiday) {
-        this.holiday = holiday;
+    public void setType(String holiday) {
+        this.type.setValue(holiday);
     }
 
-    public Date getDate() {
-        return date;
+    public String getTime(){
+        return time;
+    }
+    
+    public void setTime(String s){
+        time = s;
+    }
+    public String getDate() {
+        return date.getValue();
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Date d) {
+        this.date.setValue(d.getDay()+"_"+d.getMonth()+"_"+d.getYear());
+    }
+    
+    public void setDate(String d){
+        date.setValue(d);
     }
 
     public String getTitle() {
-        return title;
+        return title.getValue();
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title.setValue(title);
     }
 
     public String getTopic() {
-        return topic;
+        return topic.getValue();
     }
 
     public void setTopic(String topic) {
-        this.topic = topic;
+        this.topic.setValue(topic);
     }
 
     public String getLink() {
@@ -76,6 +91,20 @@ public class ScheduleItem {
         this.criteria = criteria;
     }
     
+    public StringProperty typeProperty(){
+        return type;
+    }
     
+    public StringProperty dateProperty(){
+        return date;
+    }
+    
+    public StringProperty titleProperty(){
+        return title;
+    }
+    
+    public StringProperty topicProperty(){
+        return topic;
+    }
     
 }

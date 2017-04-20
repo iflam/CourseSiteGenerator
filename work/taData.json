@@ -1,0 +1,21 @@
+
+{
+    "ta_data":{
+        "startHour":"0",
+        "endHour":"24",
+        "undergrad_tas":[
+            {
+                "name":"itai",
+                "email":"i.f@s.u"
+            }
+        ],
+        "grad_tas":[
+            {
+                "name":"flam",
+                "email":"i.fai@su.fu"
+            }
+        ],
+        "officeHours":[
+        ]
+    }
+}

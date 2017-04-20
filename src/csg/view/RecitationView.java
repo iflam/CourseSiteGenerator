@@ -7,7 +7,10 @@ package csg.view;
 
 import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
+import csg.data.CourseSiteGeneratorData;
 import csg.data.Recitation;
+import csg.data.RecitationData;
+import csg.data.SitePage;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -64,28 +68,38 @@ public class RecitationView {
     
     public RecitationView(CourseSiteGeneratorApp initApp){
         app = initApp;
+        RecitationData thisData = ((CourseSiteGeneratorData)app.getDataComponent()).getRecitationData();
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         recTitleLabel = new Label(props.getProperty(CourseSiteGeneratorProp.RECITATION_TITLE_TEXT.toString()));
         deleteButton = new Button(props.getProperty(CourseSiteGeneratorProp.DELETE_BUTTON_TEXT.toString()));
         titlehBox = new HBox();
         titlehBox.getChildren().addAll(recTitleLabel,deleteButton);
-        recitationTable = new TableView();
+        recitationTable = new TableView<Recitation>();
         sectionLabel = new Label(props.getProperty(CourseSiteGeneratorProp.SECTION_TEXT.toString()));
         instructorLabel = new Label(props.getProperty(CourseSiteGeneratorProp.INSTRUCTOR_TEXT.toString()));
         dayTimeLabel = new Label(props.getProperty(CourseSiteGeneratorProp.DAY_TIME_TEXT.toString()));
         locationLabel = new Label(props.getProperty(CourseSiteGeneratorProp.LOCATION_TEXT.toString()));
         taLabel = new Label(props.getProperty(CourseSiteGeneratorProp.TA_TEXT.toString()));
         sectionCol = new TableColumn(sectionLabel.getText());
+        sectionCol.setCellValueFactory(new PropertyValueFactory<Recitation,String>("section"));
         instructorCol = new TableColumn(instructorLabel.getText());
+        instructorCol.setCellValueFactory(new PropertyValueFactory<Recitation,String>("instructor"));
         dayTimeCol = new TableColumn(dayTimeLabel.getText());
+        dayTimeCol.setCellValueFactory(new PropertyValueFactory<Recitation,String>("dayTime"));
+        locationCol = new TableColumn(locationLabel.getText());
+        locationCol.setCellValueFactory(new PropertyValueFactory<Recitation,String>("location"));
         taCol1 = new TableColumn(taLabel.getText());
+        taCol1.setCellValueFactory(new PropertyValueFactory<Recitation,String>("ta1"));
         taCol2 = new TableColumn(taLabel.getText());
-        sectionCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
-        instructorCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
-        dayTimeCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
-        taCol1.prefWidthProperty().bind(recitationTable.widthProperty().divide(5)); // w * 1/4
-        taCol2.prefWidthProperty().bind(recitationTable.widthProperty().divide(5));
-        recitationTable.getColumns().addAll(sectionCol,instructorCol,dayTimeCol,taCol1,taCol2);
+        taCol2.setCellValueFactory(new PropertyValueFactory<Recitation,String>("ta2"));
+        sectionCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(6)); // w * 1/4
+        instructorCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(6)); // w * 1/4
+        dayTimeCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(6)); // w * 1/4
+        locationCol.prefWidthProperty().bind(recitationTable.widthProperty().divide(6));
+        taCol1.prefWidthProperty().bind(recitationTable.widthProperty().divide(6)); // w * 1/4
+        taCol2.prefWidthProperty().bind(recitationTable.widthProperty().divide(6));
+        recitationTable.getColumns().addAll(sectionCol,instructorCol,dayTimeCol,locationCol,taCol1,taCol2);
+        recitationTable.setItems(thisData.getRecitations());
         recvBox = new VBox();
         //BOTTOM
         addEditLabel = new Label(props.getProperty(CourseSiteGeneratorProp.ADD_EDIT_TEXT.toString()));

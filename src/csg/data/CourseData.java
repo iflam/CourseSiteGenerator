@@ -11,4 +11,19 @@ package csg.data;
  */
 public class CourseData {
     
+    String subject;
+    String number;
+    String semester;
+    String year;    
+    String title;
+    String iName;
+    String iHome;
+    String exDir;
+    String tempDir;
+    String bannerDir;
+    String lFtDir;
+    String rFtDir;
+    
+    
+    
 }

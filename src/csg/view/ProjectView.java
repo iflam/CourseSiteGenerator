@@ -7,6 +7,8 @@ package csg.view;
 
 import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
+import csg.data.CourseSiteGeneratorData;
+import csg.data.ProjectData;
 import csg.data.Student;
 import csg.data.Team;
 import javafx.scene.control.Button;
@@ -17,6 +19,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -68,6 +71,7 @@ public class ProjectView{
     public ProjectView(CourseSiteGeneratorApp initApp){
         app = initApp;
         PropertiesManager props = PropertiesManager.getPropertiesManager();
+        ProjectData data = ((CourseSiteGeneratorData)app.getDataComponent()).getProjectData();
         //TOP
         projectsLabel = new Label(props.getProperty(CourseSiteGeneratorProp.PROJECTS_TEXT.toString()));
         teamsLabel = new Label(props.getProperty(CourseSiteGeneratorProp.TEAMS_TEXT.toString()));
@@ -87,14 +91,19 @@ public class ProjectView{
         clearButton = new Button(props.getProperty(CourseSiteGeneratorProp.CLEAR_BUTTON_TEXT.toString()));
         topTable = new TableView();
         TableColumn<Team, String> nameCol = new TableColumn<>(nameLabel.getText());
+        nameCol.setCellValueFactory(new PropertyValueFactory<Team,String>("name"));
         TableColumn<Team, String> colorCol = new TableColumn<>(colorLabel.getText());
+        colorCol.setCellValueFactory(new PropertyValueFactory<Team,String>("color"));
         TableColumn<Team, String> textColorCol = new TableColumn<>(textColorLabel.getText());
+        textColorCol.setCellValueFactory(new PropertyValueFactory<Team,String>("textcolor"));
         TableColumn<Team, String> linkCol = new TableColumn<>(linkLabel.getText());
+        linkCol.setCellValueFactory(new PropertyValueFactory<Team,String>("link"));
         nameCol.prefWidthProperty().bind(topTable.widthProperty().divide(4)); // w * 1/4
         colorCol.prefWidthProperty().bind(topTable.widthProperty().divide(4)); // w * 1/4
         textColorCol.prefWidthProperty().bind(topTable.widthProperty().divide(4)); // w * 1/4
         linkCol.prefWidthProperty().bind(topTable.widthProperty().divide(4)); // w * 1/4
         topTable.getColumns().addAll(nameCol,colorCol,textColorCol,linkCol);
+        topTable.setItems(data.getTeams());
         topvBox = new VBox();
         topGP = new GridPane();
         GridPane.setConstraints(addEditLabel,0,0);
@@ -128,14 +137,19 @@ public class ProjectView{
         clearButton2 = new Button(props.getProperty(CourseSiteGeneratorProp.CLEAR_BUTTON_TEXT.toString()));
         lowTable = new TableView();
         TableColumn<Student, String> fnCol = new TableColumn(firstNameLabel.getText());
+        fnCol.setCellValueFactory(new PropertyValueFactory<Student,String>("firstname"));
         TableColumn<Student, String> lnCol = new TableColumn(lastNameLabel.getText());
+        lnCol.setCellValueFactory(new PropertyValueFactory<Student,String>("lastname"));
         TableColumn<Student, String> teamCol = new TableColumn(teamLabel.getText());
+        teamCol.setCellValueFactory(new PropertyValueFactory<Student,String>("team"));
         TableColumn<Student, String> roleCol = new TableColumn(roleLabel.getText());
+        roleCol.setCellValueFactory(new PropertyValueFactory<Student,String>("role"));
         fnCol.prefWidthProperty().bind(lowTable.widthProperty().divide(4)); // w * 1/4
         lnCol.prefWidthProperty().bind(lowTable.widthProperty().divide(4)); // w * 1/4
         teamCol.prefWidthProperty().bind(lowTable.widthProperty().divide(4)); // w * 1/4
         roleCol.prefWidthProperty().bind(lowTable.widthProperty().divide(4)); // w * 1/4
         lowTable.getColumns().addAll(fnCol,lnCol,teamCol,roleCol);
+        lowTable.setItems(data.getStudents());
         lowGP = new GridPane();
         GridPane.setConstraints(addEditLabel, 0, 0);
         GridPane.setConstraints(firstNameLabel, 0, 1);

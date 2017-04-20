@@ -13,69 +13,68 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Itai
  */
 public class Recitation<E extends Comparable<E>> implements Comparable<E> {
-    private String section;
-    private String instructor;
-    private String dayTime;
-    private String location;
-    private String ta1;
-    private String ta2;
+    private StringProperty section;
+    private StringProperty instructor;
+    private StringProperty dayTime;
+    private StringProperty location;
+    private StringProperty ta1;
+    private StringProperty ta2;
     
     public Recitation(String initSection, String initInstructor, String initDayTime, String initLocation,
             String initTa1, String initTa2){
-        section = initSection;
-        instructor = initInstructor;
-        dayTime = initDayTime;
-        location = initLocation;
-        ta1 = initTa1;
-        ta2 = initTa2;
+        section = new SimpleStringProperty(initSection);
+        instructor = new SimpleStringProperty(initInstructor);
+        dayTime = new SimpleStringProperty(initDayTime);
+        location = new SimpleStringProperty(initLocation);
+        ta1 = new SimpleStringProperty(initTa1);
+        ta2 = new SimpleStringProperty(initTa2);
         
     }
-
+    
     public void setInstructor(String instructor) {
-        this.instructor = instructor;
+        this.instructor.setValue(instructor);
     }
 
     public void setDayTime(String dayTime) {
-        this.dayTime = dayTime;
+        this.dayTime.setValue(dayTime);
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.location.setValue(location);
     }
-
-    public void setTa1(String ta1) {
-        this.ta1 = ta1;
+    public void setTa1(String ta1){
+        this.ta1.setValue(ta1);
     }
 
     public void setTa2(String ta2) {
-        this.ta2 = ta2;
+        this.ta2.setValue(ta2);
     }
 
     public String getSection() {
-        return section;
+        return section.getValue();
     }
     public void setSection(String s){
-        section = s;
+        section.setValue(s);
     }
     
     public String getInstructor() {
-        return instructor;
+        return instructor.getValue();
     }
 
     public String getDayTime() {
-        return dayTime;
+        return dayTime.getValue();
     }
 
     public String getLocation() {
-        return location;
+        return location.getValue();
     }
 
     public String getTa1() {
-        return ta1;
+        return ta1.getValue();
     }
 
     public String getTa2() {
-        return ta2;
+        return ta2.getValue();
     }
     
     @Override
@@ -84,7 +83,31 @@ public class Recitation<E extends Comparable<E>> implements Comparable<E> {
     }
     @Override
     public String toString() {
+        return section.getValue();
+    }
+    
+    public StringProperty sectionProperty(){
         return section;
+    }
+    
+    public StringProperty instructorProperty(){
+        return instructor;
+    }
+    
+    public StringProperty dayTimeProperty(){
+        return dayTime;
+    }
+    
+    public StringProperty locationProperty(){
+        return location;
+    }
+    
+    public StringProperty ta1Property(){
+        return ta1;
+    }
+    
+    public StringProperty ta2Property(){
+        return ta2;
     }
     
 }

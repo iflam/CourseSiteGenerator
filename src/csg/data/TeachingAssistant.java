@@ -59,11 +59,15 @@ public class TeachingAssistant<E extends Comparable<E>> implements Comparable<E>
         return name.getValue();
     }
     
-    public void undergradProperty(){
-        System.out.println(undergrad);
-        if(undergrad.getValue())
-            undergrad.setValue(Boolean.FALSE);
-        else
-            undergrad.setValue(Boolean.TRUE);
+    public BooleanProperty undergradProperty(){
+        return undergrad;
     }
+    
+//    public void undergradProperty(){
+//        System.out.println(undergrad);
+//        if(undergrad.getValue())
+//            undergrad.setValue(Boolean.FALSE);
+//        else
+//            undergrad.setValue(Boolean.TRUE);
+//    }
 }

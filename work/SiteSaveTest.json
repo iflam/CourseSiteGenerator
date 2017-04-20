@@ -1,0 +1,119 @@
+{
+	"course_details":
+	{
+		"subject": "CSE",
+		"number": "219",
+		"semester": "Summer",
+		"year": "2017",
+		"title": "dfgij",
+		"instructor_name":"",
+		"instructor_home":"",
+		"export_dir": "None",
+		"template_dir": "None",
+		"banner_image": "None",
+		"left_footer_image": "None",
+		"right_footer_image": "None",
+		"style_sheet": "None"	
+	}
+	
+	"ta_data":
+	{
+		"startHour":"5",
+		"endHour":"10",
+		"undergrad_tas":[
+			{
+				"name":"itai",
+				"email":"itai.flam@stonybrook.edu"
+			},
+			{
+				"name":"isaac ramos",
+				"email":"isaac.ramos@stonybrook.edu"
+			}
+		],
+		"officeHours":[
+			{
+				"day":"MONDAY",
+				"time":"9_30am",
+				"name":"itai"
+			},
+			{
+				"day":"TUESDAY",
+				"time":"10_30am",
+				"name":"itai"
+			},
+			{
+				"day":"MONDAY",
+				"time":"12_00pm",
+				"name":"itai"
+			},
+			{
+				"day":"TUESDAY",
+				"time":"12_00pm",
+				"name":"itai"
+			},
+			{
+				"day":"WEDNESDAY",
+				"time":"3_00pm",
+				"name":"itai"
+			},
+			{
+				"day":"MONDAY",
+				"time":"3_30pm",
+				"name":"itai"
+			}
+		]
+	}
+	
+	"recitation_data":
+	{
+		"recitations":[
+			{
+				"section":"1",
+				"instructor":"Mr One",
+				"day_time":"Monday, 3:30pm-4:30pm",
+				"location":"old CS",
+				"ta1":"TA One",
+				"ta2":"TA Two",
+			}
+			{
+				"section":"2",
+				"instructor":"Mr Two",
+				"day_time":"Tuesday, 3:30pm-4:30pm",
+				"location":"old CS",
+				"ta1":"TA Thre",
+				"ta2":"TA Four",
+			}
+		]
+	}
+	
+	"schedule_data":
+	{
+		"startDate":"4/16/2017",
+		"endDate":"4/16/2017",
+		"schedule_items"
+		[
+			{
+				"type":"Homework",
+				"date":"4/16/2017",
+				"time":"5:00pm",
+				"title":"Homework 5 due",
+				"link":"http:www.youaresilly.com",
+				"criteria":"idkwhatthisis"		
+			}			
+		]
+	}
+	
+	"project_data":
+	{
+		"teams":
+		[
+			{
+				"name":"Shwaftas",
+				"color":"#ff0000",
+				"text_color":"ffffff",
+				"link":"http:shwafta.sbu.edu"
+			}
+		]
+	}
+
+}

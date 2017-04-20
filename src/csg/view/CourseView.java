@@ -10,6 +10,7 @@ import csg.CourseSiteGeneratorProp;
 import csg.data.SitePage;
 import static djf.settings.AppStartupConstants.FILE_PROTOCOL;
 import static djf.settings.AppStartupConstants.PATH_IMAGES;
+import java.io.File;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventType;
@@ -25,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -72,6 +74,9 @@ public class CourseView{
     //BOTTOM PANE STUFF
     private GridPane lowGridPane;
     private VBox lowvBox;
+    private String bannerImageDir;
+    private String leftFtDir;
+    private String rightFtDir;
     private Label pageStyleLabel;
     private Label bannerImgLabel;
     private Label leftFtLabel;
@@ -173,7 +178,7 @@ public class CourseView{
         sitePageLabel = new Label(props.getProperty(CourseSiteGeneratorProp.SITE_PAGES_TEXT.toString()));
         templateTable = new TableView<SitePage>();
         ObservableList<SitePage> sitePages = FXCollections.observableArrayList();
-        sitePages.add(new SitePage("course","butt.html","ass.json",true));
+        sitePages.add(new SitePage("course","I am","Itai >:D",true));
         TableColumn<SitePage, Boolean> useCol = new TableColumn(props.getProperty(CourseSiteGeneratorProp.USE_TEXT.toString()));
         useCol.setCellValueFactory(new PropertyValueFactory<SitePage,Boolean>("use"));
         useCol.setCellFactory(CheckBoxTableCell.forTableColumn(useCol));
@@ -196,6 +201,9 @@ public class CourseView{
         //////////////////////////////////////////////////////////////
         //LOWER BOX
         String imagePath = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(CourseSiteGeneratorProp.DEFAULT_PICTURES_ICON.toString());
+        bannerImageDir = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(CourseSiteGeneratorProp.DEFAULT_PICTURES_ICON.toString());
+        leftFtDir = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(CourseSiteGeneratorProp.DEFAULT_PICTURES_ICON.toString());
+        rightFtDir = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(CourseSiteGeneratorProp.DEFAULT_PICTURES_ICON.toString());
         lowGridPane = new GridPane();
         lowvBox = new VBox();
         pageStyleLabel = new Label(props.getProperty(CourseSiteGeneratorProp.PAGE_STYLE_TEXT.toString()));
@@ -228,6 +236,14 @@ public class CourseView{
         GridPane.setConstraints(changeRight,3,2);
         styleSheetLabel = new Label(props.getProperty(CourseSiteGeneratorProp.STYLESHEET_TEXT.toString()));
         stylesheetCB = new ComboBox();
+        File[] f = new File("./work/css").listFiles();
+        ObservableList<String> styleSheets = FXCollections.observableArrayList();
+        for(File a : f){
+            if(a.getName().endsWith(".css"))
+                styleSheets.add(a.getName());
+        }
+        stylesheetCB.setItems(styleSheets);
+        stylesheetCB.getSelectionModel().selectFirst();
         lowGridPane.getChildren().addAll(changeBanner,changeLeft,changeRight);
         lowGridPane.setHgap(10);
         lowGridPane.setVgap(5);
@@ -434,5 +450,35 @@ public class CourseView{
     
     public ScrollPane getGUI(){
         return thisGUI;
+    }
+    /**
+     * 0 is Banner, 1 is Left, 2 is Right
+     * @return 
+     */
+    public String[] getPaths(){
+        String[] s = {bannerImageDir,leftFtDir,rightFtDir};
+        return s;
+    }
+    
+    public void setCourseItems(String subject, String number, String semester,
+            String year, String title, String in, String ih, String eDir, String tDir, 
+            String bPath, String lfPath, String rfPath, String styleSheet){
+        subjectTF.setText(subject);
+        numberTF.setText(number);
+        semesterCB.getSelectionModel().select(semesterCB.getItems().indexOf(semester));
+        yearCB.getSelectionModel().select(yearCB.getItems().indexOf(year));
+        titleTF.setText(title);
+        instructorNameTF.setText(in);
+        instructorHomeTF.setText(ih);
+        exportDirLabel.setText(eDir);
+        midvBoxDir.setText(tDir);
+        bannerImage.setImage(new Image(bPath));
+        bannerImageDir = bPath;
+        leftFtImage.setImage(new Image(lfPath));
+        leftFtDir = lfPath;
+        rightFtImage.setImage(new Image(rfPath));
+        rightFtDir = rfPath;
+        stylesheetCB.getSelectionModel().select(stylesheetCB.getItems().indexOf(styleSheet));
+        
     }
 }

@@ -2,6 +2,13 @@
 {
     "startHour":"5",
     "endHour":"16",
+	"grad_tas":[
+		{
+			"name":"Poopy Face",
+			"email":"i.f@s.u"
+		}
+	
+	],
     "undergrad_tas":[
         {
             "name":"Joe Shmoes",

@@ -5,53 +5,72 @@
  */
 package csg.data;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Itai
  */
 public class Student {
-    private String firstName;
-    private String lastName;
-    private String role;
-    private String team;
+    private StringProperty firstName;
+    private StringProperty lastName;
+    private StringProperty role;
+    private StringProperty team;
     
     public Student(String fn, String ln, String r, String t){
-        firstName = fn;
-        lastName = ln;
-        role = r;
-        team = t;
+        firstName = new SimpleStringProperty(fn);
+        lastName = new SimpleStringProperty(ln);
+        role = new SimpleStringProperty(r);
+        team = new SimpleStringProperty(t);
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName.getValue();
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName.setValue(firstName);
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName.getValue();
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName.setValue(lastName);
     }
 
     public String getRole() {
-        return role;
+        return role.getValue();
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.role.setValue(role);
     }
 
     public String getTeam() {
-        return team;
+        return team.getValue();
     }
 
     public void setTeam(String team) {
-        this.team = team;
+        this.team.setValue(team);
+    }
+    
+    public StringProperty firstnameProperty(){
+        return firstName;
+    }
+    
+    public StringProperty lastnameProperty(){
+        return lastName;
+    }
+    
+    public StringProperty roleProperty(){
+        return role;
+    }
+    
+    public StringProperty teamProperty(){
+        return team;
     }
     
     

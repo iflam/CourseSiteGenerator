@@ -536,6 +536,7 @@ public class TAView {
         
         // THEN THE TIME AND TA CELLS
         int row = 1;
+        int x = dataComponent.getEndHour();
         for (int i = dataComponent.getStartHour(); i < dataComponent.getEndHour(); i++) {
             // START TIME COLUMN
             int col = 0;
