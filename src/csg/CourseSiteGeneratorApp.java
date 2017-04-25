@@ -23,6 +23,11 @@ import jtps.jTPS;
  */
 public class CourseSiteGeneratorApp extends AppTemplate{
     private jTPS stack = new jTPS();
+    public void buildAppComponentsHookNoWork(){
+        dataComponent = new CourseSiteGeneratorData(this);
+        fileComponent = new CourseSiteGeneratorFiles(this);
+        styleComponent = new CourseSiteGeneratorStyle(this);
+    }
     @Override
     public void buildAppComponentsHook() {
         // CONSTRUCT ALL FOUR COMPONENTS. NOTE THAT FOR THIS APP

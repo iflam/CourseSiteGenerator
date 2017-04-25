@@ -76,7 +76,11 @@
 	<property name="LOAD_WORK_TITLE"		value="Select work file to load"></property>
 	<property name="EXPORT_WORK_TITLE"		value="Select direction to export to"></property>
 	<property name="WORK_FILE_EXT"			value="json"></property>
-	<property name="WORK_FILE_EXT_DESC"		value="TA Office Hours"></property>
+	<property name="IMG_FILE_EXT"			value="png"></property>
+	<property name="JPG_FILE_EXT"			value="JPG"></property>
+	<property name="WORK_FILE_EXT_DESC"		value="Course Site Generator Data"></property>
+	<property name="IMG_FILE_EXT_DESC"		value="Picture"></property>
+	<property name="JPG_FILE_EXT_DESC"		value="Picture"></property>
 
         <!-- WORKSPACE CONTROLS STUFF -->        
         <property name="TAS_HEADER_TEXT"                value="Teaching Assistants"></property>
@@ -152,6 +156,11 @@
 		<property name="LINK_TEXT"					value="Link"></property>
 		<property name="CRITERIA_TEXT"					value="Criteria"></property>
 		<property name="SI_TEXT"					value="Schedule Items"></property>
+		<property name="CB_HOLIDAY"					value="Holiday"></property>
+		<property name="CB_LECTURE"					value="Lecture"></property>
+		<property name="CB_REF"					value="Reference"></property>
+		<property name="CB_REC"					value="Recitation"></property>
+		<property name="CB_HWS"					value="Homework"></property>
 		<!-- Project view text-->
 		<property name="PROJECTS_TEXT"					value="Projects"></property>
 		<property name="TEAMS_TEXT"					value="Teams"></property>

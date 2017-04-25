@@ -31,7 +31,7 @@ public class CourseSiteGeneratorData implements AppDataComponent{
      */
     public CourseSiteGeneratorData(CourseSiteGeneratorApp initApp){
         app = initApp;
-        course = new CourseData();
+        course = new CourseData(app);
         project = new ProjectData(app);
         recitation = new RecitationData(app);
         schedule = new ScheduleData(app);

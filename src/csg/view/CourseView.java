@@ -7,10 +7,26 @@ package csg.view;
 
 import csg.CourseSiteGeneratorApp;
 import csg.CourseSiteGeneratorProp;
+import csg.data.CourseData;
+import csg.data.CourseSiteGeneratorData;
 import csg.data.SitePage;
+import static djf.settings.AppPropertyType.EXPORT_WORK_TITLE;
+import static djf.settings.AppPropertyType.IMG_FILE_EXT;
+import static djf.settings.AppPropertyType.IMG_FILE_EXT_DESC;
+import static djf.settings.AppPropertyType.JPG_FILE_EXT;
+import static djf.settings.AppPropertyType.JPG_FILE_EXT_DESC;
+import static djf.settings.AppPropertyType.LOAD_ERROR_MESSAGE;
+import static djf.settings.AppPropertyType.LOAD_ERROR_TITLE;
+import static djf.settings.AppPropertyType.SAVE_WORK_TITLE;
+import static djf.settings.AppPropertyType.WORK_FILE_EXT;
+import static djf.settings.AppPropertyType.WORK_FILE_EXT_DESC;
 import static djf.settings.AppStartupConstants.FILE_PROTOCOL;
+import static djf.settings.AppStartupConstants.PATH_HERE;
 import static djf.settings.AppStartupConstants.PATH_IMAGES;
+import static djf.settings.AppStartupConstants.PATH_WORK;
+import djf.ui.AppMessageDialogSingleton;
 import java.io.File;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventType;
@@ -31,6 +47,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import properties_manager.PropertiesManager;
 
 /**
@@ -97,6 +115,7 @@ public class CourseView{
     
     public CourseView(CourseSiteGeneratorApp initApp){
         app = initApp;
+        CourseData data = ((CourseSiteGeneratorData)app.getDataComponent()).getCourseData();
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         //vertical box, with 3 children
         vBox = new VBox();
@@ -178,7 +197,6 @@ public class CourseView{
         sitePageLabel = new Label(props.getProperty(CourseSiteGeneratorProp.SITE_PAGES_TEXT.toString()));
         templateTable = new TableView<SitePage>();
         ObservableList<SitePage> sitePages = FXCollections.observableArrayList();
-        sitePages.add(new SitePage("course","I am","Itai >:D",true));
         TableColumn<SitePage, Boolean> useCol = new TableColumn(props.getProperty(CourseSiteGeneratorProp.USE_TEXT.toString()));
         useCol.setCellValueFactory(new PropertyValueFactory<SitePage,Boolean>("use"));
         useCol.setCellFactory(CheckBoxTableCell.forTableColumn(useCol));
@@ -259,10 +277,66 @@ public class CourseView{
         thisGUI.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         //ACTION IN HERE
         changeButton.setOnAction(e->{
-	
+            String directory = promptForDirectory(true);
+            data.setExDir(directory);
+            exportDirLabel.setText(directory);
+        });
+        midTempDirButton.setOnAction(e->{
+            String directory = promptForDirectory(true);
+            data.setTempDir(directory);
+            midvBoxDir.setText(directory);
+        });
+        changeBanner.setOnAction(e->{
+            String directory = promptForDirectory(false);
+            data.setBannerDir(directory);
+            bannerImage = new ImageView("file:"+directory);
+        });
+        subjectTF.setOnAction(e->{
+            data.setSubject(subjectTF.getText());
+        });
+        numberTF.setOnAction(e->{
+            data.setNumber(numberTF.getText());
+        });
+        semesterCB.setOnAction(e->{
+            data.setSemester(semesterCB.getSelectionModel().getSelectedItem().toString());
+        });
+        yearCB.setOnAction(e->{
+            data.setYear(yearCB.getSelectionModel().getSelectedItem().toString());
+        });
+        titleTF.setOnAction(e->{
+            data.setTitle(titleTF.getText());
+        });
+        instructorNameTF.setOnAction(e->{
+            data.setiName(instructorNameTF.getText());
+        });
+        instructorHomeTF.setOnAction(e->{
+            data.setiHome(instructorHomeTF.getText());
         });
         
-                
+        
+    }
+    
+    private String promptForDirectory(Boolean isDirectory){
+        // WE'LL NEED THIS TO GET CUSTOM STUFF
+	PropertiesManager props = PropertiesManager.getPropertiesManager();
+        if(!isDirectory){
+        // PROMPT THE USER FOR A FILE NAME
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(PATH_WORK));
+        fc.setTitle(props.getProperty(SAVE_WORK_TITLE));
+        fc.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter(props.getProperty(IMG_FILE_EXT_DESC), props.getProperty(IMG_FILE_EXT)),
+        new FileChooser.ExtensionFilter(props.getProperty(JPG_FILE_EXT_DESC),props.getProperty(JPG_FILE_EXT)));
+        File selectedFile = fc.showOpenDialog(app.getGUI().getWindow());
+        return selectedFile.getAbsolutePath();
+        }
+        else{
+        DirectoryChooser fc = new DirectoryChooser();
+        fc.setInitialDirectory(new File(PATH_HERE));
+	fc.setTitle(props.getProperty(EXPORT_WORK_TITLE));
+        File selectedDirectory = fc.showDialog(app.getGUI().getWindow());
+        return selectedDirectory.getAbsolutePath();
+        }
     }
     public VBox getLowvBox(){
         return lowvBox;

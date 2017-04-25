@@ -1,0 +1,126 @@
+
+{
+    "course_data":{
+        "subject":"CSE",
+        "number":"219",
+        "semester":"Winter",
+        "year":"2017",
+        "title":"Titlething",
+        "instructor_name":"Itai Flam",
+        "instructor_home":"Xin Yang",
+        "export_dir":"./work",
+        "template_dir":"None",
+        "banner_image":"file:./images/Exit.png",
+        "left_footer_image":"file:./images/Save.png",
+        "right_footer_image":"file:./images/Load.png",
+        "style_sheet":"yourFace.css"
+    },
+    "ta_data":{
+        "startHour":"2",
+        "endHour":"18",
+        "undergrad_tas":[
+            {
+                "name":"Itai Flam",
+                "email":"i.f@s.u"
+            },
+            {
+                "name":"Xin Yang",
+                "email":"x.y@s.u"
+            }
+        ],
+        "grad_tas":[
+        ],
+        "officeHours":[
+            {
+                "day":"MONDAY",
+                "time":"1_30pm",
+                "name":"Itai Flam"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"8_30am",
+                "name":"Xin Yang"
+            }
+        ]
+    },
+    "recitation_data":{
+        "recitations":[
+            {
+                "section":"A",
+                "instructor":"B",
+                "day_time":"C",
+                "location":"D",
+                "ta1":"E",
+                "ta2":"F"
+            },
+            {
+                "section":"1",
+                "instructor":"2",
+                "day_time":"3",
+                "location":"4",
+                "ta1":"5",
+                "ta2":"6"
+            }
+        ]
+    },
+    "schedule_data":{
+        "startDate":"04_18_2018",
+        "endDate":"08_24_2018",
+        "schedule_items":[
+            {
+                "type":"A",
+                "date":"B",
+                "title":"C",
+                "time":"D",
+                "topic":"E",
+                "link":"F",
+                "criteria":"G"
+            },
+            {
+                "type":"1",
+                "date":"2",
+                "title":"3",
+                "time":"4",
+                "topic":"5",
+                "link":"6",
+                "criteria":"7"
+            }
+        ]
+    },
+    "project_data":{
+        "teams":[
+            {
+                "name":"Shwaftas",
+                "color":"#ffff00",
+                "text_color":"#000000",
+                "link":"www.myface.com"
+            },
+            {
+                "name":"Beluga Whales",
+                "color":"#b4e2AA",
+                "text_color":"#000000",
+                "link":"www.belugas.com"
+            }
+        ],
+        "students":[
+            {
+                "first_name":"Itai",
+                "last_name":"Flam",
+                "role":"Captain",
+                "team":"Shwaftas"
+            },
+            {
+                "first_name":"Xin",
+                "last_name":"Yang",
+                "role":"Programmer",
+                "team":"Shwaftas"
+            },
+            {
+                "first_name":"Your",
+                "last_name":"Face",
+                "role":"Head",
+                "team":"Beluga Whales"
+            }
+        ]
+    }
+}

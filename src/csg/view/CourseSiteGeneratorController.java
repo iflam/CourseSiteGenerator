@@ -69,11 +69,13 @@ public class CourseSiteGeneratorController {
     public void handleChangeStartDate(LocalDate d){
         ScheduleData data = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
         data.setStartDate(d);
+        app.getGUI().updateToolbarControls(false);
     }
     
     public void handleChangeEndDate(LocalDate d){
         ScheduleData data = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
         data.setEndDate(d);
+        app.getGUI().updateToolbarControls(false);
     }
     public void handleAddTA() {
         // WE'LL NEED THE WORKSPACE TO RETRIEVE THE USER INPUT VALUES
@@ -160,17 +162,18 @@ public class CourseSiteGeneratorController {
         
         // IS A TA SELECTED IN THE TABLE?
         Object selectedItem = taTable.getSelectionModel().getSelectedItem();
-        
-        // GET THE TA
-        TeachingAssistant ta = (TeachingAssistant)selectedItem;
-        String taName = ta.getName();
-        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
-        String cellKey = pane.getId();
-        
-        // AND TOGGLE THE OFFICE HOURS IN THE CLICKED CELL
-        jTPS_Transaction transaction = new ToggleTA_Transaction(data,ta,cellKey);
-        app.getStack().addTransaction(transaction);
-        app.getGUI().updateToolbarControls(false);
+        if(selectedItem != null){
+            // GET THE TA
+            TeachingAssistant ta = (TeachingAssistant)selectedItem;
+            String taName = ta.getName();
+            TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
+            String cellKey = pane.getId();
+
+            // AND TOGGLE THE OFFICE HOURS IN THE CLICKED CELL
+            jTPS_Transaction transaction = new ToggleTA_Transaction(data,ta,cellKey);
+            app.getStack().addTransaction(transaction);
+            app.getGUI().updateToolbarControls(false);
+        }
     }
     
     public void handleDeleteTA(TeachingAssistant ta){

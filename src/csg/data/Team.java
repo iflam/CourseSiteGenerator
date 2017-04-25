@@ -17,14 +17,30 @@ public class Team {
     private StringProperty color;
     private StringProperty textColor;
     private StringProperty link;
+    private String red;
+    private String green;
+    private String blue;
     
     public Team(String n, String c, String tColor, String l){
         name = new SimpleStringProperty(n);
         color = new SimpleStringProperty(c);
         textColor = new SimpleStringProperty(tColor);
         link = new SimpleStringProperty(l);
+        red = Integer.parseInt(c.substring(1,3),16)+"";
+        green = Integer.parseInt(c.substring(3,5),16)+"";
+        blue = Integer.parseInt(c.substring(5),16)+"";
     }
 
+    public String getGreen() {
+        return green;
+    }
+
+    public String getBlue() {
+        return blue;
+    }
+    public String getRed() {
+        return red;
+    }
     public String getName() {
         return name.getValue();
     }

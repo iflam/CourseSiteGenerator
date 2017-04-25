@@ -75,4 +75,31 @@ public class TimeSlot {
         }
         return officeHoursList;
     }
+    public static ArrayList<TimeSlot> buildOfficeHoursListTest(TAData data) {
+        // BUILD AND RETURN THIS LIST
+        ArrayList<TimeSlot> officeHoursList = new ArrayList();
+        ArrayList<String> gridHeaders = data.getGridHeaders();
+        HashMap<String, StringProperty> officeHours = data.getOfficeHours();
+        for (int row = 1; row < data.getNumRows(); row++) {
+            for (int col = 2; col < 7; col++) {
+                // WE ONLY WANT THE DATA, NOTE THE HEADERS
+                String cellKey = data.getCellKey(col, row);
+                StringProperty timeSlotProp = officeHours.get(cellKey);
+                String timeSlotText = timeSlotProp.getValue();
+                String[] taNames = timeSlotText.split("\n");
+                String day = gridHeaders.get(col);
+                String timeCellKey = data.getCellKey(0, row);
+                String time = officeHours.get(timeCellKey).getValue().replace(":", "_");
+                for (int i = 0; i < taNames.length; i++) {
+                    String taName = taNames[i];
+                    if (taName.length() > 0) {
+                        // ADD A TIME SLOT FOR EACH TA FOR EACH GRID CELL
+                        TimeSlot ts = new TimeSlot(day, time, taName);
+                        officeHoursList.add(ts);
+                    }
+                }
+            }
+        }
+        return officeHoursList;
+    }
 }

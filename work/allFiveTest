@@ -88,8 +88,8 @@
         ]
     },
     "schedule_data":{
-        "startDate":"04_15_2017",
-        "endDate":"05_17_2017",
+        "startDate":"04_25_2017",
+        "endDate":"06_2_2017",
         "schedule_items":[
             {
                 "type":"Homework",

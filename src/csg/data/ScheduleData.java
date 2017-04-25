@@ -55,10 +55,10 @@ public class ScheduleData{
     }
     
     public void setStartDate(LocalDate date){
-        startDate = date.getMonthValue()+"_"+date.getDayOfMonth()+"_"+date.getYear();
+        startDate = ((date.getMonthValue()<10)?"0":"") +date.getMonthValue()+"_"+((date.getDayOfMonth()<10)?"0":"")+date.getDayOfMonth()+"_"+date.getYear();
     }
     
     public void setEndDate(LocalDate date){
-        endDate = date.getMonthValue()+"_"+date.getDayOfMonth()+"_"+date.getYear();
+        endDate = ((date.getMonthValue()<10)?"0":"") +date.getMonthValue()+"_"+((date.getDayOfMonth()<10)?"0":"")+date.getDayOfMonth()+"_"+date.getYear();
     }
 }

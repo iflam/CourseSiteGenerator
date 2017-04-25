@@ -1,0 +1,22 @@
+
+{
+    "course_name":"CSE",
+    "course_num":"219",
+    "course_title":"Titlething",
+    "startHour":"2",
+    "endHour":"18",
+    "undergrad_tas":[
+        {
+            "name":"Itai Flam",
+            "email":"i.f@s.u"
+        },
+        {
+            "name":"Xin Yang",
+            "email":"x.y@s.u"
+        }
+    ],
+    "grad_tas":[
+    ],
+    "officeHours":[
+    ]
+}

@@ -1,0 +1,44 @@
+
+{
+    "course_data":{
+        "subject":"",
+        "number":"",
+        "semester":"Summer",
+        "year":"2017",
+        "title":"",
+        "instructor_name":"",
+        "instructor_home":"",
+        "export_dir":"None",
+        "template_dir":".\\templates\\CSE219",
+        "banner_image":"file:./images/derpablerp.png",
+        "left_footer_image":"file:./images/derpablerp.png",
+        "right_footer_image":"file:./images/derpablerp.png",
+        "style_sheet":"test1.css"
+    },
+    "ta_data":{
+        "startHour":"0",
+        "endHour":"24",
+        "undergrad_tas":[
+        ],
+        "grad_tas":[
+        ],
+        "officeHours":[
+        ]
+    },
+    "recitation_data":{
+        "recitations":[
+        ]
+    },
+    "schedule_data":{
+        "startDate":"01_01_2017",
+        "endDate":"12_12_2017",
+        "schedule_items":[
+        ]
+    },
+    "project_data":{
+        "teams":[
+        ],
+        "students":[
+        ]
+    }
+}

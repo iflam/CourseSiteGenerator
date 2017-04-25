@@ -78,6 +78,10 @@
 	<property name="EXPORT_WORK_TITLE"		value="輸出の名鑑を選んでください"></property>
 	<property name="WORK_FILE_EXT"			value="json"></property>
 	<property name="WORK_FILE_EXT_DESC"		value="コースサイトジェネレーター"></property>
+	<property name="IMG_FILE_EXT"			value="png"></property>
+	<property name="JPG_FILE_EXT"			value="JPG"></property>
+	<property name="IMG_FILE_EXT_DESC"		value="写真"></property>
+	<property name="JPG_FILE_EXT_DESC"		value="写真"></property>
 
         <!-- WORKSPACE CONTROLS STUFF -->        
         <property name="TAS_HEADER_TEXT"                value="手伝い"></property>

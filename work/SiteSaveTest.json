@@ -1,119 +1,125 @@
-{
-	"course_details":
-	{
-		"subject": "CSE",
-		"number": "219",
-		"semester": "Summer",
-		"year": "2017",
-		"title": "dfgij",
-		"instructor_name":"",
-		"instructor_home":"",
-		"export_dir": "None",
-		"template_dir": "None",
-		"banner_image": "None",
-		"left_footer_image": "None",
-		"right_footer_image": "None",
-		"style_sheet": "None"	
-	}
-	
-	"ta_data":
-	{
-		"startHour":"5",
-		"endHour":"10",
-		"undergrad_tas":[
-			{
-				"name":"itai",
-				"email":"itai.flam@stonybrook.edu"
-			},
-			{
-				"name":"isaac ramos",
-				"email":"isaac.ramos@stonybrook.edu"
-			}
-		],
-		"officeHours":[
-			{
-				"day":"MONDAY",
-				"time":"9_30am",
-				"name":"itai"
-			},
-			{
-				"day":"TUESDAY",
-				"time":"10_30am",
-				"name":"itai"
-			},
-			{
-				"day":"MONDAY",
-				"time":"12_00pm",
-				"name":"itai"
-			},
-			{
-				"day":"TUESDAY",
-				"time":"12_00pm",
-				"name":"itai"
-			},
-			{
-				"day":"WEDNESDAY",
-				"time":"3_00pm",
-				"name":"itai"
-			},
-			{
-				"day":"MONDAY",
-				"time":"3_30pm",
-				"name":"itai"
-			}
-		]
-	}
-	
-	"recitation_data":
-	{
-		"recitations":[
-			{
-				"section":"1",
-				"instructor":"Mr One",
-				"day_time":"Monday, 3:30pm-4:30pm",
-				"location":"old CS",
-				"ta1":"TA One",
-				"ta2":"TA Two",
-			}
-			{
-				"section":"2",
-				"instructor":"Mr Two",
-				"day_time":"Tuesday, 3:30pm-4:30pm",
-				"location":"old CS",
-				"ta1":"TA Thre",
-				"ta2":"TA Four",
-			}
-		]
-	}
-	
-	"schedule_data":
-	{
-		"startDate":"4/16/2017",
-		"endDate":"4/16/2017",
-		"schedule_items"
-		[
-			{
-				"type":"Homework",
-				"date":"4/16/2017",
-				"time":"5:00pm",
-				"title":"Homework 5 due",
-				"link":"http:www.youaresilly.com",
-				"criteria":"idkwhatthisis"		
-			}			
-		]
-	}
-	
-	"project_data":
-	{
-		"teams":
-		[
-			{
-				"name":"Shwaftas",
-				"color":"#ff0000",
-				"text_color":"ffffff",
-				"link":"http:shwafta.sbu.edu"
-			}
-		]
-	}
 
+{
+    "course_data":{
+        "subject":"CSE",
+        "number":"219",
+        "semester":"Winter",
+        "year":"2017",
+        "title":"Titlething",
+        "instructor_name":"Itai Flam",
+        "instructor_home":"Xin Yang",
+        "export_dir":"./work",
+        "template_dir":"None",
+        "banner_image":"file:./images/Exit.png",
+        "left_footer_image":"file:./images/Save.png",
+        "right_footer_image":"file:./images/Load.png",
+        "style_sheet":"yourFace.css"
+    },
+    "ta_data":{
+        "startHour":"2",
+        "endHour":"18",
+        "undergrad_tas":[
+            {
+                "name":"Itai Flam",
+                "email":"i.f@s.u"
+            },
+            {
+                "name":"Xin Yang",
+                "email":"x.y@s.u"
+            }
+        ],
+        "grad_tas":[
+        ],
+        "officeHours":[
+        ]
+    },
+    "recitation_data":{
+        "recitations":[
+            {
+                "section":"A",
+                "instructor":"B",
+                "day_time":"C",
+                "location":"D",
+                "ta_1":"E",
+                "ta_2":"F"
+            },
+            {
+                "section":"1",
+                "instructor":"2",
+                "day_time":"3",
+                "location":"4",
+                "ta_1":"5",
+                "ta_2":"6"
+            }
+        ]
+    },
+    "schedule_data":{
+        "startDate":"04_18_2018",
+        "endDate":"08_24_2018",
+        "schedule_items":[
+            {
+                "type":"Holiday",
+                "date":"06_22",
+                "title":"C",
+                "time":"D",
+                "topic":"E",
+                "link":"F",
+                "criteria":"G"
+            },
+            {
+                "type":"Lecture",
+                "date":"07_27",
+                "title":"3",
+                "time":"4",
+                "topic":"5",
+                "link":"6",
+                "criteria":"7"
+            },
+            {
+                "type":"Recitation",
+                "date":"05_02",
+                "title":"my",
+                "time":"face",
+                "topic":"is",
+                "link":"very",
+                "criteria":"cool"
+            }
+        ]
+    },
+    "project_data":{
+        "teams":[
+            {
+                "name":"Shwaftas",
+                "color":"#ffff00",
+                "text_color":"#000000",
+                "link":"www.myface.com"
+            },
+            {
+                "name":"Beluga Whales",
+                "color":"#b4e2AA",
+                "text_color":"#000000",
+                "link":"www.belugas.com"
+            }
+        ],
+        "students":[
+            {
+                "firstName":"Itai",
+                "lastName":"Flam",
+                "role":"Captain",
+                "team":"Shwaftas"
+            },
+            {
+                "firstName":"Xin",
+                "lastName":"Yang",
+                "role":"Programmer",
+                "team":"Shwaftas"
+            },
+            {
+                "firstName":"Your",
+                "lastName":"Face",
+                "role":"Head",
+                "team":"Beluga Whales"
+            }
+        ]
+    }
 }

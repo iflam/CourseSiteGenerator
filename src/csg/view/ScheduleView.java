@@ -14,6 +14,8 @@ import djf.components.AppDataComponent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -101,6 +103,15 @@ public class ScheduleView {
         addEditLabel = new Label(props.getProperty(CourseSiteGeneratorProp.ADD_EDIT_TEXT.toString()));
         typeLabel = new Label(props.getProperty(CourseSiteGeneratorProp.TYPE_TEXT.toString()));
         typeCB = new ComboBox();
+        ObservableList typeItems = FXCollections.observableArrayList();
+        typeItems.addAll(props.getProperty(CourseSiteGeneratorProp.CB_HOLIDAY.toString()),
+                props.getProperty(CourseSiteGeneratorProp.CB_LECTURE.toString()),
+                props.getProperty(CourseSiteGeneratorProp.CB_REF.toString()),
+                props.getProperty(CourseSiteGeneratorProp.CB_REC.toString()),
+                props.getProperty(CourseSiteGeneratorProp.CB_HWS.toString())
+                );
+        typeCB.setItems(typeItems);
+        typeCB.getSelectionModel().selectFirst();
         dateLabel = new Label(props.getProperty(CourseSiteGeneratorProp.DATE_TEXT.toString()));
         dateDP = new DatePicker();
         dateDP.setValue(LocalDate.now());

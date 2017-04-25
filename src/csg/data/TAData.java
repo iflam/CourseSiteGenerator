@@ -19,6 +19,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import properties_manager.PropertiesManager;
 import csg.file.TimeSlot;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -210,6 +214,20 @@ public class TAData{
         CourseSiteGeneratorWorkspace workspaceComponent = (CourseSiteGeneratorWorkspace)app.getWorkspaceComponent();
         ((TAView)workspaceComponent.getTAView()).reloadOfficeHoursGrid(this);
     }
+    
+    public void addCellToGrid(StringProperty x,int col, int row) {       
+        // BUILD A KEY TO EASILY UNIQUELY IDENTIFY THE CELL
+        String cellKey = getCellKey(col, row);
+        officeHours.put(cellKey, x);
+   }
+    public void initOfficeHoursTest(int initStartHour, int initEndHour) {
+        // NOTE THAT THESE VALUES MUST BE PRE-VERIFIED
+        startHour = initStartHour;
+        endHour = initEndHour;
+        
+        // EMPTY THE CURRENT OFFICE HOURS VALUES
+        officeHours.clear();
+    }
     public void changeOfficeHours(int startHour, int endHour){
         ArrayList<TimeSlot> officeHourTimes = TimeSlot.buildOfficeHoursList(this);
         String cellKey;
@@ -271,6 +289,17 @@ public class TAData{
                 && (initStartHour <= initEndHour)) {
             // THESE ARE VALID HOURS SO KEEP THEM
             initOfficeHours(initStartHour, initEndHour);
+        }
+    }
+    
+    public void initHoursTest(String startHourText, String endHourText){
+        int initStartHour = Integer.parseInt(startHourText);
+        int initEndHour = Integer.parseInt(endHourText);
+        if ((initStartHour >= MIN_START_HOUR)
+                && (initEndHour <= MAX_END_HOUR)
+                && (initStartHour <= initEndHour)) {
+            // THESE ARE VALID HOURS SO KEEP THEM
+            initOfficeHoursTest(initStartHour, initEndHour);
         }
     }
 

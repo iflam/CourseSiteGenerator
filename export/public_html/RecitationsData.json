@@ -1,0 +1,22 @@
+
+{
+    "course_name":"CSE",
+    "course_num":"219",
+    "course_title":"Titlething",
+    "recitations":[
+        {
+            "section":"<strong>A</strong> (B)",
+            "day_time":"C",
+            "location":"D",
+            "ta_1":"E",
+            "ta_2":"F"
+        },
+        {
+            "section":"<strong>1</strong> (2)",
+            "day_time":"3",
+            "location":"4",
+            "ta_1":"5",
+            "ta_2":"6"
+        }
+    ]
+}

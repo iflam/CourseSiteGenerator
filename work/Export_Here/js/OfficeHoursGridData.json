@@ -1,0 +1,29 @@
+
+{
+    "startHour":"2",
+    "endHour":"18",
+    "undergrad_tas":[
+        {
+            "name":"Itai Flam",
+            "email":"i.f@s.u"
+        },
+        {
+            "name":"Xin Yang",
+            "email":"x.y@s.u"
+        }
+    ],
+    "grad_tas":[
+    ],
+    "officeHours":[
+        {
+            "day":"TUESDAY",
+            "time":"8_30am",
+            "name":"Xin Yang"
+        },
+        {
+            "day":"MONDAY",
+            "time":"1_30pm",
+            "name":"Itai Flam"
+        }
+    ]
+}

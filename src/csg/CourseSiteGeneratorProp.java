@@ -97,6 +97,11 @@ public enum CourseSiteGeneratorProp {
     LINK_TEXT,
     CRITERIA_TEXT,
     SI_TEXT,
+    CB_HOLIDAY,
+    CB_LECTURE,
+    CB_REF,
+    CB_REC,
+    CB_HWS,
     //Project view
     PROJECTS_TEXT,
     TEAMS_TEXT,
