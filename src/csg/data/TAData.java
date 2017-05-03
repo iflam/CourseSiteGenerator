@@ -344,7 +344,7 @@ public class TAData{
         }
         addTA(name,email,ta.getUndergrad());
         Collections.sort(teachingAssistants);
-        int i = 0;
+        RecitationData recData = ((CourseSiteGeneratorData)app.getDataComponent()).getRecitationData();
     }
    
     public void removeTA(String initName){

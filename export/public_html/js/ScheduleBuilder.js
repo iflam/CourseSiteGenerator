@@ -33,7 +33,6 @@ function loadData(jsonFile) {
         addReferences();
         addRecitations();
         addHWs();
-        initBanner(json);
     });
 }
 function initDateData() {
@@ -235,8 +234,4 @@ function addHWs() {
         var cell = $("#" + hw.date.month + "_" + hw.date.day);
         cell.append(textToAppend);
     }
-}
-function initBanner(data){
-    var banner = $("#banner");
-    banner.append(data.course_name + " " + data.course_num + " " + data.course_title);
 }

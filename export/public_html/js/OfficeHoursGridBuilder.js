@@ -5,16 +5,20 @@ var daysOfWeek;
 var officeHours;
 var undergradTAs;
 var gradTAs;
+var bannerInit;
 
 function buildOfficeHoursGrid() {
     var dataFile = "./js/OfficeHoursGridData.json";
+    bannerInit = false;
     loadData(dataFile, loadOfficeHours);
 }
 
 function loadData(jsonFile, callback) {
     $.getJSON(jsonFile, function(json) {
         callback(json);
-        initBanner(json);
+        if(!bannerInit){
+            bannerInit = true;
+        }
     });
 }
 
@@ -152,9 +156,4 @@ function getAMorPM(testTime) {
         return "pm";
     else
         return "am";
-}
-
-function initBanner(data){
-var banner = $("#banner");
-banner.append(data.course_name + " " + data.course_num + " " + data.course_title);
 }

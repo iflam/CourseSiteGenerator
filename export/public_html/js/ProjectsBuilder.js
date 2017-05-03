@@ -22,7 +22,6 @@ function loadData(jsonFile) {
     $.getJSON(jsonFile, function (json) {
         loadJSONData(json);
         addProjects();
-        initBanner(json);
     });
 }
 function loadJSONData(data) {
@@ -83,8 +82,4 @@ function getProjectCell(project) {
     }
     text += "<br /><br /></td>";
     return text;
-}
-function initBanner(data){
-var banner = $("#banner");
-banner.append(data.course_name + " " + data.course_num + " " + data.course_title);
 }

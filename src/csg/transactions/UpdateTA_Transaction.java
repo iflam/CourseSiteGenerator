@@ -5,6 +5,7 @@
  */
 package csg.transactions;
 
+import csg.data.RecitationData;
 import javafx.collections.ObservableList;
 import jtps.jTPS_Transaction;
 import csg.data.TAData;
@@ -23,7 +24,7 @@ public class UpdateTA_Transaction implements jTPS_Transaction{
     String OgName;
     String OgEmail;
     boolean isUndergrad;
-    public UpdateTA_Transaction(TAData data, TeachingAssistant t, String name, String email){
+    public UpdateTA_Transaction(RecitationData recData, TAData data, TeachingAssistant t, String name, String email){
         teachingAssistants = data.getTeachingAssistants();
         this.t = t;
         this.data = data;

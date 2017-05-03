@@ -10,6 +10,9 @@ import djf.ui.AppGUI;
 import javafx.geometry.Insets;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import properties_manager.PropertiesManager;
 
@@ -42,6 +45,18 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
         recitation = new RecitationView(app);
         schedule = new ScheduleView(app);
         ta = new TAView(app);
+        controller = new CourseSiteGeneratorController(app);
+        KeyCombination ctrlZ = KeyCodeCombination.keyCombination("Ctrl+z");
+        KeyCombination ctrlY = KeyCodeCombination.keyCombination("Ctrl+y");
+        app.getGUI().getPrimaryScene().setOnKeyPressed(e ->{
+            if(ctrlZ.match(e)){
+                controller.handleCtrlz(); //Handle control z, now go back to TAController and finish that by 
+                //undoing transactions in there, reference jTPS files for help.
+            }
+            if(ctrlY.match(e)){
+                controller.handleCtrly();
+            }
+        });
         
         
     }
@@ -76,6 +91,7 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
         ta = new TAView(app);
         taTab.setContent(ta.getGUI());
         ((CourseSiteGeneratorStyle)(app.getStyleComponent())).initStyleSheet();
+        app.getStack().clearStack();
     }
 
     @Override

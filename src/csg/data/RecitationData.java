@@ -29,6 +29,13 @@ public class RecitationData{
         recitations.add(r);
     }
     
+    public void addRecitation(Recitation r){
+        recitations.add(r);
+    }
+    
+    public void removeRecitation(Recitation r){
+        recitations.remove(r);
+    }
     public ObservableList<Recitation> getRecitations(){
         return recitations;
     }

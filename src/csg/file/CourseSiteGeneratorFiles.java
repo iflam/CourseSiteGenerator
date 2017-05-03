@@ -36,6 +36,7 @@ import csg.data.Team;
 import csg.view.CourseSiteGeneratorWorkspace;
 import csg.view.CourseView;
 import csg.view.ScheduleView;
+import static djf.settings.AppStartupConstants.PATH_COURSESTUFF;
 import static djf.settings.AppStartupConstants.PATH_EXPORT;
 import static djf.settings.AppStartupConstants.PATH_HERE;
 import static djf.settings.AppStartupConstants.PATH_JSON;
@@ -669,9 +670,6 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                         .add(JSON_COURSENAME, courseData.getSubject())
                         .add(JSON_COURSENUM, courseData.getNumber())
                         .add(JSON_COURSETITLE, courseData.getTitle())
-                        .add(JSON_COURSENAME, courseData.getSubject())
-                        .add(JSON_COURSENUM, courseData.getNumber())
-                        .add(JSON_COURSETITLE, courseData.getTitle())
                         .add(JSON_START_HOUR, "" + taData.getStartHour())
                         .add(JSON_END_HOUR, "" + taData.getEndHour())
                         .add(JSON_UNDERGRAD_TAS, undergradTAsArray)
@@ -710,10 +708,7 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                             .build();                   
                         recitationArrayBuilder.add(recitationJson);
                 }
-                JsonObject recitationDataJson = Json.createObjectBuilder()
-                        .add(JSON_COURSENAME, courseData.getSubject())
-                        .add(JSON_COURSENUM, courseData.getNumber())
-                        .add(JSON_COURSETITLE, courseData.getTitle())      
+                JsonObject recitationDataJson = Json.createObjectBuilder()      
                         .add(JSON_RECITATIONS, recitationArrayBuilder).build();
                 //SAVE INTO RecitationsData.json
                 // AND NOW OUTPUT IT TO A JSON FILE WITH PRETTY PRINTING
@@ -758,9 +753,6 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                     studentsArrayBuilder.add(studentJson);
                 }
                 JsonObject projectObject = Json.createObjectBuilder()
-                        .add(JSON_COURSENAME, courseData.getSubject())
-                        .add(JSON_COURSENUM, courseData.getNumber())
-                        .add(JSON_COURSETITLE, courseData.getTitle())
                         .add(JSON_PROJECT_TEAMS, teamsArrayBuilder)
                         .add(JSON_PROJECT_STUDENTS, studentsArrayBuilder)
                         .build();
@@ -805,9 +797,6 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                         .build();
                 JsonArrayBuilder workArrayBuilder = Json.createArrayBuilder().add(projectsObject);
                 JsonObject projectsDataObj = Json.createObjectBuilder()
-                        .add(JSON_COURSENAME, courseData.getSubject())
-                        .add(JSON_COURSENUM, courseData.getNumber())
-                        .add(JSON_COURSETITLE, courseData.getTitle())
                         .add(JSON_PROJECT_WORK, workArrayBuilder).build();
                 //save to ProjectsData.json
                 properties = new HashMap<>(1);
@@ -874,9 +863,6 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                 String endMonth = endFull[0];
                 String endDay = endFull[1];
                 JsonObject scheduleDataObject = Json.createObjectBuilder()
-                        .add(JSON_COURSENAME, courseData.getSubject())
-                        .add(JSON_COURSENUM, courseData.getNumber())
-                        .add(JSON_COURSETITLE, courseData.getTitle())
                         .add(JSON_SCHEDULE_STARTMONTH, startMonth)
                         .add(JSON_SCHEDULE_STARTDAY, startDay)
                         .add(JSON_SCHEDULE_ENDMONTH, endMonth)
@@ -909,6 +895,30 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                 File currentDir = new File(System.getProperty("user.dir"));
                 File dest = new File(PATH_HERE);
                 FileUtils.copyDirectory(source,dest);
+                
+                //COURSE PUT STUFF
+                JsonObject courseStuff = Json.createObjectBuilder()
+                        .add(JSON_COURSENAME, courseData.getSubject())
+                        .add(JSON_COURSENUM, courseData.getNumber())
+                        .add(JSON_COURSETITLE, courseData.getTitle())
+                        .build();
+                //save to CourseStuff.json
+                properties = new HashMap<>(1);
+                properties.put(JsonGenerator.PRETTY_PRINTING, true);
+                writerFactory = Json.createWriterFactory(properties);
+                sw = new StringWriter();
+                jsonWriter = writerFactory.createWriter(sw);
+                jsonWriter.writeObject(scheduleDataObject);
+                jsonWriter.close();
+
+                // INIT THE WRITER
+                os = new FileOutputStream(PATH_COURSESTUFF);
+                jsonFileWriter = Json.createWriter(os);
+                jsonFileWriter.writeObject(scheduleDataObject);
+                prettyPrinted = sw.toString();
+                pw = new PrintWriter(PATH_COURSESTUFF);
+                pw.write(prettyPrinted);
+                pw.close();  
                 
     }
 }

@@ -289,7 +289,17 @@ public class CourseView{
         changeBanner.setOnAction(e->{
             String directory = promptForDirectory(false);
             data.setBannerDir(directory);
-            bannerImage = new ImageView("file:"+directory);
+            bannerImage.setImage(new Image("file:"+directory));
+        });
+        changeLeft.setOnAction(e->{
+            String directory = promptForDirectory(false);
+            data.setBannerDir(directory);
+            leftFtImage.setImage(new Image("file:"+directory));
+        });
+        changeRight.setOnAction(e->{
+            String directory = promptForDirectory(false);
+            data.setBannerDir(directory);
+            rightFtImage.setImage(new Image("file:"+directory));
         });
         subjectTF.setOnAction(e->{
             data.setSubject(subjectTF.getText());

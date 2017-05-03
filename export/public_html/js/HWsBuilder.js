@@ -38,7 +38,6 @@ function loadData(jsonFile) {
     $.getJSON(jsonFile, function (json) {
 	loadJSONData(json);
         addHWs();
-        initBanner(json);
     });
 }
 function loadJSONData(data) {    
@@ -101,8 +100,4 @@ function getDayOfWeek(gDay, gMonth) {
     date.setMonth(gMonth-1);
     date.setDate(gDay);
     return daysOfWeek[date.getDay()];
-}
-function initBanner(data){
-var banner = $("#banner");
-banner.append(data.course_name + " " + data.course_num + " " + data.course_title);
 }

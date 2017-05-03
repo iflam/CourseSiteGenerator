@@ -58,8 +58,4 @@ function buildRecCell(recClassNum, recData) {
     text += "</table></td>";
     return text;
 }
-function initBanner(data){
-var banner = $("#banner");
-banner.append(data.course_name + " " + data.course_num + " " + data.course_title);
-}
 

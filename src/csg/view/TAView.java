@@ -247,9 +247,6 @@ public class TAView {
                 final TeachingAssistant taObj = taTable.getSelectionModel().getSelectedItem();
                 controller.handleDeleteTA(taObj);
             }
-            else if(e.getCode().getName().equals("z")){
-                
-            }
         });
         //TOGGLE
         taTable.setOnMouseClicked(e ->{

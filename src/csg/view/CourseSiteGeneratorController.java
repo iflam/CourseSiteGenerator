@@ -15,6 +15,7 @@ import static csg.CourseSiteGeneratorProp.MISSING_TA_NAME_TITLE;
 import static csg.CourseSiteGeneratorProp.TA_NAME_AND_EMAIL_NOT_UNIQUE_MESSAGE;
 import static csg.CourseSiteGeneratorProp.TA_NAME_AND_EMAIL_NOT_UNIQUE_TITLE;
 import csg.data.CourseSiteGeneratorData;
+import csg.data.RecitationData;
 import csg.data.ScheduleData;
 import csg.data.TAData;
 import csg.data.TeachingAssistant;
@@ -237,7 +238,8 @@ public class CourseSiteGeneratorController {
             }
             else{
             // ADD THE NEW TA TO THE DATA
-            jTPS_Transaction transaction = new UpdateTA_Transaction(data,ta,name,email);
+            RecitationData recData = ((CourseSiteGeneratorData)app.getDataComponent()).getRecitationData();
+            jTPS_Transaction transaction = new UpdateTA_Transaction(recData,data,ta,name,email);
             app.getStack().addTransaction(transaction);
             nameTextField.requestFocus();
             notGood = true;
@@ -248,7 +250,8 @@ public class CourseSiteGeneratorController {
                 AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
                 dialog.show(props.getProperty(INCORRECT_FORMAT_TA_EMAIL_TITLE), props.getProperty(INCORRECT_FORMAT_TA_EMAIL_MESSAGE));
             }
-            jTPS_Transaction transaction = new UpdateTA_Transaction(data,ta,name,email);
+            RecitationData recData = ((CourseSiteGeneratorData)app.getDataComponent()).getRecitationData();
+            jTPS_Transaction transaction = new UpdateTA_Transaction(recData,data,ta,name,email);
             app.getStack().addTransaction(transaction);
             nameTextField.requestFocus();
         }
