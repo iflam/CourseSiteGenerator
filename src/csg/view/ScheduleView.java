@@ -10,6 +10,10 @@ import csg.CourseSiteGeneratorProp;
 import csg.data.CourseSiteGeneratorData;
 import csg.data.ScheduleData;
 import csg.data.ScheduleItem;
+import csg.transactions.AddSchedItem_Transaction;
+import csg.transactions.RemoveSchedItem_Transaction;
+import csg.transactions.ToggleTA_Transaction;
+import csg.transactions.UpdateSchedItem_Transaction;
 import djf.components.AppDataComponent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,9 +28,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import jtps.jTPS_Transaction;
 import properties_manager.PropertiesManager;
 
 /**
@@ -70,11 +78,13 @@ public class ScheduleView {
     TextField criteriaTF;
     Button addUpdateButton;
     Button clearButton;
-    public static final String DEFAULT_START = "01_01_2017";
-    public static final String DEFAULT_END = "12_12_2017";
+    public static final LocalDate DEFAULT_START = LocalDate.now();
+    public static final LocalDate DEFAULT_END = LocalDate.now();
+    boolean isAdd;
     
     public ScheduleView(CourseSiteGeneratorApp initApp){
         app = initApp;
+        isAdd = true;
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         ScheduleData thisData = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
         //TOP
@@ -175,14 +185,101 @@ public class ScheduleView {
         endDate.setOnAction(e->{
             controller.handleChangeEndDate(endDate.getValue());
         });
+        clearButton.setOnAction(e->{
+            typeCB.getSelectionModel().selectFirst();
+            dateDP.setValue(DEFAULT_START);
+            titleTF.setText("");
+            timeTF.setText("");
+            topicTF.setText("");
+            linkTF.setText("");
+            criteriaTF.setText("");
+            isAdd = true;
+            
+        });
+        scheduleTable.setOnMouseClicked(e->{
+            if(scheduleTable.getSelectionModel().getSelectedItem() != null){
+                ScheduleItem item = ((ScheduleItem)scheduleTable.getSelectionModel().getSelectedItem());
+                typeCB.setValue(item.getType());
+                dateDP.setValue(makeDate(item.getDate()));
+                titleTF.setText(item.getTitle());
+                timeTF.setText(item.getTime());
+                topicTF.setText(item.getTopic());
+                linkTF.setText(item.getLink());
+                criteriaTF.setText(item.getCriteria());
+                isAdd = false;
+            }
+        });
+        controller = new CourseSiteGeneratorController(app);
+        addUpdateButton.setOnAction(e->{
+            if(isAdd){
+                handleAddScheduleItem(thisData, new ScheduleItem(
+                    typeCB.getValue().toString(),
+                    ((dateDP.getValue().getMonthValue()<10)?"0":"") +dateDP.getValue().getMonthValue()+"_"
+                    +((dateDP.getValue().getDayOfMonth()<10)?"0":"")+dateDP.getValue().getDayOfMonth()+"_"+dateDP.getValue().getYear(),
+                    titleTF.getText(),
+                    timeTF.getText(),
+                    topicTF.getText(),
+                    linkTF.getText(),
+                    criteriaTF.getText())
+                );
+            }
+            else{
+                handleUpdateScheduleItem(thisData,new ScheduleItem(
+                    typeCB.getValue().toString(),
+                    ((dateDP.getValue().getMonthValue()<10)?"0":"") +dateDP.getValue().getMonthValue()+"_"
+                    +((dateDP.getValue().getDayOfMonth()<10)?"0":"")+dateDP.getValue().getDayOfMonth()+"_"+dateDP.getValue().getYear(),
+                    titleTF.getText(),
+                    timeTF.getText(),
+                    topicTF.getText(),
+                    linkTF.getText(),
+                    criteriaTF.getText()));
+            }
+        });
+        deleteButton.setOnAction(e->{
+            handleDeleteScheduleItem(thisData,(ScheduleItem)scheduleTable.getSelectionModel().getSelectedItem());
+        });
+        scheduleTable.setOnKeyPressed(e->{
+            if(e.getCode() == KeyCode.DELETE){
+                handleDeleteScheduleItem(thisData,(ScheduleItem)scheduleTable.getSelectionModel().getSelectedItem());
+            }
+        });
+        
+        
+        KeyCombination ctrlZ = KeyCodeCombination.keyCombination("Ctrl+z");
+        KeyCombination ctrlY = KeyCodeCombination.keyCombination("Ctrl+y");
+        app.getGUI().getPrimaryScene().setOnKeyPressed(e ->{
+            if(ctrlZ.match(e)){
+                controller.handleCtrlz(); //Handle control z, now go back to TAController and finish that by 
+                //undoing transactions in there, reference jTPS files for help.
+            }
+            if(ctrlY.match(e)){
+                controller.handleCtrly();
+            }
+        });
+    }
+    public void handleDeleteScheduleItem(ScheduleData scheduleData, ScheduleItem s){
+        jTPS_Transaction transaction = new RemoveSchedItem_Transaction(scheduleData, s);
+            app.getStack().addTransaction(transaction);
+    }
+    public void handleUpdateScheduleItem(ScheduleData scheduleData, ScheduleItem s){
+        for(ScheduleItem s2 : scheduleData.getItems()){
+            if(s2.equals(scheduleTable.getSelectionModel().getSelectedItem())){
+                jTPS_Transaction transaction = new UpdateSchedItem_Transaction(scheduleData,s2, s);
+                    app.getStack().addTransaction(transaction);
+            }
+        }
     }
     
+    public void handleAddScheduleItem(ScheduleData scheduleData, ScheduleItem s){
+        jTPS_Transaction transaction = new AddSchedItem_Transaction(scheduleData, s);
+            app.getStack().addTransaction(transaction);
+    }
     public String getDefaultStart(){
-        return DEFAULT_START;
+        return DEFAULT_START.getMonthValue()+"_"+DEFAULT_START.getDayOfMonth()+"_"+DEFAULT_START.getYear();
     }
     
     public String getDefaultEnd(){
-        return DEFAULT_END;
+        return DEFAULT_END.getMonthValue()+"_"+DEFAULT_END.getDayOfMonth()+"_"+DEFAULT_END.getYear();
     }
     public static LocalDate makeDate(String dateString){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM_dd_yyyy");
@@ -323,8 +420,8 @@ public class ScheduleView {
     
     public void resetDates(){
         ScheduleData thisData = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
-        startDate.setValue(makeDate(DEFAULT_START));
-        endDate.setValue(makeDate(DEFAULT_END));
+        startDate.setValue(DEFAULT_START);
+        endDate.setValue(DEFAULT_END);
     }
     
     public void setStartDate(String d){

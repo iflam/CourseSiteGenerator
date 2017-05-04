@@ -15,6 +15,7 @@ import jtps.jTPS_Transaction;
  * @author Itai
  */
 public class UpdateRec_Transaction implements jTPS_Transaction{
+    public final String viewType = "recitationTab";
     RecitationData recData;
     Recitation oldRec;
     Recitation newRec;
@@ -38,5 +39,8 @@ public class UpdateRec_Transaction implements jTPS_Transaction{
         recData.removeRecitation(newRec);
         recData.addRecitation(oldRec);
     }
-    
+    @Override
+    public String getViewType() {
+        return viewType;
+    }
 }

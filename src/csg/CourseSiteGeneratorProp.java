@@ -112,7 +112,12 @@ public enum CourseSiteGeneratorProp {
     LAST_NAME_TEXT,
     TEAM_TEXT,
     ROLE_TEXT,
-    
+    TEAM_PROMPT_TEXT,
+    TEAM_PROMPT_MESSAGE,
+    TEAM_ENTER_TEXT,
+    NO_TEAM_TEXT,
+    NO_TEAM_MESSAGE,
+    NO_TEAM_CONTENT,
     
     
     

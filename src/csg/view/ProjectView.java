@@ -11,6 +11,15 @@ import csg.data.CourseSiteGeneratorData;
 import csg.data.ProjectData;
 import csg.data.Student;
 import csg.data.Team;
+import csg.transactions.AddStudent_Transaction;
+import csg.transactions.AddTeam_Transaction;
+import csg.transactions.RemoveSchedItem_Transaction;
+import csg.transactions.RemoveStudent_Transaction;
+import csg.transactions.RemoveTeam_Transaction;
+import csg.transactions.UpdateStudent_Transaction;
+import csg.transactions.UpdateTeam_Transaction;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -20,9 +29,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import jtps.jTPS_Transaction;
 import properties_manager.PropertiesManager;
 
 public class ProjectView{
@@ -67,9 +81,13 @@ public class ProjectView{
     TextField roleTF;
     Button addUpdateButton2;
     Button clearButton2;
+    boolean isAdd1;
+    boolean isAdd2;
     
     public ProjectView(CourseSiteGeneratorApp initApp){
         app = initApp;
+        isAdd1 = true;
+        isAdd2 = true;
         PropertiesManager props = PropertiesManager.getPropertiesManager();
         ProjectData data = ((CourseSiteGeneratorData)app.getDataComponent()).getProjectData();
         //TOP
@@ -130,7 +148,8 @@ public class ProjectView{
         lastNameLabel = new Label(props.getProperty(CourseSiteGeneratorProp.LAST_NAME_TEXT.toString()));
         lastNameTF = new TextField();
         teamLabel = new Label(props.getProperty(CourseSiteGeneratorProp.TEAM_TEXT.toString()));
-        teamCB = new ComboBox();
+        teamCB = new ComboBox(data.getTeams());
+        teamCB.getSelectionModel().selectFirst();
         roleLabel = new Label(props.getProperty(CourseSiteGeneratorProp.ROLE_TEXT.toString()));
         roleTF = new TextField();
         addUpdateButton2 = new Button(props.getProperty(CourseSiteGeneratorProp.ADD_UPDATE_TEXT.toString()));
@@ -173,8 +192,160 @@ public class ProjectView{
         thisGUI.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         thisGUI.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         thisGUI.setContent(projectvBox);
+        CourseSiteGeneratorController controller = new CourseSiteGeneratorController(app);
+        addUpdateButton.setOnAction(e->{
+            if(isAdd1){
+                handleAddTeam(data);
+                app.getGUI().updateToolbarControls(false);
+                ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+            }
+            else{
+                handleUpdateTeam(data, (Team)topTable.getSelectionModel().getSelectedItem());
+                app.getGUI().updateToolbarControls(false);
+                ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+            }
+        });
+        addUpdateButton2.setOnAction(e->{
+            if(isAdd2){
+                handleAddStudent(data);
+                app.getGUI().updateToolbarControls(false);
+                ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+            }
+            else{
+                handleUpdateStudent(data,(Student)lowTable.getSelectionModel().getSelectedItem());
+                app.getGUI().updateToolbarControls(false);
+                ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+            }
+        });
+        deleteButton.setOnAction(e->{
+            if(topTable.getSelectionModel().getSelectedItem()!=null){
+                handleDeleteTeam(data);
+                app.getGUI().updateToolbarControls(false);
+                ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+            }
+            if(lowTable.getSelectionModel().getSelectedItem()!=null){
+                handleDeleteStudent(data);
+                app.getGUI().updateToolbarControls(false);
+                ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+            }
+        });
+        topTable.setOnKeyPressed(e->{
+            if(e.getCode() == KeyCode.DELETE){
+                handleDeleteTeam(data);
+                app.getGUI().updateToolbarControls(false);
+                ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+                }
+        });
+        lowTable.setOnMouseClicked(e->{
+            if(lowTable.getSelectionModel().getSelectedItem()!=null){
+                firstNameTF.setText(((Student)lowTable.getSelectionModel().getSelectedItem()).getFirstName());
+                lastNameTF.setText(((Student)lowTable.getSelectionModel().getSelectedItem()).getLastName());
+                roleTF.setText(((Student)lowTable.getSelectionModel().getSelectedItem()).getRole());
+                teamCB.setValue(((Student)lowTable.getSelectionModel().getSelectedItem()).getTeam());
+            }
+            isAdd2 = false;
+        });
+        topTable.setOnMouseClicked(e->{
+            if(topTable.getSelectionModel().getSelectedItem()!=null){
+                nameTF.setText(((Team)topTable.getSelectionModel().getSelectedItem()).getName());
+                handleSetColors(((Team)topTable.getSelectionModel().getSelectedItem()));
+                linkTF.setText(((Team)topTable.getSelectionModel().getSelectedItem()).getLink());
+            }
+            isAdd1 = false;
+        });
+        clearButton.setOnAction(e->{
+            nameTF.setText("");
+            colorPicker.setValue(Color.WHITE);
+            textColorPicker.setValue(Color.WHITE);
+            linkTF.setText("");
+            isAdd1 = true;
+        });
+        clearButton2.setOnAction(e->{
+            firstNameTF.setText("");
+            lastNameTF.setText("");
+            teamCB.getSelectionModel().selectFirst();
+            roleTF.setText("");
+            isAdd2 = true;
+        });  
+        KeyCombination ctrlZ = KeyCodeCombination.keyCombination("Ctrl+z");
+        KeyCombination ctrlY = KeyCodeCombination.keyCombination("Ctrl+y");
+        app.getGUI().getPrimaryScene().setOnKeyPressed(e ->{
+            if(ctrlZ.match(e)){
+                controller.handleCtrlz(); //Handle control z, now go back to TAController and finish that by 
+                //undoing transactions in there, reference jTPS files for help.
+            }
+            if(ctrlY.match(e)){
+                controller.handleCtrly();
+            }
+        });
     }
-
+    public void handleUpdateTeam(ProjectData data, Team t){
+           Team newT = new Team(nameTF.getText(),
+                toRGBCode(colorPicker.getValue()),
+                toRGBCode(textColorPicker.getValue()),
+                   linkTF.getText()
+           );
+           jTPS_Transaction transaction = new UpdateTeam_Transaction(data,t,newT);
+                app.getStack().addTransaction(transaction);
+    }
+    
+    public void handleUpdateStudent(ProjectData data, Student s){
+        Student newS = new Student(firstNameTF.getText(),
+                                lastNameTF.getText(),
+                                roleTF.getText(),
+                                teamCB.getValue().toString());
+        jTPS_Transaction transaction = new UpdateStudent_Transaction(data,s,newS);
+                app.getStack().addTransaction(transaction);
+        
+    }
+    public void handleSetColors(Team t){
+        Color color = Color.color((((double)Integer.parseInt(t.getRed()))/255),
+                (((double)Integer.parseInt(t.getGreen()))/255),
+                (((double)Integer.parseInt(t.getBlue()))/255));
+        Color tColor = Color.color((((double)Integer.parseInt(t.gettRed()))/255),
+                (((double)Integer.parseInt(t.gettGreen()))/255),
+                (((double)Integer.parseInt(t.gettBlue()))/255));
+        colorPicker.setValue(color);
+        textColorPicker.setValue(tColor);
+    }
+    public void handleAddStudent(ProjectData data){
+        Student s = new Student(
+                    firstNameTF.getText(),
+                    lastNameTF.getText(),
+                    roleTF.getText(),
+                    teamCB.getValue().toString()       
+        );
+        jTPS_Transaction transaction = new AddStudent_Transaction(data, s);
+            app.getStack().addTransaction(transaction);
+    }
+    
+    public void handleDeleteStudent(ProjectData data){
+        Student s = (Student)lowTable.getSelectionModel().getSelectedItem();
+        jTPS_Transaction transaction = new RemoveStudent_Transaction(data, s);
+            app.getStack().addTransaction(transaction);
+    }
+    public void handleDeleteTeam(ProjectData data){
+        Team t = (Team)topTable.getSelectionModel().getSelectedItem();
+        jTPS_Transaction transaction = new RemoveTeam_Transaction(data, t);
+            app.getStack().addTransaction(transaction);
+    }
+    public void handleAddTeam(ProjectData data){
+        Team t = new Team(
+                nameTF.getText(),
+                toRGBCode(colorPicker.getValue()),
+                toRGBCode(textColorPicker.getValue()),
+                linkTF.getText()       
+        );
+        jTPS_Transaction transaction = new AddTeam_Transaction(data, t);
+            app.getStack().addTransaction(transaction);
+    }
+    public static String toRGBCode(Color color )
+    {
+        return String.format( "#%02X%02X%02X",
+            (int)( color.getRed() * 255 ),
+            (int)( color.getGreen() * 255 ),
+            (int)( color.getBlue() * 255 ) );
+    }
     public CourseSiteGeneratorApp getApp() {
         return app;
     }

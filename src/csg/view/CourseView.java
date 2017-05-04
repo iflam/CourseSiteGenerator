@@ -44,6 +44,8 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -322,7 +324,18 @@ public class CourseView{
         instructorHomeTF.setOnAction(e->{
             data.setiHome(instructorHomeTF.getText());
         });
-        
+        CourseSiteGeneratorController controller = new CourseSiteGeneratorController(app);
+        KeyCombination ctrlZ = KeyCodeCombination.keyCombination("Ctrl+z");
+        KeyCombination ctrlY = KeyCodeCombination.keyCombination("Ctrl+y");
+        app.getGUI().getPrimaryScene().setOnKeyPressed(e ->{
+            if(ctrlZ.match(e)){
+                controller.handleCtrlz(); //Handle control z, now go back to TAController and finish that by 
+                //undoing transactions in there, reference jTPS files for help.
+            }
+            if(ctrlY.match(e)){
+                controller.handleCtrly();
+            }
+        });
         
     }
     

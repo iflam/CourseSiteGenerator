@@ -6,14 +6,27 @@ import csg.data.CourseSiteGeneratorData;
 import csg.style.CourseSiteGeneratorStyle;
 import djf.components.AppDataComponent;
 import djf.components.AppWorkspaceComponent;
+import static djf.settings.AppPropertyType.ABOUT_ICON;
+import static djf.settings.AppPropertyType.ABOUT_TOOLTIP;
+import static djf.settings.AppPropertyType.REDO_ICON;
+import static djf.settings.AppPropertyType.REDO_TOOLTIP;
+import static djf.settings.AppPropertyType.UNDO_ICON;
+import static djf.settings.AppPropertyType.UNDO_TOOLTIP;
+import static djf.settings.AppStartupConstants.FILE_PROTOCOL;
+import static djf.settings.AppStartupConstants.PATH_IMAGES;
 import djf.ui.AppGUI;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import properties_manager.PropertiesManager;
 
 /**
@@ -37,6 +50,10 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
     ScheduleView schedule;
     TAView ta;
     TabPane tp;
+    FlowPane undoRedoToolbar;
+    Button undoButton;
+    Button redoButton;
+    Button aboutButton;
     
     public CourseSiteGeneratorWorkspace(CourseSiteGeneratorApp initApp){
         app = initApp;
@@ -44,8 +61,9 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
         project = new ProjectView(app);
         recitation = new RecitationView(app);
         schedule = new ScheduleView(app);
-        ta = new TAView(app);
+        ta = new TAView(app);    
         controller = new CourseSiteGeneratorController(app);
+        initButtons();
         KeyCombination ctrlZ = KeyCodeCombination.keyCombination("Ctrl+z");
         KeyCombination ctrlY = KeyCodeCombination.keyCombination("Ctrl+y");
         app.getGUI().getPrimaryScene().setOnKeyPressed(e ->{
@@ -57,8 +75,12 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
                 controller.handleCtrly();
             }
         });
-        
-        
+        undoButton.setOnAction(e->{
+            controller.handleCtrlz();
+        });
+        redoButton.setOnAction(e->{
+            controller.handleCtrly();
+        });
     }
     
     @Override
@@ -94,6 +116,40 @@ public class CourseSiteGeneratorWorkspace extends AppWorkspaceComponent{
         app.getStack().clearStack();
     }
 
+    public void initButtons(){
+        PropertiesManager props = PropertiesManager.getPropertiesManager();
+        undoRedoToolbar = new FlowPane();
+        String undoPath = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(UNDO_ICON.toString());
+        String redoPath = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(REDO_ICON.toString());
+        String aboutPath = FILE_PROTOCOL + PATH_IMAGES + props.getProperty(ABOUT_ICON.toString());
+        Image undoImage = new Image(undoPath);
+        Image redoImage = new Image(redoPath);
+        Image aboutImage = new Image(aboutPath);
+        undoButton = new Button();
+        redoButton = new Button();
+        aboutButton = new Button();
+        undoButton.setDisable(true);
+        redoButton.setDisable(true);
+        aboutButton.setDisable(false);
+        undoButton.setGraphic(new ImageView(undoImage));
+        redoButton.setGraphic(new ImageView(redoImage));
+        aboutButton.setGraphic(new ImageView(aboutImage));
+        Tooltip undoButtonTooltip = new Tooltip(props.getProperty(UNDO_TOOLTIP.toString()));
+        Tooltip redoButtonTooltip = new Tooltip(props.getProperty(REDO_TOOLTIP.toString()));
+        Tooltip aboutButtonTooltip = new Tooltip(props.getProperty(ABOUT_TOOLTIP.toString()));
+        undoButton.setTooltip(undoButtonTooltip);
+        redoButton.setTooltip(redoButtonTooltip);
+        aboutButton.setTooltip(aboutButtonTooltip);
+        // PUT THE BUTTON IN THE TOOLBAR
+        undoRedoToolbar.getChildren().addAll(undoButton,redoButton,aboutButton);
+        app.getGUI().getTopFlowPane().getChildren().add(undoRedoToolbar);
+    }
+    public void setUndo(boolean isNotFirst){
+        undoButton.setDisable(!isNotFirst);
+    }
+    public void setRedo(boolean isNotLast){
+        redoButton.setDisable(!isNotLast);
+    }
     @Override
     public void reloadWorkspace(AppDataComponent dataComponent) {
         app.getGUI().getAppPane().setCenter(workspace);

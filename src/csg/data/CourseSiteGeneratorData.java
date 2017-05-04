@@ -22,6 +22,8 @@ public class CourseSiteGeneratorData implements AppDataComponent{
     RecitationData recitation;
     ScheduleData schedule;
     TAData ta;
+    boolean undo;
+    boolean redo;
     
     /**
      * This constructor will setup the required data structures for
@@ -36,6 +38,14 @@ public class CourseSiteGeneratorData implements AppDataComponent{
         recitation = new RecitationData(app);
         schedule = new ScheduleData(app);
         ta = new TAData(app);
+        undo = false;
+        redo = false;
+    }
+    public void setUndo(boolean bool){
+        undo = bool;
+    }
+    public void setRedo(boolean bool){
+        redo = bool;
     }
     @Override
     public void resetData() {

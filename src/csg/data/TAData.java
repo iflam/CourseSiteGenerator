@@ -278,9 +278,6 @@ public class TAData{
         
     }
     
-    public void setUndoRedo(boolean bool){
-        undoRedo = bool;
-    }
     public void initHours(String startHourText, String endHourText) {
         int initStartHour = Integer.parseInt(startHourText);
         int initEndHour = Integer.parseInt(endHourText);

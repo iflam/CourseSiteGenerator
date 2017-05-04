@@ -16,6 +16,7 @@ import csg.data.TeachingAssistant;
  * @author Itai
  */
 public class UpdateTA_Transaction implements jTPS_Transaction{
+    public final String viewType = "taTab";
     TAData data;
     ObservableList teachingAssistants;
     TeachingAssistant t;
@@ -44,5 +45,8 @@ public class UpdateTA_Transaction implements jTPS_Transaction{
         TeachingAssistant b = new TeachingAssistant(name, email,isUndergrad);
         data.updateTA(b, OgName, OgEmail);
     }
-    
+    @Override
+    public String getViewType() {
+        return viewType;
+    }
 }

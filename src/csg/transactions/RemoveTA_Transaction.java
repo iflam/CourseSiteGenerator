@@ -17,6 +17,7 @@ import csg.file.TimeSlot;
  * @author Itai
  */
 public class RemoveTA_Transaction implements jTPS_Transaction{
+    public final String viewType = "taTab";
     TAData data;
     ArrayList<TimeSlot> OGofficeHourTimes;
     ObservableList teachingAssistants;
@@ -45,5 +46,8 @@ public class RemoveTA_Transaction implements jTPS_Transaction{
             }
         }  
     }
-    
+    @Override
+    public String getViewType() {
+        return viewType;
+    }
 }

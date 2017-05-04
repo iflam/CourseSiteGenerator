@@ -7,6 +7,7 @@ package csg.data;
 
 import csg.CourseSiteGeneratorApp;
 import csg.view.CourseSiteGeneratorWorkspace;
+import csg.view.ScheduleView;
 import java.time.LocalDate;
 import java.util.Date;
 import javafx.collections.FXCollections;
@@ -38,12 +39,22 @@ public class ScheduleData{
     public String getStartDate(){
         return startDate;
     }
+    public LocalDate getStartDateAsDate(){
+        return ScheduleView.makeDate(startDate);
+    }
+    public LocalDate getEndDateAsDate(){
+        return ScheduleView.makeDate(endDate);
+    }
     
     public String getEndDate(){
         return endDate;
     }
     public void addItem(String h, String d, String ti,String time, String to, String l, String c){
         scheduleItems.add(new ScheduleItem(h,d,ti,time,to,l,c));
+    }
+    
+    public void addItem(ScheduleItem s){
+        scheduleItems.add(s);
     }
     
     public void setStartDate(String s){

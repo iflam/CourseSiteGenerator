@@ -29,6 +29,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -149,13 +151,15 @@ public class RecitationView {
         RecitationData recitationData = ((CourseSiteGeneratorData)app.getDataComponent()).getRecitationData();
         selectedRecitation = null;
         recitationTable.setOnMouseClicked(e->{
-            selectedRecitation = (Recitation)recitationTable.getSelectionModel().getSelectedItem();
-            sectionTF.setText(selectedRecitation.getSection());
-            instructorTF.setText(selectedRecitation.getInstructor());
-            dayTimeTF.setText(selectedRecitation.getDayTime());
-            locationTF.setText(selectedRecitation.getLocation());
-            supervisingTACB1.getSelectionModel().select(selectedRecitation.getTa1());
-            supervisingTACB2.getSelectionModel().select(selectedRecitation.getTa2());
+            if(recitationTable.getSelectionModel().getSelectedItem() != null){
+                selectedRecitation = (Recitation)recitationTable.getSelectionModel().getSelectedItem();
+                sectionTF.setText(selectedRecitation.getSection());
+                instructorTF.setText(selectedRecitation.getInstructor());
+                dayTimeTF.setText(selectedRecitation.getDayTime());
+                locationTF.setText(selectedRecitation.getLocation());
+                supervisingTACB1.getSelectionModel().select(selectedRecitation.getTa1());
+                supervisingTACB2.getSelectionModel().select(selectedRecitation.getTa2());
+            }
         });
         clearButton.setOnAction(e->{
                 selectedRecitation = null;
@@ -183,6 +187,18 @@ public class RecitationView {
                     handleUpdateRec(recitationData);
                 }
                     });
+        CourseSiteGeneratorController controller = new CourseSiteGeneratorController(app);
+        KeyCombination ctrlZ = KeyCodeCombination.keyCombination("Ctrl+z");
+        KeyCombination ctrlY = KeyCodeCombination.keyCombination("Ctrl+y");
+        app.getGUI().getPrimaryScene().setOnKeyPressed(e ->{
+            if(ctrlZ.match(e)){
+                controller.handleCtrlz(); //Handle control z, now go back to TAController and finish that by 
+                //undoing transactions in there, reference jTPS files for help.
+            }
+            if(ctrlY.match(e)){
+                controller.handleCtrly();
+            }
+        });
         
     }
     

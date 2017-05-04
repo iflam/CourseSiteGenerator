@@ -167,6 +167,12 @@
 		<property name="LAST_NAME_TEXT"					value="名字"></property>
 		<property name="TEAM_TEXT"					value="チーム"></property>
 		<property name="ROLE_TEXT"					value="ロール"></property>
+		<property name="TEAM_PROMPT_TEXT"					value="チーム欠落"></property>
+		<property name="TEAM_PROMPT_MESSAGE"					value="チームがない学生があります！"></property>
+		<property name="TEAM_ENTER_TEXT"					value="この人に新しいチームを選択してください"></property>
+		<property name="NO_TEAM_TEXT"					value="チームがない"></property>
+		<property name="NO_TEAM_MESSAGE"					value="チームがない学生があります！"></property>
+		<property name="NO_TEAM_CONTENT"					value="後で選択してください。"></property>
 		
 		
 		<!-- Tab names-->

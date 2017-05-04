@@ -171,6 +171,13 @@
 		<property name="LAST_NAME_TEXT"					value="Last Name"></property>
 		<property name="TEAM_TEXT"					value="Team"></property>
 		<property name="ROLE_TEXT"					value="Role"></property>
+		<property name="TEAM_PROMPT_TEXT"					value="Missing Team"></property>
+		<property name="TEAM_PROMPT_MESSAGE"					value="Some students are missing a team!"></property>
+		<property name="TEAM_ENTER_TEXT"					value="Please select a new team for"></property>
+		<property name="NO_TEAM_TEXT"					value="No Team"></property>
+		<property name="NO_TEAM_MESSAGE"					value="Some students do not have a team!"></property>
+		<property name="NO_TEAM_CONTENT"					value="Please remember to select a team at a later point in time."></property>
+		
 		
 		
 		<!-- Tab names-->

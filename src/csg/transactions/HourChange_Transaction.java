@@ -18,6 +18,7 @@ import csg.view.TAView;
  * @author Itai
  */
 public class HourChange_Transaction implements jTPS_Transaction{
+    public final String viewType = "taTab";
     TAData data;
     HashMap<String, StringProperty> OGofficeHours;
     int startTime;
@@ -55,6 +56,10 @@ public class HourChange_Transaction implements jTPS_Transaction{
                 
             }
         }  
+    }
+    @Override
+    public String getViewType() {
+        return viewType;
     }
     
 }

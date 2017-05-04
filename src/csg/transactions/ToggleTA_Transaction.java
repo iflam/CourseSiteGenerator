@@ -15,6 +15,7 @@ import csg.data.TeachingAssistant;
  * @author Itai
  */
 public class ToggleTA_Transaction implements jTPS_Transaction{
+    public String viewType = "taTab";
     TAData data;
     String cellKey;
     String taName;
@@ -31,6 +32,11 @@ public class ToggleTA_Transaction implements jTPS_Transaction{
     @Override
     public void undoTransaction() {
         data.toggleTAOfficeHours(cellKey, taName);
+    }
+
+    @Override
+    public String getViewType() {
+        return viewType;
     }
     
 }

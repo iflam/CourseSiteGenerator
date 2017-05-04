@@ -16,6 +16,7 @@ import csg.data.TeachingAssistant;
  * @author Itai
  */
 public class AddTA_Transaction implements jTPS_Transaction{
+    public final String viewType = "taTab";
     TAData data;
     ObservableList teachingAssistants;
     TeachingAssistant t;
@@ -32,6 +33,10 @@ public class AddTA_Transaction implements jTPS_Transaction{
     @Override
     public void undoTransaction() {
         data.removeTA(t.getName());
+    }
+    @Override
+    public String getViewType() {
+        return viewType;
     }
     
 }

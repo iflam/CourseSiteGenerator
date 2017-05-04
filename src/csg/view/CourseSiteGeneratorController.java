@@ -27,6 +27,8 @@ import javafx.scene.layout.Pane;
 import jtps.jTPS_Transaction;
 import properties_manager.PropertiesManager;
 import csg.transactions.AddTA_Transaction;
+import csg.transactions.ChangeEnd_Transaction;
+import csg.transactions.ChangeStart_Transaction;
 import csg.transactions.HourChange_Transaction;
 import csg.transactions.RemoveTA_Transaction;
 import csg.transactions.ToggleTA_Transaction;
@@ -36,6 +38,7 @@ import static djf.settings.AppStartupConstants.PATH_WORK;
 import java.io.File;
 import java.time.LocalDate;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 
 /**
@@ -46,6 +49,7 @@ public class CourseSiteGeneratorController {
 
    // THE APP PROVIDES ACCESS TO OTHER COMPONENTS AS NEEDED
     CourseSiteGeneratorApp app;
+    static boolean isUndoRedo;
 
     /**
      * Constructor, note that the app must already be constructed.
@@ -54,6 +58,7 @@ public class CourseSiteGeneratorController {
     public CourseSiteGeneratorController(CourseSiteGeneratorApp initApp) {
         // KEEP THIS FOR LATER
         app = initApp;
+        isUndoRedo = false;
     }
     /**
      * This method reponds to switching a tab's display
@@ -61,21 +66,34 @@ public class CourseSiteGeneratorController {
      */
     
     /**
-     * This method responds to when the user requests to add
-     * a new TA via the UI. Note that it must first do some
+     * This method responds to when the user requests to change the 
+     * start date via the UI. Note that it must first do some
      * validation to make sure a unique name and email address
      * has been provided.
+     * @param d
      */
     
     public void handleChangeStartDate(LocalDate d){
-        ScheduleData data = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
-        data.setStartDate(d);
+        if(isUndoRedo){
+            isUndoRedo = false;
+            return;
+        }
+        ScheduleData s = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
+        ScheduleView sV = ((CourseSiteGeneratorWorkspace)app.getWorkspaceComponent()).getScheduleView();
+        jTPS_Transaction transaction = new ChangeStart_Transaction(sV,s,d);
+        app.getStack().addTransaction(transaction);
         app.getGUI().updateToolbarControls(false);
     }
     
     public void handleChangeEndDate(LocalDate d){
-        ScheduleData data = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
-        data.setEndDate(d);
+        if(isUndoRedo){
+            isUndoRedo = false;
+            return;
+        }
+        ScheduleData s = ((CourseSiteGeneratorData)app.getDataComponent()).getScheduleData();
+        ScheduleView sV = ((CourseSiteGeneratorWorkspace)app.getWorkspaceComponent()).getScheduleView();
+        jTPS_Transaction transaction = new ChangeEnd_Transaction(sV,s,d);
+        app.getStack().addTransaction(transaction);
         app.getGUI().updateToolbarControls(false);
     }
     public void handleAddTA() {
@@ -137,16 +155,88 @@ public class CourseSiteGeneratorController {
     }
 
     public void handleCtrlz(){
-        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
-        data.setUndoRedo(true);
+        CourseSiteGeneratorData data = (CourseSiteGeneratorData)app.getDataComponent();
+        data.setRedo(true);
+        TabPane x = ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).getTabPane();
+        jTPS_Transaction currentTransaction = app.getStack().getCurrentTransaction();
+        isUndoRedo = true;
+        int currentTab = 0;
+        switch(currentTransaction.getViewType()){
+            case "courseTab":
+                currentTab = 0;
+                break;
+            case "taTab":
+                currentTab = 1;
+                break;
+            case "recitationTab":
+                currentTab = 2;
+                break;
+            case "scheduleTab":
+                currentTab = 3;
+                break;
+            case "projectTab":
+                currentTab = 4;
+                break;
+        }
+        x.getSelectionModel().select(currentTab);
         app.getStack().undoTransaction();
+        if(app.getStack().isFirst()){
+            data.setUndo(false);
+            ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(false);
+        }
+        if(app.getStack().isLast()){
+            data.setRedo(false);
+            ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setRedo(false);
+        }
+        else{
+            data.setRedo(true);
+            ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setRedo(true);
+        }
         app.getGUI().updateToolbarControls(false);
     }
     
     public void handleCtrly(){
-        TAData data = ((CourseSiteGeneratorData)app.getDataComponent()).getTAData();
-        data.setUndoRedo(true);
+        CourseSiteGeneratorData data = (CourseSiteGeneratorData)app.getDataComponent();
+        isUndoRedo = true;
+        data.setRedo(true);
+        TabPane x = ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).getTabPane();
+        jTPS_Transaction currentTransaction = app.getStack().getNextTransaction();
+        if(currentTransaction == null){
+            return;
+        }
+        isUndoRedo = true;
+        int currentTab = 0;
+        switch(currentTransaction.getViewType()){
+            case "courseTab":
+                currentTab = 0;
+                break;
+            case "taTab":
+                currentTab = 1;
+                break;
+            case "recitationTab":
+                currentTab = 2;
+                break;
+            case "scheduleTab":
+                currentTab = 3;
+                break;
+            case "projectTab":
+                currentTab = 4;
+                break;
+        }
+        x.getSelectionModel().select(currentTab);
         app.getStack().doTransaction();
+        if(app.getStack().isFirst()){
+            data.setUndo(false);
+            ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(false);
+        }
+        else{
+            data.setUndo(true);
+            ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
+        }
+        if(app.getStack().isLast()){
+            data.setRedo(false);
+            ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setRedo(false);
+        }
         app.getGUI().updateToolbarControls(false);
     }
     /**
