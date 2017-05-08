@@ -1,0 +1,13 @@
+
+{
+    "course_name":"YA",
+    "course_num":"71",
+    "course_title":"ShwaftaLand",
+    "site_pages":[
+        "hws.html",
+        "main.html",
+        "projects.html",
+        "schedule.html",
+        "syllabus.html"
+    ]
+}

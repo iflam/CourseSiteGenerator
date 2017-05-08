@@ -1,0 +1,16 @@
+
+{
+    "course_name":"YAY",
+    "course_num":"715",
+    "course_title":"ShwaftaLand",
+    "year":"2017",
+    "semester":"Spring",
+    "site_pages":[
+        "hws.html",
+        "main.html",
+        "projects.html",
+        "schedule.html",
+        "syllabus.html"
+    ],
+    "style_sheet":"realcss.css"
+}

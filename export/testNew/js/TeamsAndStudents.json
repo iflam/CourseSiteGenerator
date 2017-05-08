@@ -1,0 +1,33 @@
+
+{
+    "teams":[
+        {
+            "name":"Shertpet",
+            "red":"255",
+            "green":"255",
+            "blue":"102",
+            "text_color":"#FFFFFF"
+        },
+        {
+            "name":"AppleBottom",
+            "red":"26",
+            "green":"77",
+            "blue":"26",
+            "text_color":"#FFFFFF"
+        }
+    ],
+    "students":[
+        {
+            "firstName":"Yenger",
+            "lastName":"Wenger",
+            "role":"Sump",
+            "team":"Shertpet"
+        },
+        {
+            "firstName":"Doofle",
+            "lastName":"Cambood",
+            "role":"Snoff",
+            "team":"AppleBottom"
+        }
+    ]
+}

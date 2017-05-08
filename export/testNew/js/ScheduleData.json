@@ -1,0 +1,26 @@
+
+{
+    "startingMondayMonth":"02",
+    "startingMondayDay":"01",
+    "endingFridayMonth":"05",
+    "endingFridayDay":"17",
+    "holidays":[
+    ],
+    "lectures":[
+        {
+            "month":"5",
+            "day":"17",
+            "title":"yoobla",
+            "time":"Monday 5:30pm - 8pm",
+            "topic":"sapong",
+            "link":"tranuffle",
+            "criteria":"addlesbrough"
+        }
+    ],
+    "references":[
+    ],
+    "recitations":[
+    ],
+    "hws":[
+    ]
+}

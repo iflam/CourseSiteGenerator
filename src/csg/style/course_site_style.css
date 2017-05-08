@@ -355,14 +355,22 @@
 .table-view .column-header{
     -fx-background-color:#f9dd90;
 }
-.scroll-bar:vertical{
+.scroll-bar{
     -fx-background-color:#ffed6d;
 }
 .scroll-bar .thumb{
-    -fx-background-color:#ddcb99;
+    -fx-background-color:#d3b45d;
 }
 .scroll-bar .thumb:hover, .scroll-bar .increment-button:hover, .scroll-bar .decrement-button:hover{
     -fx-background-color:#b7a36a;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.scroll-pane {
+   -fx-background-color: #fff9d1;
+   -fx-border-radius: 10 10 10 10;
+   -fx-background-radius: 10 10 10 10;
 }
 
 .text_prompt{

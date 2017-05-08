@@ -65,6 +65,9 @@ public enum CourseSiteGeneratorProp {
     RIGHT_IMG_TEXT,
     STYLESHEET_TEXT,
     STYLESHEET_MESSAGE,
+    BAD_EXPORT_TEXT,
+    BAD_EXPORT_MESSAGE,
+    BAD_EXPORT_CONTENT,
     // Recitation View
     RECITATION_TITLE_TEXT,
     SECTION_TEXT,

@@ -6,6 +6,7 @@
 package csg.data;
 
 import csg.CourseSiteGeneratorApp;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -26,6 +27,7 @@ public class CourseData {
     String lFtDir;
     String rFtDir;
     String styleSheet;
+    private ObservableList<SitePage> sitePages;
     
     public CourseData(CourseSiteGeneratorApp initApp){
         app = initApp;
@@ -46,6 +48,14 @@ public class CourseData {
         this.lFtDir = lFtDir;
         this.rFtDir = rFtDir;
         this.styleSheet = styleSheet;
+    }
+
+    public void setSitePages(ObservableList<SitePage> sitePages) {
+        this.sitePages = sitePages;
+    }
+
+    public ObservableList<SitePage> getSitePages() {
+        return sitePages;
     }
 
     public String getStyleSheet(){

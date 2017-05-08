@@ -26,6 +26,14 @@ public class SitePage {
         script = new SimpleStringProperty(s);
         isUsed = new SimpleBooleanProperty(i);
     }
+    
+    public boolean isUsed(){
+        return isUsed.getValue();
+    }
+    
+    public String getHtml(){
+        return file.getValue();
+    }
 
     public BooleanProperty useProperty(){
         return isUsed;
@@ -41,12 +49,5 @@ public class SitePage {
     
     public StringProperty scriptProperty(){
         return script;
-    }
-    
-    public void updateUsed(){
-        if(isUsed.getValue())
-            isUsed.setValue(Boolean.FALSE);
-        else
-            isUsed.setValue(Boolean.TRUE);      
     }
 }

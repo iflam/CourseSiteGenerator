@@ -196,6 +196,10 @@ public class ProjectView{
         addUpdateButton.setOnAction(e->{
             if(isAdd1){
                 handleAddTeam(data);
+                nameTF.setText("");
+                colorPicker.setValue(Color.WHITE);
+                textColorPicker.setValue(Color.WHITE);
+                linkTF.setText("");
                 app.getGUI().updateToolbarControls(false);
                 ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
             }
@@ -208,6 +212,10 @@ public class ProjectView{
         addUpdateButton2.setOnAction(e->{
             if(isAdd2){
                 handleAddStudent(data);
+                firstNameTF.setText("");
+                lastNameTF.setText("");
+                teamCB.getSelectionModel().selectFirst();
+                roleTF.setText("");
                 app.getGUI().updateToolbarControls(false);
                 ((CourseSiteGeneratorWorkspace)(app.getWorkspaceComponent())).setUndo(true);
             }

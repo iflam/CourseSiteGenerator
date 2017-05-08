@@ -1,8 +1,5 @@
 
 {
-    "course_name":"CSE",
-    "course_num":"219",
-    "course_title":"Titlething",
     "startingMondayMonth":"04",
     "startingMondayDay":"18",
     "endingFridayMonth":"08",
@@ -35,7 +32,7 @@
         {
             "month":"5",
             "day":"2",
-            "titleFace":"my",
+            "title":"my",
             "time":"face",
             "topic":"is",
             "link":"very",

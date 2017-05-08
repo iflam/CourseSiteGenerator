@@ -1,0 +1,126 @@
+
+{
+    "course_name":"BERST",
+    "course_num":"224-5",
+    "course_title":"Slerpy",
+    "startHour":"0",
+    "endHour":"24",
+    "undergrad_tas":[
+        {
+            "name":"Orgle Borgle",
+            "email":"o.b@s.u"
+        },
+        {
+            "name":"hitotsu man",
+            "email":"flampert@sfas.eri"
+        }
+    ],
+    "grad_tas":[
+        {
+            "name":"Sunnifer Gonk",
+            "email":"Hoopla@sasd.sdao"
+        }
+    ],
+    "officeHours":[
+        {
+            "day":"TUESDAY",
+            "time":"1_00am",
+            "name":"Orgle Borgle"
+        },
+        {
+            "day":"FRIDAY",
+            "time":"1_30am",
+            "name":"Orgle Borgle"
+        },
+        {
+            "day":"MONDAY",
+            "time":"2_30am",
+            "name":"hitotsu man"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"2_30am",
+            "name":"hitotsu man"
+        },
+        {
+            "day":"TUESDAY",
+            "time":"3_30am",
+            "name":"hitotsu man"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"4_00am",
+            "name":"Orgle Borgle"
+        },
+        {
+            "day":"MONDAY",
+            "time":"4_30am",
+            "name":"Sunnifer Gonk"
+        },
+        {
+            "day":"THURSDAY",
+            "time":"4_30am",
+            "name":"Orgle Borgle"
+        },
+        {
+            "day":"THURSDAY",
+            "time":"5_00am",
+            "name":"Orgle Borgle"
+        },
+        {
+            "day":"TUESDAY",
+            "time":"6_00am",
+            "name":"Sunnifer Gonk"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"6_00am",
+            "name":"hitotsu man"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"6_30am",
+            "name":"Sunnifer Gonk"
+        },
+        {
+            "day":"FRIDAY",
+            "time":"6_30am",
+            "name":"Orgle Borgle"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"7_00am",
+            "name":"Sunnifer Gonk"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"7_30am",
+            "name":"Sunnifer Gonk"
+        },
+        {
+            "day":"MONDAY",
+            "time":"8_00am",
+            "name":"Sunnifer Gonk"
+        },
+        {
+            "day":"TUESDAY",
+            "time":"8_00am",
+            "name":"hitotsu man"
+        },
+        {
+            "day":"THURSDAY",
+            "time":"8_00am",
+            "name":"Orgle Borgle"
+        },
+        {
+            "day":"WEDNESDAY",
+            "time":"8_30am",
+            "name":"Sunnifer Gonk"
+        },
+        {
+            "day":"TUESDAY",
+            "time":"10_30am",
+            "name":"Sunnifer Gonk"
+        }
+    ]
+}

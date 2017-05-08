@@ -15,6 +15,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="./js/OfficeHoursGridBuilder.js"></script>
         <script src="./js/RecitationsBuilder.js"></script>
+        <script src="./js/CourseStuffPutter.js"></script>
 
         <!-- ONCE THE PAGE FULLY LOADS INITIALIZE THE SLIDESHOW -->
         <script>
@@ -22,6 +23,7 @@
             {
                 buildOfficeHoursGrid();
                 buildRecitations();
+                initStuff("syllabus");
             }
             window.on
         </script>
@@ -63,10 +65,7 @@
 	<div id="content">
 
 	    <div id="navbar">
-
-		<a href="http://www.stonybrook.edu"><img alt="Stony Brook University" class="sbu_navbar" src="./images/SBUDarkRedShieldLogo.png"></a>
                 <!-- NAVIGATION LINKS GO HERE -->
-		<a class="nav" href="main.html" id="home_link">Home</a><a class="open_nav" href="syllabus.html" id="syllabus_link">Syllabus</a><a class="nav" href="schedule.html" id="schedule_link">Schedule</a><a class="nav" href="hws.html" id="hws_link">HWs</a><a class="nav" href="projects.html" id="hws_link">Projects</a>
 	    </div>
 
 
@@ -76,96 +75,12 @@
 	    <div id="desc">
 
 		<div id="custom_syllabus_content">
-
-	    <h3>COURSE DESCRIPTION</h3>
-
-	    <p>Development of the basic concepts and techniques from Computer Science I and II into practical programming skills that include a systematic approach to program design, coding, testing, and debugging. Application of these skills to the construction of robust programs of thousands of lines of source code. Use of programming environments and tools to aid in the software development process.</p>
-
-	    <p><br /></p>
-
-	    <h3>COURSE TOPICS</h3>
-
-	    <ul>
-		<li>Programming style and its impact on readability, reliability, maintainability, and portability.</li>
-		<li>Decomposing problems into modular designs with simple, narrow interfaces.</li>
-		<li>Determining the proper objects in an object-oriented design.</li>
-		<li>Selecting appropriate algorithms and data structures.</li>
-		<li>Reusing code, including external libraries designed and built by others.</li>
-		<li>Learning systematic testing and debugging techniques.</li>
-		<li>Maintaining a repository of code during incremental development of a software project.</li>
-		<li>Learning how to use threads to synchronize several tasks.</li>
-		<li>Improving program performance.</li>
-		<li>Making effective use of a programming environment, including:
-		    <ul>
-			<li>Syntax-directed editor</li>
-			<li>Build tools</li>
-			<li>Debugging tools</li>
-			<li>Testing tools</li>
-			<li>Source code management tools</li>
-			<li>Profiling tools</li>
-		    </ul>
-		</li>
-	    </ul>
-
-	    <p><br /></p>
-
-	    <h3>PREREQUISITES</h3>
-
-	    <p>You must have taken CSE 214 and received a grade of "C" or better in order to take this course.
-		In more detail, you are expected to have the following knowledge and skills at the beginning of the course:</p>
-	    <ul>
-		<li>Ability to write programs of a few hundred lines of code in the Java programming language.</li>
-		<li>Understanding of fundamental data structures, including lists, binary trees, hash tables, and graphs, and the ability to employ these data structures in the form provided by the standard Java API.</li>
-		<li>Ability to construct simple command-based user interfaces, and to use files for the input and output of data.</li>
-		<li>Mastery of basic mathematical and geometric reasoning using pre-calculus concepts.</li>
-	    </ul>
-
-
-	    <p><br /></p>
-
-	    <h3>COURSE GOALS</h3>
-
-	    <p>At the end of the course you should have the following knowledge and skills:</p>
-	    <ul>
-		<li>Ability to systematically design, code, debug, and test programs of about two thousand lines of code.</li>
-		<li>Sensitivity to the issues of programming style and modularity and their relationship to the construction and evolution of robust software.</li>
-		<li>Knowledge of basic ideas and techniques of object-oriented programming.</li>
-		<li>Familiarity with the capabilities and use of programming tools such as syntax-directed editors, debuggers, execution profilers, documentation generators, and revison-control systems.</li>
-	    </ul>
-
-	    <br /><br />
-
 	    <h3>INSTRUCTOR</h3>
-
-	    <table>
-		<tr>
-		    <td style="font-size:14pt"><a href="http://www.cs.stonybrook.edu/~richard">
-			    Richard McKenna</a><br />
-			<strong>richard@cs.stonybrook.edu</strong><br />
-			216 New Computer Science Building<br />
-			<strong>Office Hours:</strong><br />
-			<table>
-			    <tr>
-				<td><strong>--Tuesdays</td><td style="padding-left:20px">4:00pm - 5:30pm</td>
-			    </tr>
-			    <tr>
-				<td><strong>--Thursdays</td><td style="padding-left:20px">4:00pm - 5:30pm</td>
-			    </tr>
-			</table>
-		    </td>
-		    <td>
-			<img src="./images/RichardMcKenna.jpg" alt="Richard McKenna Profile" style="margin-left:30px;" />
-		    </td>
-	    </table>
-
-	    <br />
-	    <br />
 
 	    <h3 id="tas">TEACHING ASSISTANTS (Grading Appointments in the <em>New</em> Computer Science Building, Room 106)</h3>
 
             <p>Go to the <a href="https://docs.google.com/spreadsheets/d/14hYgrFgK95_KmFxrhEUe6lXIn6tpCXBVXkF6QotZ3ZI">Grading Appointments Sheet</a> to reserve a time for each assignment. Note TA-student pairings
                 are done according to student last name so make sure you put your reservation on the correct sheet.</p>
-            <p>TBA</p>
 	    <br />
 	    <br />
 
@@ -174,6 +89,13 @@
             <br />
             <table>
                 <tbody id="undergrad_tas">
+                <h3>UNDERGRAD</h3>
+                    
+                </tbody>
+            </table>
+            <table>
+                <tbody id="grad_tas">
+                <h3>GRAD</h3>
                     
                 </tbody>
             </table>

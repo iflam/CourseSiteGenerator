@@ -15,6 +15,7 @@ import csg.transactions.RemoveSchedItem_Transaction;
 import csg.transactions.ToggleTA_Transaction;
 import csg.transactions.UpdateSchedItem_Transaction;
 import djf.components.AppDataComponent;
+import djf.ui.AppMessageDialogSingleton;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -179,11 +180,27 @@ public class ScheduleView {
         schedulevBox.getChildren().addAll(sLabel,topGrid,lowvBox);
         // NOW LET'S SETUP THE EVENT HANDLING
         controller = new CourseSiteGeneratorController(app);
+        LocalDate tempStartDate = startDate.getValue();
+        LocalDate tempEndDate = endDate.getValue();
         startDate.setOnAction(e->{
-            controller.handleChangeStartDate(startDate.getValue());
+            if(startDate.getValue().compareTo(endDate.getValue()) > 0){
+                AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
+                dialog.show(props.getProperty("WRONG_HOURS_FORMAT_TITLE"), props.getProperty("WRONG_HOURS_FORMAT_MESSAGE"));
+                startDate.setValue(tempStartDate);
+            }
+            else{
+                controller.handleChangeStartDate(startDate.getValue());
+            }
         });
         endDate.setOnAction(e->{
-            controller.handleChangeEndDate(endDate.getValue());
+            if(endDate.getValue().compareTo(startDate.getValue()) < 0){
+                AppMessageDialogSingleton dialog = AppMessageDialogSingleton.getSingleton();
+                dialog.show(props.getProperty("WRONG_HOURS_FORMAT_TITLE"), props.getProperty("WRONG_HOURS_FORMAT_MESSAGE"));
+                endDate.setValue(tempEndDate);
+            }
+            else{
+                controller.handleChangeEndDate(endDate.getValue());
+            }
         });
         clearButton.setOnAction(e->{
             typeCB.getSelectionModel().selectFirst();
@@ -214,20 +231,27 @@ public class ScheduleView {
             if(isAdd){
                 handleAddScheduleItem(thisData, new ScheduleItem(
                     typeCB.getValue().toString(),
-                    ((dateDP.getValue().getMonthValue()<10)?"0":"") +dateDP.getValue().getMonthValue()+"_"
-                    +((dateDP.getValue().getDayOfMonth()<10)?"0":"")+dateDP.getValue().getDayOfMonth()+"_"+dateDP.getValue().getYear(),
+                    dateDP.getValue().getMonthValue()+"_"
+                    +dateDP.getValue().getDayOfMonth()+"_"+dateDP.getValue().getYear(),
                     titleTF.getText(),
                     timeTF.getText(),
                     topicTF.getText(),
                     linkTF.getText(),
                     criteriaTF.getText())
                 );
+                typeCB.getSelectionModel().selectFirst();
+                dateDP.setValue(DEFAULT_START);
+                titleTF.setText("");
+                timeTF.setText("");
+                topicTF.setText("");
+                linkTF.setText("");
+                criteriaTF.setText("");
             }
             else{
                 handleUpdateScheduleItem(thisData,new ScheduleItem(
                     typeCB.getValue().toString(),
-                    ((dateDP.getValue().getMonthValue()<10)?"0":"") +dateDP.getValue().getMonthValue()+"_"
-                    +((dateDP.getValue().getDayOfMonth()<10)?"0":"")+dateDP.getValue().getDayOfMonth()+"_"+dateDP.getValue().getYear(),
+                    dateDP.getValue().getMonthValue()+"_"
+                    +dateDP.getValue().getDayOfMonth()+"_"+dateDP.getValue().getYear(),
                     titleTF.getText(),
                     timeTF.getText(),
                     topicTF.getText(),
@@ -282,7 +306,21 @@ public class ScheduleView {
         return DEFAULT_END.getMonthValue()+"_"+DEFAULT_END.getDayOfMonth()+"_"+DEFAULT_END.getYear();
     }
     public static LocalDate makeDate(String dateString){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM_dd_yyyy");
+        DateTimeFormatter formatter;
+        if(dateString.charAt(1) == '_'){
+            if(dateString.charAt(3) == '_')
+                formatter = DateTimeFormatter.ofPattern("M_d_yyyy");
+            else{
+                formatter = DateTimeFormatter.ofPattern("M_dd_yyyy");
+            }
+        }
+        else{
+            if(dateString.charAt(4) == '_')
+            formatter = DateTimeFormatter.ofPattern("MM_d_yyyy");
+            else{
+                formatter = DateTimeFormatter.ofPattern("MM_dd_yyyy");
+            }
+        }
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
     }

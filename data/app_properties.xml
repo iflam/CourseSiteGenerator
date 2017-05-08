@@ -112,7 +112,7 @@
 		<property name="TITLE_DEFAULT_TEXT"	    value="Computer Science III"></property>
 		<property name="INSTRUCTOR_NAME_DEFAULT_TEXT"	    value="Richard McKenna"></property>
 		<property name="INSTRUCTOR_HOME_DEFAULT_TEXT"	    value="htttp://www.cs.stonybrook.edu/~richard"></property>
-		<property name="EXPORT_DIRECTORY_DEFAULT_TEXT"	    value="None"></property>
+		<property name="EXPORT_DIRECTORY_DEFAULT_TEXT"	    value="./export/public_html"></property>
 		<property name="SITE_TEMPLATE_TEXT"               value="Site Template	"></property>
 		<property name="SELECTED_TEMPLATE_TEXT"               value="The selected template should contain the full site template, including the HTML files."></property>
 		<property name="TEMPLATE_DEFAULT_TEXT"               value=".\templates\CSE219"></property>
@@ -128,6 +128,10 @@
 		<property name="RIGHT_IMG_TEXT"               value="Right Footer Image:"></property>
 		<property name="STYLESHEET_TEXT"               value="Stylesheet:"></property>
 		<property name="STYLESHEET_MESSAGE"               value="NOTE: New stylesheets may be placed in work/css to be selectable"></property>
+		<property name="BAD_EXPORT_TEXT"               value="Export Directory Error"></property>
+		<property name="BAD_EXPORT_MESSAGE"               value="The selected export directory is missing files."></property>
+		<property name="BAD_EXPORT_CONTENT"               value="Please make sure the directory you select contains main.html, syllabus.html, projects.html, schedule.html, and hws.html."></property>
+		
 		<!-- Recitation view text -->
 		<property name="RECITATION_TITLE_TEXT"               value="Recitations"></property>
 		<property name="SECTION_TEXT"               value="Section"></property>

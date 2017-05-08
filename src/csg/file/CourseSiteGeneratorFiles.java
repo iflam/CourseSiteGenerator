@@ -29,6 +29,7 @@ import csg.data.Recitation;
 import csg.data.RecitationData;
 import csg.data.ScheduleData;
 import csg.data.ScheduleItem;
+import csg.data.SitePage;
 import csg.data.Student;
 import csg.data.TAData;
 import csg.data.TeachingAssistant;
@@ -36,17 +37,26 @@ import csg.data.Team;
 import csg.view.CourseSiteGeneratorWorkspace;
 import csg.view.CourseView;
 import csg.view.ScheduleView;
+import static djf.settings.AppStartupConstants.FILE_PROTOCOL;
+import static djf.settings.AppStartupConstants.PATH_COMPILE;
 import static djf.settings.AppStartupConstants.PATH_COURSESTUFF;
+import static djf.settings.AppStartupConstants.PATH_CSS;
+import static djf.settings.AppStartupConstants.PATH_EXIMAGES;
 import static djf.settings.AppStartupConstants.PATH_EXPORT;
 import static djf.settings.AppStartupConstants.PATH_HERE;
+import static djf.settings.AppStartupConstants.PATH_JS;
 import static djf.settings.AppStartupConstants.PATH_JSON;
 import static djf.settings.AppStartupConstants.PATH_PROJECTSDATA;
 import static djf.settings.AppStartupConstants.PATH_RECITATION;
 import static djf.settings.AppStartupConstants.PATH_SCHEDULEDATA;
 import static djf.settings.AppStartupConstants.PATH_TEAMSANDSTUDENTS;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.math.BigDecimal;
 import javafx.collections.FXCollections;
+import javafx.scene.image.ImageView;
+import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -139,7 +149,7 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
     static final String JSON_COURSENAME = "course_name";
     static final String JSON_COURSENUM = "course_num";
     static final String JSON_COURSETITLE = "course_title";
-    
+    static final String JSON_SITE_PAGES = "site_pages";
     
     
     public CourseSiteGeneratorFiles(CourseSiteGeneratorApp initApp) {
@@ -286,9 +296,11 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
             CourseView courseView = ((CourseSiteGeneratorWorkspace)app.getWorkspaceComponent()).getCourseView();
             courseView.setCourseItems(subject, number, semester, 
                 year, title, in, ih, eDir, tDir, bPath, lfPath, rfPath, styleSheet);
+            courseView.handleAddHTMLS(tDir);
+            courseData.addData(subject, number, semester, year, title, in, ih, eDir, tDir, bPath, lfPath, rfPath, styleSheet);
         }
         catch(NullPointerException e){}
-        courseData.addData(subject, number, semester, year, title, in, ih, eDir, tDir, eDir, tDir, tDir, styleSheet);
+            courseData.addData(subject, number, semester, year, title, in, ih, eDir, tDir, bPath, lfPath, rfPath, styleSheet);
     }
     
     public void loadDataTest(AppDataComponent data, String filePath) throws IOException {
@@ -629,7 +641,7 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
     }
 
     @Override
-    public void exportData(AppDataComponent data, String filePath) throws IOException {
+    public void exportData(AppDataComponent data) throws IOException {
                 //FIRST LET'S GET ALL THE JSON FILES LOADED
                 //OfficeHoursGridData.json
                 CourseData courseData = ((CourseSiteGeneratorData)data).getCourseData();
@@ -891,16 +903,21 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                 pw.write(prettyPrinted);
                 pw.close();        
                 
-                File source = new File(PATH_EXPORT);
-                File currentDir = new File(System.getProperty("user.dir"));
-                File dest = new File(PATH_HERE);
-                FileUtils.copyDirectory(source,dest);
-                
                 //COURSE PUT STUFF
+                CourseView courseView = ((CourseSiteGeneratorWorkspace)app.getWorkspaceComponent()).getCourseView();
+                JsonArrayBuilder sitePagesArray = Json.createArrayBuilder();
+                for(SitePage s:courseView.getSitePages()){
+                    if(s.isUsed())
+                        sitePagesArray.add(s.getHtml());
+                }
                 JsonObject courseStuff = Json.createObjectBuilder()
                         .add(JSON_COURSENAME, courseData.getSubject())
                         .add(JSON_COURSENUM, courseData.getNumber())
                         .add(JSON_COURSETITLE, courseData.getTitle())
+                        .add(JSON_COURSE_YEAR, courseData.getYear())
+                        .add(JSON_COURSE_SEMESTER, courseData.getSemester())
+                        .add(JSON_SITE_PAGES, sitePagesArray)
+                        .add(JSON_COURSE_SS, courseData.getStyleSheet())
                         .build();
                 //save to CourseStuff.json
                 properties = new HashMap<>(1);
@@ -908,7 +925,7 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                 writerFactory = Json.createWriterFactory(properties);
                 sw = new StringWriter();
                 jsonWriter = writerFactory.createWriter(sw);
-                jsonWriter.writeObject(scheduleDataObject);
+                jsonWriter.writeObject(courseStuff);
                 jsonWriter.close();
 
                 // INIT THE WRITER
@@ -919,6 +936,40 @@ public class CourseSiteGeneratorFiles implements AppFileComponent {
                 pw = new PrintWriter(PATH_COURSESTUFF);
                 pw.write(prettyPrinted);
                 pw.close();  
-                
+                //NOW, WE WILL GET ALL THE HTMLS AND JS AND PUT THEM TOGETHER
+                //GET PATH TO HTMLS
+                File putHere = new File(PATH_COMPILE);
+                FileUtils.cleanDirectory(putHere);
+                File htmls = new File(courseData.getTempDir());
+                File javaScripts = new File(PATH_JS);
+                String s = courseData.getBannerDir();
+                s = s.substring(7);
+                File imageBanner = new File(s);
+                File imageLFoot = new File(courseData.getlFtDir().substring(7));
+                File imageRFoot = new File(courseData.getrFtDir().substring(7));
+                File imagePath = new File(PATH_EXIMAGES);
+                File imagePathMove = new File(PATH_EXIMAGES.replaceFirst("/images",""));
+                File cssMovePath = new File("./work/css/" + courseData.getStyleSheet());
+                File cssPath = new File(PATH_CSS);
+                FileUtils.copyDirectory(cssPath, putHere);
+                FileUtils.copyFileToDirectory(cssMovePath , new File(putHere+"/css"));
+                File rename = new File(putHere+"/css/"+ courseData.getStyleSheet());
+                FileUtils.copyFile(rename, new File(putHere+"/css/selectedfile.css"));
+                rename.delete();
+                FileUtils.copyFile(imageBanner, new File(imagePath+"/header.jpg"));
+                FileUtils.copyFile(imageLFoot, new File(imagePath+"/leftFooter.jpg"));
+                FileUtils.copyFile(imageRFoot, new File(imagePath+"/rightFooter.jpg"));
+                for(SitePage exportHTML: courseView.getSitePages()){
+                    if(exportHTML.isUsed()){
+                        s = htmls+"\\"+exportHTML.getHtml() ;
+                        FileUtils.copyFileToDirectory(new File(s),putHere);
+                    }
+                }
+                FileUtils.copyDirectory(imagePathMove, putHere);
+                FileUtils.copyDirectory(javaScripts, putHere);
+                FileUtils.copyDirectory(putHere,new File(courseData.getExDir()));
+//                File source = new File(PATH_EXPORT);
+//                File dest = new File(filePath);
+//                FileUtils.copyDirectory(source,dest);
     }
 }

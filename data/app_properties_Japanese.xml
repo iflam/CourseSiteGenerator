@@ -113,7 +113,7 @@
 		<property name="TITLE_DEFAULT_TEXT"	    value="コンピューターサイエンス ３"></property>
 		<property name="INSTRUCTOR_NAME_DEFAULT_TEXT"	    value="Richard McKenna"></property>
 		<property name="INSTRUCTOR_HOME_DEFAULT_TEXT"	    value="htttp://www.cs.stonybrook.edu/~richard"></property>
-		<property name="EXPORT_DIRECTORY_DEFAULT_TEXT"	    value="なし"></property>
+		<property name="EXPORT_DIRECTORY_DEFAULT_TEXT"	    value="./export/public_html"></property>
 		<property name="SITE_TEMPLATE_TEXT"               value="サイトテンプレート"></property>
 		<property name="SELECTED_TEMPLATE_TEXT"               value="選んだテンプレートが完全なサイトテンプレートを含む。（HTMLファイルも含んでください）"></property>
 		<property name="TEMPLATE_DEFAULT_TEXT"               value=".\templates\CSE219"></property>
@@ -129,6 +129,9 @@
 		<property name="RIGHT_IMG_TEXT"               value="右フッターバナー:"></property>
 		<property name="STYLESHEET_TEXT"               value="スタイルシート:"></property>
 		<property name="STYLESHEET_MESSAGE"               value="選べるスタイルシートはwork/cssに入らないといけません。"></property>
+		<property name="BAD_EXPORT_TEXT"               value="輸出エラー"></property>
+		<property name="BAD_EXPORT_MESSAGE"               value="いくつかのファイルがありません。"></property>
+		<property name="BAD_EXPORT_CONTENT"               value="main.html, syllabus.html, projects.html, schedule.html, and hws.htmlが名鑑にあることを確認してください。"></property>
 		<!-- Recitation view text -->
 		<property name="RECITATION_TITLE_TEXT"               value="復習クラス"></property>
 		<property name="SECTION_TEXT"               value="セクション"></property>

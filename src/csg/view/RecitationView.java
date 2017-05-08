@@ -182,6 +182,12 @@ public class RecitationView {
         addUpdateButton.setOnAction(e->{
                 if(selectedRecitation == null){
                     handleAddRec(recitationData);
+                    sectionTF.setText("");
+                    instructorTF.setText("");
+                    dayTimeTF.setText("");
+                    locationTF.setText("");
+                    supervisingTACB1.getSelectionModel().selectFirst();
+                    supervisingTACB2.getSelectionModel().selectFirst();
                 }
                 else{
                     handleUpdateRec(recitationData);

@@ -1,36 +1,136 @@
 
 {
     "course_data":{
-        "subject":"CSE",
-        "number":"219",
-        "semester":"Winter",
+        "subject":"YAY",
+        "number":"715",
+        "semester":"Spring",
         "year":"2017",
-        "title":"Titlething",
+        "title":"ShwaftaLand",
         "instructor_name":"Itai Flam",
-        "instructor_home":"Xin Yang",
-        "export_dir":"./work",
-        "template_dir":"None",
-        "banner_image":"file:./images/Exit.png",
+        "instructor_home":"www.youtube.com",
+        "export_dir":"C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\export\\test_html",
+        "template_dir":"C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\export\\public_html\\htmls",
+        "banner_image":"C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\images\\derpablerp.png",
         "left_footer_image":"file:./images/Save.png",
         "right_footer_image":"file:./images/Load.png",
-        "style_sheet":"yourFace.css"
+        "style_sheet":"realcss.css"
     },
     "ta_data":{
         "startHour":"2",
         "endHour":"18",
         "undergrad_tas":[
             {
-                "name":"Itai Flam",
-                "email":"i.f@s.u"
+                "name":"Hanabarastaman",
+                "email":"Shwafta@sbu.com"
             },
             {
-                "name":"Xin Yang",
-                "email":"x.y@s.u"
+                "name":"Itai Flam",
+                "email":"i.f@s.u"
             }
         ],
         "grad_tas":[
         ],
         "officeHours":[
+            {
+                "day":"MONDAY",
+                "time":"3_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"3_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"FRIDAY",
+                "time":"4_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"MONDAY",
+                "time":"5_00am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"5_00am",
+                "name":"Itai Flam"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"5_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"5_30am",
+                "name":"Itai Flam"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"6_30am",
+                "name":"Itai Flam"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"7_00am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"MONDAY",
+                "time":"7_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"8_00am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"8_00am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"8_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"MONDAY",
+                "time":"9_00am",
+                "name":"Itai Flam"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"9_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"10_30am",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"11_30am",
+                "name":"Itai Flam"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"12_30pm",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"12_30pm",
+                "name":"Hanabarastaman"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"1_00pm",
+                "name":"Hanabarastaman"
+            }
         ]
     },
     "recitation_data":{
@@ -40,16 +140,16 @@
                 "instructor":"B",
                 "day_time":"C",
                 "location":"D",
-                "ta_1":"E",
-                "ta_2":"F"
+                "ta_1":"Itai Flam",
+                "ta_2":"Shwafta McShwaft"
             },
             {
                 "section":"1",
                 "instructor":"2",
                 "day_time":"3",
                 "location":"4",
-                "ta_1":"5",
-                "ta_2":"6"
+                "ta_1":"Itai Flam",
+                "ta_2":"Shwafta McShwaft"
             }
         ]
     },
@@ -59,7 +159,7 @@
         "schedule_items":[
             {
                 "type":"Holiday",
-                "date":"06_22",
+                "date":"6_22_2017",
                 "title":"C",
                 "time":"D",
                 "topic":"E",
@@ -68,7 +168,7 @@
             },
             {
                 "type":"Lecture",
-                "date":"07_27",
+                "date":"7_27_2017",
                 "title":"3",
                 "time":"4",
                 "topic":"5",
@@ -77,7 +177,7 @@
             },
             {
                 "type":"Recitation",
-                "date":"05_02",
+                "date":"5_2_2017",
                 "title":"my",
                 "time":"face",
                 "topic":"is",
@@ -109,15 +209,21 @@
                 "team":"Shwaftas"
             },
             {
-                "firstName":"Xin",
-                "lastName":"Yang",
+                "firstName":"Your",
+                "lastName":"Face",
+                "role":"Head",
+                "team":"Beluga Whales"
+            },
+            {
+                "firstName":"Inderdeep",
+                "lastName":"Jaswal",
                 "role":"Programmer",
                 "team":"Shwaftas"
             },
             {
-                "firstName":"Your",
-                "lastName":"Face",
-                "role":"Head",
+                "firstName":"Floopy",
+                "lastName":"Sterb",
+                "role":"Hoola Hooper",
                 "team":"Beluga Whales"
             }
         ]

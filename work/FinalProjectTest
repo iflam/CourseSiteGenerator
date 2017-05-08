@@ -1,0 +1,197 @@
+
+{
+    "course_data":{
+        "subject":"BERST",
+        "number":"224-5",
+        "semester":"Spring",
+        "year":"2017",
+        "title":"Slerpy",
+        "instructor_name":"Yogbert Slumpa",
+        "instructor_home":"www.foople.com",
+        "export_dir":"C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\export\\testNew",
+        "template_dir":"C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\export\\public_html\\htmls",
+        "banner_image":"file:C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\images\\Exit.png",
+        "left_footer_image":"file:C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\images\\Export.png",
+        "right_footer_image":"file:C:\\Users\\Itai\\Documents\\School\\CSE219\\Homework\\Project\\CourseSiteGenerator\\images\\Save.png",
+        "style_sheet":"realcss.css"
+    },
+    "ta_data":{
+        "startHour":"0",
+        "endHour":"24",
+        "undergrad_tas":[
+            {
+                "name":"Orgle Borgle",
+                "email":"o.b@s.u"
+            },
+            {
+                "name":"hitotsu man",
+                "email":"flampert@sfas.eri"
+            }
+        ],
+        "grad_tas":[
+            {
+                "name":"Sunnifer Gonk",
+                "email":"Hoopla@sasd.sdao"
+            }
+        ],
+        "officeHours":[
+            {
+                "day":"TUESDAY",
+                "time":"1_00am",
+                "name":"Orgle Borgle"
+            },
+            {
+                "day":"FRIDAY",
+                "time":"1_30am",
+                "name":"Orgle Borgle"
+            },
+            {
+                "day":"MONDAY",
+                "time":"2_30am",
+                "name":"hitotsu man"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"2_30am",
+                "name":"hitotsu man"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"3_30am",
+                "name":"hitotsu man"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"4_00am",
+                "name":"Orgle Borgle"
+            },
+            {
+                "day":"MONDAY",
+                "time":"4_30am",
+                "name":"Sunnifer Gonk"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"4_30am",
+                "name":"Orgle Borgle"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"5_00am",
+                "name":"Orgle Borgle"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"6_00am",
+                "name":"Sunnifer Gonk"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"6_00am",
+                "name":"hitotsu man"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"6_30am",
+                "name":"Sunnifer Gonk"
+            },
+            {
+                "day":"FRIDAY",
+                "time":"6_30am",
+                "name":"Orgle Borgle"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"7_00am",
+                "name":"Sunnifer Gonk"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"7_30am",
+                "name":"Sunnifer Gonk"
+            },
+            {
+                "day":"MONDAY",
+                "time":"8_00am",
+                "name":"Sunnifer Gonk"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"8_00am",
+                "name":"hitotsu man"
+            },
+            {
+                "day":"THURSDAY",
+                "time":"8_00am",
+                "name":"Orgle Borgle"
+            },
+            {
+                "day":"WEDNESDAY",
+                "time":"8_30am",
+                "name":"Sunnifer Gonk"
+            },
+            {
+                "day":"TUESDAY",
+                "time":"10_30am",
+                "name":"Sunnifer Gonk"
+            }
+        ]
+    },
+    "recitation_data":{
+        "recitations":[
+            {
+                "section":"Sloop",
+                "instructor":"Floop",
+                "day_time":"Oogidy Boogidy",
+                "location":"Flibbity Floob",
+                "ta_1":"Orgle Borgle",
+                "ta_2":"hitotsu man"
+            }
+        ]
+    },
+    "schedule_data":{
+        "startDate":"02_01_2017",
+        "endDate":"05_17_2017",
+        "schedule_items":[
+            {
+                "type":"Lecture",
+                "date":"5_17_2017",
+                "title":"yoobla",
+                "time":"Monday 5:30pm - 8pm",
+                "topic":"sapong",
+                "link":"tranuffle",
+                "criteria":"addlesbrough"
+            }
+        ]
+    },
+    "project_data":{
+        "teams":[
+            {
+                "name":"Shertpet",
+                "color":"#FFFF66",
+                "text_color":"#FFFFFF",
+                "link":"Hooflws"
+            },
+            {
+                "name":"AppleBottom",
+                "color":"#1A4D1A",
+                "text_color":"#FFFFFF",
+                "link":"Yottidy"
+            }
+        ],
+        "students":[
+            {
+                "firstName":"Yenger",
+                "lastName":"Wenger",
+                "role":"Sump",
+                "team":"Shertpet"
+            },
+            {
+                "firstName":"Doofle",
+                "lastName":"Cambood",
+                "role":"Snoff",
+                "team":"AppleBottom"
+            }
+        ]
+    }
+}

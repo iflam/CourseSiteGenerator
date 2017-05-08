@@ -15,12 +15,14 @@
         <!-- LINK TO OUR JavaScript FILE AND JQuery -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="./js/ScheduleBuilder.js"></script>
+        <script src="./js/CourseStuffPutter.js"></script>
 
 	<!-- ONCE THE PAGE FULLY LOADS INITIALIZE THE SLIDESHOW -->
         <script>
 	    $(document).ready()
 	    {
 		initSchedule();
+                initStuff("schedule");
 	    }
         </script>
     </head>
@@ -31,10 +33,6 @@
 	<div id="content">
 
 	    <div id="navbar">
-
-		<a href="http://www.stonybrook.edu/"><img alt="Stony Brook University" class="sbu_navbar" src="./CSE 219 Schedule_files/SBUDarkRedShieldLogo.png"></a>
-                <!-- NAVIGATION LINKS GO HERE -->
-		<a class="nav" href="main.html" id="home_link">Home</a><a class="nav" href="syllabus.html" id="syllabus_link">Syllabus</a><a class="open_nav" href="schedule.html" id="schedule_link">Schedule</a><a class="nav" href="hws.html" id="hws_link">HWs</a><a class="nav" href="projects.html" id="hws_link">Projects</a>
 	    </div>
 
 
